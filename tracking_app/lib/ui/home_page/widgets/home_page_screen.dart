@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
 
 
     return Scaffold (
-      appBar: AppBar(title: const Text('Yesterday\'s summary', style: TextStyle(color: Colors.white)), backgroundColor: Colors.black),
+      appBar: AppBar(title: const Text('June 17 Summary', style: TextStyle(color: Colors.white)), backgroundColor: Colors.black),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -23,10 +23,12 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     Text('You spent:', style: TextStyle(fontSize: 16)),
+                    const SizedBox(height:15),
                     Text('Approximately 180 min eating', style: TextStyle(fontSize: 20)),
                     Text('60 min were likely to be snacking', style: TextStyle(fontSize: 20)),
-                    const SizedBox(height:15),
+                    const SizedBox(height:30),
                     Text('Compared to yesterday:', style: TextStyle(fontSize: 16)),
+                    const SizedBox(height:15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -46,6 +48,7 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     Text('Based on your goals:', style: TextStyle(fontSize: 16)),
+                    const SizedBox(height:15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -65,6 +68,7 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     Text('Anything that contributed to snacking?', style: TextStyle(fontSize: 16)),
+                    const SizedBox(height:15),
                     TextField(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
