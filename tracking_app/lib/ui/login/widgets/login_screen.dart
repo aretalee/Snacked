@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class SignUpPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('Sign Up', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+                  Text('Login', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold,)),
                   const SizedBox(height:15),
                   TextField(
                       decoration: InputDecoration(
@@ -40,7 +40,7 @@ class SignUpPage extends StatelessWidget {
                     const SizedBox(height:30),
                     FilledButton(
                       onPressed: () {}, 
-                      child: const Text('Register'),
+                      child: const Text('Go'),
                     ),
                 ]
               )
@@ -50,6 +50,5 @@ class SignUpPage extends StatelessWidget {
       )
     );
   }
-
+  
 }
-

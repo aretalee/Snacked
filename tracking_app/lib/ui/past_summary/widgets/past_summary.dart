@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class PastSummaryPage extends StatelessWidget {
+  const PastSummaryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -75,11 +75,6 @@ class HomePage extends StatelessWidget {
                         hintText: 'Type here: ',
                       ),
                     ),
-                    const SizedBox(height:15),
-                    // FilledButton(
-                    //   onPressed: () {}, 
-                    //   child: const Text('Save'),
-                    // ),
                   ]
                 ),
               ),
@@ -88,6 +83,7 @@ class HomePage extends StatelessWidget {
         )
       )
     );
+
 
   }
 

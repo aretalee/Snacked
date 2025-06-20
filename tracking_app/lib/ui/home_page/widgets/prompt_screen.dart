@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+class PromptPage extends StatelessWidget {
+  const PromptPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,27 +21,29 @@ class SignUpPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text('Sign Up', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
-                  const SizedBox(height:15),
-                  TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Email: ',
-                      ),
+                  const SizedBox(height:30),
+                  Text(
+                    'Were you happy with yesterday’s eating habits?', 
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,), 
+                    textAlign: TextAlign.center),
+                  const SizedBox(height:30),
+                  FilledButton(
+                      onPressed: () {}, 
+                      child: const Text('I feel great!'),
                     ),
                     const SizedBox(height:15),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Password: ',
-                      ),
-                    ),
-                    const SizedBox(height:30),
                     FilledButton(
                       onPressed: () {}, 
-                      child: const Text('Register'),
+                      child: const Text('Not really...'),
                     ),
+                    const SizedBox(height:15),
+                    FilledButton(
+                      onPressed: () {}, 
+                      child: const Text('Maybe?'),
+                    ),
+                    const SizedBox(height:30),
                 ]
               )
             )
@@ -50,6 +52,7 @@ class SignUpPage extends StatelessWidget {
       )
     );
   }
-
+  
 }
+
 
