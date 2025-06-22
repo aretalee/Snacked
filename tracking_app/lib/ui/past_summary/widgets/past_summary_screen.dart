@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 
 class PastSummaryPage extends StatelessWidget {
-  const PastSummaryPage({super.key});
+  const PastSummaryPage({super.key, required this.dateString});
+  final String dateString;
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold (
       appBar: AppBar(
-        title: const Text('June 17 Summary', style: TextStyle(color: Colors.white)), backgroundColor: Colors.black, 
+        title: Text('Summary for $dateString ', style: TextStyle(color: Colors.white)), backgroundColor: Colors.black, 
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new),
           onPressed: () => Navigator.of(context).pop(),

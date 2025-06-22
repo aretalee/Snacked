@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 import 'package:snacktrac/ui/home_page/widgets/home_page_screen.dart';
 import 'package:snacktrac/ui/profile/widgets/profile_screen.dart';
@@ -13,7 +11,6 @@ class NavBar extends StatefulWidget {
 
   @override
   State<NavBar> createState() => _NavBarState();
-
 }
 
 

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 import 'package:snacktrac/ui/set_goals/widgets/set_goals_screen.dart';
 import 'package:snacktrac/ui/export_data/widgets/export_screen.dart';
