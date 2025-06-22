@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
+import 'package:snacktrac/ui/past_summary/widgets/past_summary_screen.dart';
+
 
 class ArchivePage extends StatelessWidget {
   const ArchivePage({super.key});
@@ -17,7 +19,14 @@ class ArchivePage extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            Text('This is just a placeholder', style: TextStyle(fontSize: 24)),
+            FilledButton(
+              onPressed: () {
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const PastSummaryPage()),
+                );
+              }, 
+              child: const Text('Placeholder'),
+            ),
 
             // Card(
             //   child: Padding(

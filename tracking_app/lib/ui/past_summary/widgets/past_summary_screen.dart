@@ -11,7 +11,13 @@ class PastSummaryPage extends StatelessWidget {
 
 
     return Scaffold (
-      appBar: AppBar(title: const Text('June 17 Summary', style: TextStyle(color: Colors.white)), backgroundColor: Colors.black),
+      appBar: AppBar(
+        title: const Text('June 17 Summary', style: TextStyle(color: Colors.white)), backgroundColor: Colors.black, 
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new),
+          onPressed: () => Navigator.of(context).pop(),
+        )
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(

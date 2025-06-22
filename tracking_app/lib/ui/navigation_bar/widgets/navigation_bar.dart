@@ -8,16 +8,16 @@ import 'package:snacktrac/ui/archive/widgets/archive_screen.dart';
 
 
 
-class NavigationLogic extends StatefulWidget {
-  const NavigationLogic({super.key});
+class NavBar extends StatefulWidget {
+  const NavBar({super.key});
 
   @override
-  State<NavigationLogic> createState() => _NavigationState();
+  State<NavBar> createState() => _NavBarState();
 
 }
 
 
-class _NavigationState extends State<NavigationLogic> {
+class _NavBarState extends State<NavBar> {
   int pageIndex = 0;
   
   @override

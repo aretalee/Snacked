@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
+import 'package:snacktrac/ui/set_goals/widgets/set_goals_screen.dart';
+import 'package:snacktrac/ui/export_data/widgets/export_screen.dart';
+import 'package:snacktrac/ui/change_password/widgets/change_password_screen.dart';
+import 'package:snacktrac/ui/info/widgets/info_screen.dart';
+
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -28,25 +33,38 @@ class ProfilePage extends StatelessWidget {
             Text('User 1908', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
             const SizedBox(height:45),
             FilledButton(
-              onPressed: () {}, 
-              // style: FilledButton.styleFrom(
-              //   backgroundColor: const Color(0x8405BE),
-              // ),
+              onPressed: () {
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const SetGoalsPage()),
+                );
+              }, 
               child: const Text('Set Daily Goal'), 
             ),
             const SizedBox(height:15),
             FilledButton(
-              onPressed: () {}, 
+              onPressed: () {
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const ExportPage()),
+                );
+              }, 
               child: const Text('Export Data'),
             ),
             const SizedBox(height:15),
             FilledButton(
-              onPressed: () {}, 
+              onPressed: () {
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const ChangePasswordPage()),
+                );
+              }, 
               child: const Text('Change Password'),
             ),
             const SizedBox(height:15),
             FilledButton(
-              onPressed: () {}, 
+              onPressed: () {
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const InfoPage()),
+                );
+              }, 
               child: const Text('About SnackTrac'),
             ),
           ],

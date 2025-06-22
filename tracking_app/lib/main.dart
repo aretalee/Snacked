@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       // darkTheme: FlexThemeData.dark(scheme: FlexScheme.blue),
       theme: FlexThemeData.dark(scheme: FlexScheme.blue, fontFamily: GoogleFonts.inter().fontFamily),
       // home: SignInPage(),
-      home: NavigationLogic(),
+      home: NavBar(),
     );
   }
 }

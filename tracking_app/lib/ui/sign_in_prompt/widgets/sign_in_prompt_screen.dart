@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
+import 'package:snacktrac/ui/signup/widgets/sign_up_screen.dart';
+import 'package:snacktrac/ui/login/widgets/login_screen.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
@@ -18,15 +20,20 @@ class SignInPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             FilledButton(
-              onPressed: () {}, 
-              // style: FilledButton.styleFrom(
-              //   backgroundColor: const Color(0x8405BE),
-              // ),
+              onPressed: () {
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const SignUpPage()),
+                );
+              }, 
               child: const Text('Sign Up'), 
             ),
             const SizedBox(height:15),
             FilledButton(
-              onPressed: () {}, 
+              onPressed: () {
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+              }, 
               child: const Text('Login'),
             ),
           ],
