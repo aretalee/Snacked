@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
 import 'ui/home_page/widgets/home_page_screen.dart';
 import 'ui/home_page/widgets/no_data_screen.dart';
 import 'ui/home_page/widgets/prompt_screen.dart';
@@ -18,9 +21,14 @@ import 'ui/navigation_bar/widgets/navigation_bar.dart';
 import 'ui/navigation_bar/view_model/navigation_bar_vm.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

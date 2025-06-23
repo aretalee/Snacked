@@ -65,6 +65,11 @@ class ProfilePage extends StatelessWidget {
               }, 
               child: const Text('About SnackTrac'),
             ),
+            const SizedBox(height:15),
+            FilledButton(
+              onPressed: () {}, 
+              child: const Text('Sign Out'),
+            ),
           ],
         )
       )
