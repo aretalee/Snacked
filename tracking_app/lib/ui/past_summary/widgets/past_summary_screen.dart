@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 
 class PastSummaryPage extends StatelessWidget {
-  const PastSummaryPage({super.key, required this.dateString});
-  final String dateString;
+  const PastSummaryPage({super.key, required this.date});
+  final DateTime date;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold (
       appBar: AppBar(
-        title: Text('Summary for $dateString ', style: TextStyle(color: Colors.white)), backgroundColor: Colors.black, 
+        title: Text('Summary for ${DateFormat('MMMM d, y').format(date)} ', style: TextStyle(color: Colors.white)), backgroundColor: Colors.black, 
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new),
           onPressed: () => Navigator.of(context).pop(),

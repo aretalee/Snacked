@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:snacktrac/ui/home_page/widgets/home_page_screen.dart';
-import 'package:snacktrac/ui/profile/widgets/profile_screen.dart';
-import 'package:snacktrac/ui/archive/widgets/archive_screen.dart';
+import 'package:snacktrac/ui/navigation_bar/view_model/navigation_bar_vm.dart';
 
 
 
 class NavBar extends StatefulWidget {
-  const NavBar({super.key});
+  const NavBar({super.key, required this.viewModel});
+  final NavBarViewModel viewModel;
 
   @override
   State<NavBar> createState() => _NavBarState();
@@ -15,27 +14,14 @@ class NavBar extends StatefulWidget {
 
 
 class _NavBarState extends State<NavBar> {
-  int pageIndex = 0;
-  
+
   @override
   Widget build(BuildContext context) {
-    Widget currentPage;
-    switch (pageIndex) {
-      case 0:
-        currentPage = HomePage();
-      case 1:
-        currentPage = ArchivePage();
-      case 2:
-        currentPage = ProfilePage();
-      default:
-        currentPage = HomePage();
-    }
-
     return Scaffold(
       bottomNavigationBar: NavigationBar(
-        selectedIndex: pageIndex,
+        selectedIndex: widget.viewModel.pageIndex,
         onDestinationSelected: (int index) {
-          setState(() {pageIndex = index;} );
+          setState(() {widget.viewModel.pageSelected(index);} );
         },
         destinations: [
           NavigationDestination(
@@ -55,7 +41,7 @@ class _NavBarState extends State<NavBar> {
           ),
         ],
       ),
-      body: currentPage,
+      body: widget.viewModel.currentPage,
     );
   }
 

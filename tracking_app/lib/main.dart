@@ -15,6 +15,7 @@ import 'ui/profile/widgets/profile_screen.dart';
 import 'ui/set_goals/widgets/set_goals_screen.dart';
 import 'ui/archive/widgets/archive_screen.dart';
 import 'ui/navigation_bar/widgets/navigation_bar.dart';
+import 'ui/navigation_bar/view_model/navigation_bar_vm.dart';
 
 
 void main() {
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
       // darkTheme: FlexThemeData.dark(scheme: FlexScheme.blue),
       theme: FlexThemeData.dark(scheme: FlexScheme.blue, fontFamily: GoogleFonts.inter().fontFamily),
       // home: SignInPage(),
-      home: NavBar(),
+      home: NavBar(viewModel: NavBarViewModel()),
     );
   }
 }

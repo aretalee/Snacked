@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:intl/intl.dart';
 
 import 'package:snacktrac/ui/past_summary/widgets/past_summary_screen.dart';
 
@@ -16,7 +15,7 @@ class _ArchivePageState extends State<ArchivePage> {
   CalendarFormat format = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _chosenDate;
-  String dateString = '';
+  DateTime forSummary = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,7 @@ class _ArchivePageState extends State<ArchivePage> {
                 setState(() {
                   _chosenDate = chosenDate;
                   _focusedDay = focusedDay;
-                  dateString =  DateFormat('MMMM d, y').format(chosenDate);
+                  forSummary =  chosenDate;
                 });
               }, 
               onPageChanged: (focusedDay) {
@@ -54,7 +53,7 @@ class _ArchivePageState extends State<ArchivePage> {
             FilledButton(
               onPressed: () {
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => PastSummaryPage(dateString: dateString)),
+                  context, MaterialPageRoute(builder: (context) => PastSummaryPage(date: forSummary)),
                 );
               }, 
               child: Padding(
