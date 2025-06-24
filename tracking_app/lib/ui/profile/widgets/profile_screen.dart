@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:snacktrac/ui/set_goals/widgets/set_goals_screen.dart';
 import 'package:snacktrac/ui/export_data/widgets/export_screen.dart';
 import 'package:snacktrac/ui/change_password/widgets/change_password_screen.dart';
+import 'package:snacktrac/ui/change_username/widgets/change_username_screen.dart';
 import 'package:snacktrac/ui/info/widgets/info_screen.dart';
 import 'package:snacktrac/ui/change_password/view_model/change_password_vm.dart';
+import 'package:snacktrac/ui/change_username/view_model/change_username_vm.dart';
 import 'package:snacktrac/ui/sign_in_prompt/widgets/sign_in_prompt_screen.dart';
 import 'package:snacktrac/ui/profile/view_model/profile_vm.dart';
 
@@ -21,9 +23,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold (
-      appBar: AppBar(backgroundColor: Colors.black),
+      appBar: AppBar(backgroundColor: Colors.black, automaticallyImplyLeading:false),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -38,7 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
               )
             ),
             const SizedBox(height:15),
-            Text('User 1908', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+            Text('${widget.viewModel.getName()}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
             const SizedBox(height:45),
             FilledButton(
               onPressed: () {
@@ -56,6 +57,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 );
               }, 
               child: const Text('Export Data'),
+            ),
+            const SizedBox(height:15),
+            FilledButton(
+              onPressed: () {
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => ChangeNamePage(viewModel: ChangeNameViewModel())),
+                );
+              }, 
+              child: const Text('Change Username'),
             ),
             const SizedBox(height:15),
             FilledButton(

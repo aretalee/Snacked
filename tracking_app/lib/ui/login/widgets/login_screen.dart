@@ -62,7 +62,30 @@ class _LoginPageState extends State<LoginPage> {
                       errorText: _pwdError,
                     ),
                   ),
-                  const SizedBox(height:30),
+                  const SizedBox(height:15),
+                   OutlinedButton(
+                    onPressed: () async {
+                      if (_emailController.text.isNotEmpty) {
+                        widget.viewModel.setEmail(_emailController.text);
+                        final resetStatus = await widget.viewModel.resetPassword();
+                        if (resetStatus != null && resetStatus.contains('Success')) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('If an account is linked to this email, you will receive a reset link shortly.', style: TextStyle(fontSize: 16, color:Colors.green, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                              duration: const Duration(seconds: 5),
+                            )
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('$resetStatus', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                              duration: const Duration(seconds: 3),
+                            )
+                          );
+                        }
+                      };
+                    },
+                    child: const Text('Forgot password'),
+                  ),
+                  const SizedBox(height:5),
                   FilledButton(
                     onPressed: () async {
                       setState(() {

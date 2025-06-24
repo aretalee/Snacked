@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:snacktrac/ui/change_password/view_model/change_password_vm.dart';
+import 'package:snacktrac/ui/profile/widgets/profile_screen.dart';
+import 'package:snacktrac/ui/profile/view_model/profile_vm.dart';
 
 
 class ChangePwdPage extends StatefulWidget {
@@ -76,7 +78,7 @@ class _ChangePwdPageState extends State<ChangePwdPage> {
                       onPressed: () async {
                         setState(() {
                         if (_pwdControllerOld.text.isEmpty) {
-                          _pwdErrorTwo = 'Please enter your old password';
+                          _pwdErrorOld = 'Please enter your old password';
                         } else { _pwdErrorOld = null; }
                         if (_pwdControllerOne.text.isEmpty) {
                           _pwdErrorOne = 'Please enter a password';
@@ -95,6 +97,9 @@ class _ChangePwdPageState extends State<ChangePwdPage> {
                                 content: Text('Successfully changed password', style: TextStyle(fontSize: 16, color:Colors.green, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
                                 duration: const Duration(seconds: 3),
                                 )
+                              );
+                              Navigator.push(
+                                context, MaterialPageRoute(builder: (context) => ProfilePage(viewModel: ProfileViewModel())),
                               );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(

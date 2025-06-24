@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:snacktrac/data/repositories/auth_repository.dart';
 
 
-
 class ChangePwdViewModel extends ChangeNotifier{
   final AuthRepository authRepo = AuthRepository();
   String _oldPwd = '';
@@ -27,3 +26,4 @@ class ChangePwdViewModel extends ChangeNotifier{
   }
   
 }
+

@@ -24,6 +24,15 @@ class LoginViewModel extends ChangeNotifier{
       return e.toString();
     }
   }
+
+  Future<String?> resetPassword() async {
+    try {
+      final status = await authRepo.resetPassword(_email);
+      return status;
+    } catch (e) {
+      return e.toString();
+    }
+  }
   
 }
 

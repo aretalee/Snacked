@@ -57,6 +57,23 @@ class AuthRepository {
     } 
   }
 
+  Future<String?> resetPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      return 'Success';
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+      if (e.code == 'invalid-email') {
+        return 'Not a valid email format';
+      } else if (e.code == 'missing-email') {
+        return('Please type in an email to reset password');
+      } 
+    } catch (e) {
+      return e.toString();
+    }
+    return '';
+  }
+
   Future<String?> changePassword(String oldPwd, String newPwd) async {
     try {
       final credential = EmailAuthProvider.credential(
@@ -82,7 +99,7 @@ class AuthRepository {
     return '';
   }
 
-  Future<String?> changeDisplayName(String name) async {
+  Future<String?> changeUserame(String name) async {
     try {
       await _auth.currentUser?.updateDisplayName(name);
       return 'Success';

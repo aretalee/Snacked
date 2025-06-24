@@ -21,7 +21,8 @@ class _ArchivePageState extends State<ArchivePage> {
   Widget build(BuildContext context) {
     return Scaffold (
       appBar: AppBar(title: const Text('Find a Past Report:', 
-        style: TextStyle(color: Colors.white)), backgroundColor: Colors.black),
+        style: TextStyle(color: Colors.white)), backgroundColor: Colors.black, 
+        automaticallyImplyLeading:false),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
