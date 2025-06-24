@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
-import 'package:snacktrac/data/repositories/auth_repository.dart';
+import 'package:snacktrac/ui/login/view_model/login_vm.dart';
 import 'package:snacktrac/ui/navigation_bar/widgets/navigation_bar.dart';
 import 'package:snacktrac/ui/navigation_bar/view_model/navigation_bar_vm.dart';
 
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({super.key, required this.viewModel});
+  final LoginViewModel viewModel;
 
+  @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final AuthRepository authRepo = AuthRepository();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwdController = TextEditingController();
   String? _emailError;
   String? _pwdError;
-  String? loginError = '';
 
   @override
   void initState() {
@@ -65,37 +65,33 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height:30),
                   FilledButton(
                     onPressed: () async {
-                      final email = _emailController.text;
-                      final pwd = _pwdController.text;
                       setState(() {
-                        _emailError = null;
-                        _pwdError = null;
-                        if (email.isEmpty) {
-                          _emailError = 'Please enter your email address';
-                        } 
-                        if (pwd.isEmpty) {
-                          _pwdError = 'Please enter your password';
-                        }
+                        if (_emailController.text.isEmpty) {
+                          _emailError = 'Please enter an email address';
+                        } else { _emailError = null; }
+                        if (_pwdController.text.isEmpty) {
+                          _pwdError = 'Please enter a password';
+                        } else { _pwdError = null; }
                       });
-                      final loginStatus = await authRepo.login (
-                        _emailController.text, _pwdController.text
-                      );
-                      if (loginStatus != null && loginStatus.contains('Success')) {
-                        Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => NavBar(viewModel: NavBarViewModel())),
-                        );
-                      } else {
-                        setState(() {
-                          loginError = loginStatus;
-                        });
-                        print(loginStatus);
-                        print(loginError);
-                      }
+                      if (_emailError == null && _pwdError == null) {
+                        widget.viewModel.setEmail(_emailController.text);
+                        widget.viewModel.setPwd(_pwdController.text);
+                        final signUpStatus = await widget.viewModel.login();
+                        if (signUpStatus != null && signUpStatus.contains('Success')) {
+                          Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => NavBar(viewModel: NavBarViewModel())),
+                          );
+                        } else{
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('$signUpStatus', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                            duration: const Duration(seconds: 3),
+                            )
+                          );
+                        };
+                      };
                     },
                     child: const Text('Go'),
                   ),
-                  const SizedBox(height:15),
-                  Text('$loginError', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
                 ]
               )
             )

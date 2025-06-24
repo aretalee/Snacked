@@ -4,6 +4,7 @@ import 'package:snacktrac/ui/set_goals/widgets/set_goals_screen.dart';
 import 'package:snacktrac/ui/export_data/widgets/export_screen.dart';
 import 'package:snacktrac/ui/change_password/widgets/change_password_screen.dart';
 import 'package:snacktrac/ui/info/widgets/info_screen.dart';
+import 'package:snacktrac/ui/change_password/view_model/change_password_vm.dart';
 
 
 class ProfilePage extends StatelessWidget {
@@ -51,7 +52,7 @@ class ProfilePage extends StatelessWidget {
             FilledButton(
               onPressed: () {
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const ChangePasswordPage()),
+                  context, MaterialPageRoute(builder: (context) => ChangePwdPage(viewModel: ChangePwdViewModel())),
                 );
               }, 
               child: const Text('Change Password'),

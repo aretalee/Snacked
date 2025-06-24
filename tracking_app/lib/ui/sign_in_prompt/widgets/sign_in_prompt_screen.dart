@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:snacktrac/ui/signup/widgets/sign_up_screen.dart';
 import 'package:snacktrac/ui/login/widgets/login_screen.dart';
+import 'package:snacktrac/ui/signup/view_model/sign_up_vm.dart';
+import 'package:snacktrac/ui/login/view_model/login_vm.dart';
+
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
@@ -20,7 +23,7 @@ class SignInPage extends StatelessWidget {
             FilledButton(
               onPressed: () {
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const SignUpPage()),
+                  context, MaterialPageRoute(builder: (context) => SignUpPage(viewModel: SignUpViewModel())),
                 );
               }, 
               child: const Text('Sign Up'), 
@@ -29,7 +32,7 @@ class SignInPage extends StatelessWidget {
             FilledButton(
               onPressed: () {
                 Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const LoginPage()),
+                  context, MaterialPageRoute(builder: (context) => LoginPage(viewModel: LoginViewModel())),
                 );
               }, 
               child: const Text('Login'),

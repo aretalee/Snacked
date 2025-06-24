@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 
-import 'package:snacktrac/data/repositories/auth_repository.dart';
+import 'package:snacktrac/ui/signup/view_model/sign_up_vm.dart';
 import 'package:snacktrac/ui/navigation_bar/widgets/navigation_bar.dart';
 import 'package:snacktrac/ui/navigation_bar/view_model/navigation_bar_vm.dart';
 
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+  const SignUpPage({super.key, required this.viewModel});
+  final SignUpViewModel viewModel;
 
+  @override
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
 
 class _SignUpPageState extends State<SignUpPage> {
-  final AuthRepository authRepo = AuthRepository();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwdController = TextEditingController();
   String? _emailError;
   String? _pwdError;
-  String? signUpError = '';
 
   @override
   void initState() {
@@ -66,35 +66,33 @@ class _SignUpPageState extends State<SignUpPage> {
                   const SizedBox(height:30),
                   FilledButton(
                     onPressed: () async {
-                      final email = _emailController.text;
-                      final pwd = _pwdController.text;
                       setState(() {
-                        _emailError = null;
-                        _pwdError = null;
-                        if (email.isEmpty) {
+                        if (_emailController.text.isEmpty) {
                           _emailError = 'Please enter an email address';
-                        } 
-                        if (pwd.isEmpty) {
+                        } else { _emailError = null; }
+                        if (_pwdController.text.isEmpty) {
                           _pwdError = 'Please enter a password';
-                        }
+                        } else { _pwdError = null; }
                       });
-                      final signUpStatus = await authRepo.register (
-                        _emailController.text, _pwdController.text
-                      );
-                      if (signUpStatus != null && signUpStatus.contains('Success')) {
-                        Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => NavBar(viewModel: NavBarViewModel())),
-                        );
-                      } else{
-                        setState(() {
-                          signUpError = signUpStatus;
-                        });
+                      if (_emailError == null && _pwdError == null) {
+                        widget.viewModel.setEmail(_emailController.text);
+                        widget.viewModel.setPwd(_pwdController.text);
+                        final signUpStatus = await widget.viewModel.register();
+                        if (signUpStatus != null && signUpStatus.contains('Success')) {
+                          Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => NavBar(viewModel: NavBarViewModel())),
+                          );
+                        } else{
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('$signUpStatus', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                            duration: const Duration(seconds: 3),
+                            )
+                          );
+                        };
                       };
                     },
                     child: const Text('Register'),
                   ),
-                  const SizedBox(height:15),
-                  Text('$signUpError', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
                 ]
               )
             )
