@@ -8,42 +8,44 @@ class AuthRepository {
   User? get currentUser => _auth.currentUser!;
   Stream<User?> get userChanges => _auth.userChanges();
 
-  Future<UserCredential?> register(String email, String password) async {
+  Future<String?> register(String email, String password) async {
     try {
       UserCredential credential = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return credential;
+      return 'Success';
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'email-already-in-use') {
-        print('An account is already associated with this email.');
+      if (e.code == 'invalid-email') {
+        return 'Not a valid email format';
       } else if (e.code == 'email-already-in-use') {
-        print('Chosen password is too weak.');
+        return 'An account is already associated with this email';
+      } else if (e.code == 'weak-password') {
+        return('Chosen password is too weak');
       } 
     } catch (e) {
-        print(e);
+        return e.toString();
       }
-    return null;
+    return '';
   }
 
-  Future<UserCredential?> login(String email, String password) async {
+  Future<String?> login(String email, String password) async {
     try {
       UserCredential credential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return credential;
+      return 'Success';
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'wrong-password') {
-        print('Incorrect password.');
-      } else if (e.code == 'user-not-found') {
-        print('No account created under this email.');
+      if (e.code == 'invalid-email') {
+        return 'Not a valid email format';
+      } else if (e.code == 'invalid-credential') {
+        return 'Invalid email or password';
       } 
     } catch (e) {
-        print(e);
+        return e.toString();
       }
-    return null;
+    return '';
   }
 
   Future<void> signOut () async {

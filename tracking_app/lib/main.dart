@@ -42,8 +42,8 @@ class MyApp extends StatelessWidget {
       // theme: FlexThemeData.light(scheme: FlexScheme.blue),
       // darkTheme: FlexThemeData.dark(scheme: FlexScheme.blue),
       theme: FlexThemeData.dark(scheme: FlexScheme.blue, fontFamily: GoogleFonts.inter().fontFamily),
-      // home: SignInPage(),
-      home: NavBar(viewModel: NavBarViewModel()),
+      home: SignInPage(),
+      // home: NavBar(viewModel: NavBarViewModel()),
     );
   }
 }
