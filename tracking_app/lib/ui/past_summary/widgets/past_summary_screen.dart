@@ -56,7 +56,7 @@ class PastSummaryPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text('You\'re on track, keep it up!', style: TextStyle(fontSize: 20)),
-                        const SizedBox(width:5),
+                        const SizedBox(width:10),
                         Icon(Icons.thumb_up, color: Colors.green, size: 20,)
                       ]
                     ),

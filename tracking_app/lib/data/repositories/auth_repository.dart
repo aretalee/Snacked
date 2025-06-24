@@ -48,8 +48,13 @@ class AuthRepository {
     return '';
   }
 
-  Future<void> signOut () async {
-    await _auth.signOut();
+  Future<String?> signOut () async {
+    try {
+      await _auth.signOut();
+      return 'Success';
+    } catch (e) {
+      return e.toString();
+    } 
   }
 
   Future<String?> changePassword(String oldPwd, String newPwd) async {
@@ -77,9 +82,14 @@ class AuthRepository {
     return '';
   }
 
-  Future<void> changeDisplayName(String name) async {
-    await _auth.currentUser?.updateDisplayName(name);
-  } 
+  Future<String?> changeDisplayName(String name) async {
+    try {
+      await _auth.currentUser?.updateDisplayName(name);
+      return 'Success';
+    } catch (e) {
+      return e.toString();
+    } 
+  }
 
 }
 
