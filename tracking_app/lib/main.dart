@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
       title: 'SnackTrac',
       theme: FlexThemeData.dark(scheme: FlexScheme.blue, fontFamily: GoogleFonts.inter().fontFamily),
       routerConfig: thisRouter,
+      // routerConfig: router(authRepo),
     );
   }
 }

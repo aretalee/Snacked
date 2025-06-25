@@ -11,7 +11,8 @@ class PastSummaryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold (
       appBar: AppBar(
-        title: Text('Summary for ${DateFormat('MMMM d, y').format(date)} ', style: TextStyle(color: Colors.white)), backgroundColor: Colors.black, 
+        title: Text('Summary for ${DateFormat('MMMM d, y').format(date)} ', 
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)), backgroundColor: Colors.black, 
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new),
           onPressed: () => context.go('/archive'),
@@ -29,7 +30,7 @@ class PastSummaryPage extends StatelessWidget {
                     Text('You spent:', style: TextStyle(fontSize: 16)),
                     const SizedBox(height:15),
                     Text('Approximately 180 min eating', style: TextStyle(fontSize: 20)),
-                    Text('60 min were likely to be snacking', style: TextStyle(fontSize: 20)),
+                    Text('60 min were likely to be snacking', style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
                     const SizedBox(height:30),
                     Text('Compared to yesterday:', style: TextStyle(fontSize: 16)),
                     const SizedBox(height:15),

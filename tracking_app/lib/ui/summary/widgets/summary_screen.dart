@@ -11,7 +11,7 @@ class SummaryPage extends StatelessWidget {
 
     return Scaffold (
       appBar: AppBar(
-        title: const Text('June 17 Summary', style: TextStyle(color: Colors.white)), 
+        title: const Text('June 17 Summary', style: TextStyle(fontWeight: FontWeight.bold)), 
         backgroundColor: Colors.black, automaticallyImplyLeading:false),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -22,12 +22,12 @@ class SummaryPage extends StatelessWidget {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    Text('You spent:', style: TextStyle(fontSize: 20)),
+                    Text('You spent:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     const SizedBox(height:10),
-                    Text('Approximately 180 min eating', style: TextStyle(fontSize: 16)),
+                    Text('Approximately 180 min eating,', style: TextStyle(fontSize: 16)),
                     const SizedBox(height:5),
                     Text('60 min were likely to be snacking', style: TextStyle(fontSize: 16)),
-                    const SizedBox(height:30),
+                    const SizedBox(height:15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -64,13 +64,13 @@ class SummaryPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height:15),
+            const SizedBox(height:10),
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    Text('Based on your goals:', style: TextStyle(fontSize: 20)),
+                    Text('Based on your goals:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     const SizedBox(height:10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +84,7 @@ class SummaryPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height:15),
+            const SizedBox(height:10),
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -98,7 +98,6 @@ class SummaryPage extends StatelessWidget {
                         hintText: 'Type here: ',
                       ),
                     ),
-                    const SizedBox(height:15),
                     // FilledButton(
                     //   onPressed: () {}, 
                     //   child: const Text('Save'),
