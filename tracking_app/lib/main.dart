@@ -1,24 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-import 'ui/home_page/widgets/home_page_screen.dart';
-import 'ui/home_page/widgets/no_data_screen.dart';
-import 'ui/home_page/widgets/prompt_screen.dart';
-import 'ui/info/widgets/info_screen.dart';
-import 'ui/sign_in_prompt/widgets/sign_in_prompt_screen.dart';
-import 'ui/signup/widgets/sign_up_screen.dart';
-import 'ui/login/widgets/login_screen.dart';
-import 'ui/change_password/widgets/change_password_screen.dart';
-import 'ui/export_data/widgets/export_screen.dart';
-import 'ui/profile/widgets/profile_screen.dart';
-import 'ui/set_goals/widgets/set_goals_screen.dart';
-import 'ui/archive/widgets/archive_screen.dart';
-import 'ui/navigation_bar/widgets/navigation_bar.dart';
-import 'ui/navigation_bar/view_model/navigation_bar_vm.dart';
+import 'package:snacktrac/routing/nav_router.dart';
+import 'package:snacktrac/data/repositories/auth_repository.dart';
 
 
 void main() async {
@@ -36,13 +25,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'SnackTrac',
       // themeMode: ThemeMode.system,
       // theme: FlexThemeData.light(scheme: FlexScheme.blue),
       // darkTheme: FlexThemeData.dark(scheme: FlexScheme.blue),
       theme: FlexThemeData.dark(scheme: FlexScheme.blue, fontFamily: GoogleFonts.inter().fontFamily),
-      home: SignInPage(),
+      routerConfig: router(AuthRepository()),
       // home: NavBar(viewModel: NavBarViewModel()),
     );
   }

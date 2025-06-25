@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:snacktrac/ui/signup/widgets/sign_up_screen.dart';
 import 'package:snacktrac/ui/login/widgets/login_screen.dart';
@@ -21,20 +22,12 @@ class SignInPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             FilledButton(
-              onPressed: () {
-                Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => SignUpPage(viewModel: SignUpViewModel())),
-                );
-              }, 
+              onPressed: () => context.go('/signin/signup'),
               child: const Text('Sign Up'), 
             ),
             const SizedBox(height:15),
             FilledButton(
-              onPressed: () {
-                Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => LoginPage(viewModel: LoginViewModel())),
-                );
-              }, 
+              onPressed: () => context.go('/signin/login'),
               child: const Text('Login'),
             ),
           ],

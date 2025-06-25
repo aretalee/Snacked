@@ -22,9 +22,9 @@ class InfoPage extends StatelessWidget {
                 child: Column(
                   children: [
                     Text('Your bespoke snacking report for the previous day is released at 7am daily', style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
-                    const SizedBox(height:30),
+                    const SizedBox(height:24),
                     Text('We aim to give an overview of how much time you spend  eating every day', style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
-                    const SizedBox(height:30),
+                    const SizedBox(height:24),
                     Text('But what and when you eat is up to you!', style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
                   ],
                 ),
@@ -33,7 +33,7 @@ class InfoPage extends StatelessWidget {
             const SizedBox(height:30),
             Text('Potential Snacking Triggers', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             Text('Do any of these apply to you?', style: TextStyle(fontSize: 16)),
-                        const SizedBox(height:15),
+            const SizedBox(height:15),
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -43,11 +43,11 @@ class InfoPage extends StatelessWidget {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Stress', style: TextStyle(fontSize: 30)),
+                        Text('Stress', style: TextStyle(fontSize: 15)),
                         const SizedBox(width:10),
-                        Text('Boredom', style: TextStyle(fontSize: 30)),
+                        Text('Boredom', style: TextStyle(fontSize: 15)),
                         const SizedBox(width:10),
-                        Text('Exercise', style: TextStyle(fontSize: 30)),
+                        Text('Exercise', style: TextStyle(fontSize: 15)),
                       ]
                     ),
                   ]

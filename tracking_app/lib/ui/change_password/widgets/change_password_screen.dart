@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:snacktrac/ui/change_password/view_model/change_password_vm.dart';
 import 'package:snacktrac/ui/profile/widgets/profile_screen.dart';
@@ -98,9 +99,7 @@ class _ChangePwdPageState extends State<ChangePwdPage> {
                                 duration: const Duration(seconds: 3),
                                 )
                               );
-                              Navigator.push(
-                                context, MaterialPageRoute(builder: (context) => ProfilePage(viewModel: ProfileViewModel())),
-                              );
+                              context.go('/profile');
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text('$changeStatus', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),

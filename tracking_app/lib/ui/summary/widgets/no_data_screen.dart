@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 
-class NoDataHomePage extends StatelessWidget {
-  const NoDataHomePage({super.key});
+class NoDataSummary extends StatelessWidget {
+  const NoDataSummary({super.key});
 
   @override
   Widget build(BuildContext context) {

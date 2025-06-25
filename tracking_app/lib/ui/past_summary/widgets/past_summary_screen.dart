@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 
@@ -13,7 +14,7 @@ class PastSummaryPage extends StatelessWidget {
         title: Text('Summary for ${DateFormat('MMMM d, y').format(date)} ', style: TextStyle(color: Colors.white)), backgroundColor: Colors.black, 
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => context.go('/archive'),
         )
       ),
       body: Padding(

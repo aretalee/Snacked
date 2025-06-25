@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:snacktrac/ui/set_goals/widgets/set_goals_screen.dart';
 import 'package:snacktrac/ui/export_data/widgets/export_screen.dart';
@@ -42,47 +43,27 @@ class _ProfilePageState extends State<ProfilePage> {
             Text('${widget.viewModel.getName()}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
             const SizedBox(height:45),
             FilledButton(
-              onPressed: () {
-                Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const SetGoalsPage()),
-                );
-              }, 
+              onPressed: () => context.go('/profile/setGoals'),
               child: const Text('Set Daily Goal'), 
             ),
             const SizedBox(height:15),
             FilledButton(
-              onPressed: () {
-                Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const ExportPage()),
-                );
-              }, 
+              onPressed: () => context.go('/profile/export'), 
               child: const Text('Export Data'),
             ),
             const SizedBox(height:15),
             FilledButton(
-              onPressed: () {
-                Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => ChangeNamePage(viewModel: ChangeNameViewModel())),
-                );
-              }, 
+              onPressed: () => context.go('/profile/changeUsername'),
               child: const Text('Change Username'),
             ),
             const SizedBox(height:15),
             FilledButton(
-              onPressed: () {
-                Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => ChangePwdPage(viewModel: ChangePwdViewModel())),
-                );
-              }, 
+              onPressed: () => context.go('/profile/changePassword'),
               child: const Text('Change Password'),
             ),
             const SizedBox(height:15),
             FilledButton(
-              onPressed: () {
-                Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const InfoPage()),
-                );
-              }, 
+              onPressed: () => context.go('/profile/info'),
               child: const Text('About SnackTrac'),
             ),
             const SizedBox(height:15),
@@ -90,9 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () async {
                 final signOutStatus = await widget.viewModel.signOut();
                 if (signOutStatus != null && signOutStatus.contains('Success')) {
-                  Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => const SignInPage()),
-                  );
+                  context.go('/signin');
                 };
               }, 
               child: const Text('Sign Out'),

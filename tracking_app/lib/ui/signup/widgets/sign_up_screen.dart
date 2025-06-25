@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:snacktrac/ui/signup/view_model/sign_up_vm.dart';
 import 'package:snacktrac/ui/navigation_bar/widgets/navigation_bar.dart';
@@ -79,9 +80,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         widget.viewModel.setPwd(_pwdController.text);
                         final signUpStatus = await widget.viewModel.register();
                         if (signUpStatus != null && signUpStatus.contains('Success')) {
-                          Navigator.push(
-                            context, MaterialPageRoute(builder: (context) => NavBar(viewModel: NavBarViewModel())),
-                          );
+                          context.go('/summary');
                         } else{
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text('$signUpStatus', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),

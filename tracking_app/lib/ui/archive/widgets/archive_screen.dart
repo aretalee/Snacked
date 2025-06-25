@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import 'package:snacktrac/ui/past_summary/widgets/past_summary_screen.dart';
@@ -53,9 +54,7 @@ class _ArchivePageState extends State<ArchivePage> {
             const SizedBox(height:60),
             FilledButton(
               onPressed: () {
-                Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => PastSummaryPage(date: forSummary)),
-                );
+                context.go('/archive/pastReport');
               }, 
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
