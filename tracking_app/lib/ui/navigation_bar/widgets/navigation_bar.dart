@@ -5,9 +5,10 @@ import 'package:snacktrac/ui/navigation_bar/view_model/navigation_bar_vm.dart';
 
 
 class NavBar extends StatefulWidget {
-  const NavBar({super.key, required this.viewModel, required this.child});
+  const NavBar({super.key, required this.viewModel, required this.where, required this.child});
   final NavBarViewModel viewModel;
   final Widget child;
+  final String where;
 
   @override
   State<NavBar> createState() => _NavBarState();
@@ -18,9 +19,18 @@ class _NavBarState extends State<NavBar> {
 
   @override
   Widget build(BuildContext context) {
+    int selectedIndex;
+    if (widget.where.startsWith('/summary')) {
+      selectedIndex = 0;
+    } else if (widget.where.startsWith('/archive')) {
+      selectedIndex = 1;
+    } else if (widget.where.startsWith('/profile')) {
+      selectedIndex = 2;
+    } else { selectedIndex = 0; }
+
     return Scaffold(
       bottomNavigationBar: NavigationBar(
-        selectedIndex: widget.viewModel.pageIndex,
+        selectedIndex: selectedIndex,
         onDestinationSelected: (int index) {
           setState(() {widget.viewModel.pageSelected(index);});
           String location = widget.viewModel.currentPage;

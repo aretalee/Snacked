@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:snacktrac/ui/signup/widgets/sign_up_screen.dart';
-import 'package:snacktrac/ui/login/widgets/login_screen.dart';
-import 'package:snacktrac/ui/signup/view_model/sign_up_vm.dart';
-import 'package:snacktrac/ui/login/view_model/login_vm.dart';
-
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});

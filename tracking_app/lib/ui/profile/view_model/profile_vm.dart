@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:snacktrac/data/repositories/auth_repository.dart';
+import 'package:snacktrac/global.dart';
 
 
 class ProfileViewModel extends ChangeNotifier{
-  final AuthRepository authRepo = AuthRepository();
 
   String? getName() {
     return authRepo.currentUser?.displayName;

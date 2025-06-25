@@ -5,6 +5,7 @@ class AuthRepository {
   final _auth = FirebaseAuth.instance;
 
   User? get currentUser => _auth.currentUser;
+  Stream<User?> get changes => _auth.authStateChanges();
 
   Future<String?> register(String email, String password) async {
     try {

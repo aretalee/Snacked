@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:snacktrac/ui/signup/view_model/sign_up_vm.dart';
-import 'package:snacktrac/ui/navigation_bar/widgets/navigation_bar.dart';
-import 'package:snacktrac/ui/navigation_bar/view_model/navigation_bar_vm.dart';
 
 
 class SignUpPage extends StatefulWidget {

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:snacktrac/ui/login/view_model/login_vm.dart';
-import 'package:snacktrac/ui/navigation_bar/widgets/navigation_bar.dart';
-import 'package:snacktrac/ui/navigation_bar/view_model/navigation_bar_vm.dart';
 
 
 class LoginPage extends StatefulWidget {

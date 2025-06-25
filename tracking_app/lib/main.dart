@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
@@ -7,7 +6,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 import 'package:snacktrac/routing/nav_router.dart';
-import 'package:snacktrac/data/repositories/auth_repository.dart';
+import 'global.dart';
+
+final thisRouter = router(authRepo);
 
 
 void main() async {
@@ -27,12 +28,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'SnackTrac',
-      // themeMode: ThemeMode.system,
-      // theme: FlexThemeData.light(scheme: FlexScheme.blue),
-      // darkTheme: FlexThemeData.dark(scheme: FlexScheme.blue),
       theme: FlexThemeData.dark(scheme: FlexScheme.blue, fontFamily: GoogleFonts.inter().fontFamily),
-      routerConfig: router(AuthRepository()),
-      // home: NavBar(viewModel: NavBarViewModel()),
+      routerConfig: thisRouter,
     );
   }
 }

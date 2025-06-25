@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:snacktrac/data/repositories/auth_repository.dart';
+import 'package:snacktrac/global.dart';
 
 
 
 class SignUpViewModel extends ChangeNotifier{
-  final AuthRepository authRepo = AuthRepository();
   String _email = '';
   String _pwd = '';
 

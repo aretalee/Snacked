@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:snacktrac/data/repositories/auth_repository.dart';
+import 'package:snacktrac/global.dart';
 
 
 class ChangePwdViewModel extends ChangeNotifier{
-  final AuthRepository authRepo = AuthRepository();
   String _oldPwd = '';
   String _newPwd = '';
 
