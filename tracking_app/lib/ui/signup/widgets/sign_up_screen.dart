@@ -16,8 +16,6 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwdController = TextEditingController();
-  String? _emailError;
-  String? _pwdError;
 
   @override
   void initState() {
@@ -50,7 +48,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Email: ',
-                      errorText: _emailError,
+                      errorText: widget.viewModel.emailError,
                     ),
                   ),
                   const SizedBox(height:15),
@@ -59,25 +57,18 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Password: ',
-                      errorText: _pwdError,
+                      errorText: widget.viewModel.pwdError,
                     ),
                   ),
                   const SizedBox(height:30),
                   FilledButton(
                     onPressed: () async {
                       setState(() {
-                        if (_emailController.text.isEmpty) {
-                          _emailError = 'Please enter an email address';
-                        } else { _emailError = null; }
-                        if (_pwdController.text.isEmpty) {
-                          _pwdError = 'Please enter a password';
-                        } else { _pwdError = null; }
+                        widget.viewModel.registerErrors(_emailController.text, _pwdController.text);
                       });
-                      if (_emailError == null && _pwdError == null) {
-                        widget.viewModel.setEmail(_emailController.text);
-                        widget.viewModel.setPwd(_pwdController.text);
+                      if (widget.viewModel.registerCheck(_emailController.text, _pwdController.text)) {
                         final signUpStatus = await widget.viewModel.register();
-                        if (signUpStatus != null && signUpStatus.contains('Success')) {
+                        if (widget.viewModel.registerSuccess(signUpStatus)) {
                           context.go('/summary');
                         } else{
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(

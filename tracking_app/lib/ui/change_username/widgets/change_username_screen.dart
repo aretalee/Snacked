@@ -16,7 +16,6 @@ class ChangeNamePage extends StatefulWidget {
 
 class _ChangeNamePageState extends State<ChangeNamePage> {
   final TextEditingController _nameController = TextEditingController();
-  String? _nameError;
 
   @override
   void initState() {
@@ -48,21 +47,18 @@ class _ChangeNamePageState extends State<ChangeNamePage> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'New username: ',
-                        errorText: _nameError,
+                        errorText: widget.viewModel.nameError,
                       ),
                     ),
                     const SizedBox(height:30),
                     FilledButton(
                       onPressed: () async {
                         setState(() {
-                        if (_nameController.text.isEmpty) {
-                          _nameError = 'Please enter a username';
-                        } else { _nameError = null; }
+                        widget.viewModel.nameErrors(_nameController.text);
                       });
-                      if (_nameError == null) {
-                        widget.viewModel.setNewName(_nameController.text);
+                      if (widget.viewModel.nameCheck(_nameController.text)) {
                         final nameChangeStatus = await widget.viewModel.changeUsername();
-                        if (nameChangeStatus != null && nameChangeStatus.contains('Success')) {
+                        if (widget.viewModel.nameSuccess(nameChangeStatus)) {
                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text('Successfully changed username', style: TextStyle(fontSize: 16, color:Colors.green, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
                             duration: const Duration(seconds: 3),

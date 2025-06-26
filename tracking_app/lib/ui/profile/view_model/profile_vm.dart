@@ -17,6 +17,13 @@ class ProfileViewModel extends ChangeNotifier{
       return e.toString();
     }
   }
+
+  Future<bool> status() async {
+    final signOutStatus = await signOut();
+     if (signOutStatus != null && signOutStatus.contains('Success')) {
+        return true;
+     } else { return false; }
+  }
   
 }
 

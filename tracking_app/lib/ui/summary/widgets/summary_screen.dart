@@ -97,10 +97,6 @@ class SummaryPage extends StatelessWidget {
                         hintText: 'Type here: ',
                       ),
                     ),
-                    // FilledButton(
-                    //   onPressed: () {}, 
-                    //   child: const Text('Save'),
-                    // ),
                   ]
                 ),
               ),

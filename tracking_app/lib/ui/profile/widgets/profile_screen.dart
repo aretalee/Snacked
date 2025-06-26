@@ -61,8 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(height:15),
             FilledButton(
               onPressed: () async {
-                final signOutStatus = await widget.viewModel.signOut();
-                if (signOutStatus != null && signOutStatus.contains('Success')) {
+                if (await widget.viewModel.status()) {
                   context.go('/signin');
                 };
               }, 

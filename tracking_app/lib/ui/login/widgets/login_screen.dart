@@ -15,8 +15,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwdController = TextEditingController();
-  String? _emailError;
-  String? _pwdError;
 
   @override
   void initState() {
@@ -49,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Email: ',
-                      errorText: _emailError,
+                      errorText: widget.viewModel.emailError,
                     ),
                   ),
                   const SizedBox(height:15),
@@ -58,16 +56,15 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Password: ',
-                      errorText: _pwdError,
+                      errorText: widget.viewModel.pwdError,
                     ),
                   ),
                   const SizedBox(height:15),
                    OutlinedButton(
                     onPressed: () async {
-                      if (_emailController.text.isNotEmpty) {
-                        widget.viewModel.setEmail(_emailController.text);
+                      if (widget.viewModel.resetEmailCheck(_emailController.text)) {
                         final resetStatus = await widget.viewModel.resetPassword();
-                        if (resetStatus != null && resetStatus.contains('Success')) {
+                        if (widget.viewModel.resetSuccess(resetStatus)) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text('If an account is linked to this email, you will receive a reset link shortly.', style: TextStyle(fontSize: 16, color:Colors.green, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
                               duration: const Duration(seconds: 5),
@@ -88,22 +85,15 @@ class _LoginPageState extends State<LoginPage> {
                   FilledButton(
                     onPressed: () async {
                       setState(() {
-                        if (_emailController.text.isEmpty) {
-                          _emailError = 'Please enter an email address';
-                        } else { _emailError = null; }
-                        if (_pwdController.text.isEmpty) {
-                          _pwdError = 'Please enter a password';
-                        } else { _pwdError = null; }
+                        widget.viewModel.loginErrors(_emailController.text, _pwdController.text);
                       });
-                      if (_emailError == null && _pwdError == null) {
-                        widget.viewModel.setEmail(_emailController.text);
-                        widget.viewModel.setPwd(_pwdController.text);
-                        final signUpStatus = await widget.viewModel.login();
-                        if (signUpStatus != null && signUpStatus.contains('Success')) {
+                      if (widget.viewModel.loginCheck(_emailController.text, _pwdController.text)) {
+                        final loginStatus = await widget.viewModel.login();
+                        if (widget.viewModel.loginSuccess(loginStatus)) {
                           context.go('/summary'); // is this still needed if there's also logic
                         } else{
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text('$signUpStatus', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                            content: Text('$loginStatus', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
                             duration: const Duration(seconds: 3),
                             )
                           );

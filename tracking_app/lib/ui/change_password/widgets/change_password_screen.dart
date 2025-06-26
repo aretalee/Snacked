@@ -16,9 +16,6 @@ class _ChangePwdPageState extends State<ChangePwdPage> {
   final TextEditingController _pwdControllerOne = TextEditingController();
   final TextEditingController _pwdControllerTwo = TextEditingController();
   final TextEditingController _pwdControllerOld = TextEditingController();
-  String? _pwdErrorOne;
-  String? _pwdErrorTwo;
-  String? _pwdErrorOld;
 
   @override
   void initState() {
@@ -51,7 +48,7 @@ class _ChangePwdPageState extends State<ChangePwdPage> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Old password: ',
-                        errorText: _pwdErrorOld,
+                        errorText: widget.viewModel.pwdErrorOld,
                       ),
                     ),
                     const SizedBox(height:15),
@@ -60,7 +57,7 @@ class _ChangePwdPageState extends State<ChangePwdPage> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'New password: ',
-                        errorText: _pwdErrorOne,
+                        errorText: widget.viewModel.pwdErrorOne,
                       ),
                     ),
                     const SizedBox(height:15),
@@ -69,46 +66,36 @@ class _ChangePwdPageState extends State<ChangePwdPage> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Retype password: ',
-                        errorText: _pwdErrorTwo,
+                        errorText: widget.viewModel.pwdErrorTwo,
                       ),
                     ),
                     const SizedBox(height:30),
                     FilledButton(
                       onPressed: () async {
                         setState(() {
-                        if (_pwdControllerOld.text.isEmpty) {
-                          _pwdErrorOld = 'Please enter your old password';
-                        } else { _pwdErrorOld = null; }
-                        if (_pwdControllerOne.text.isEmpty) {
-                          _pwdErrorOne = 'Please enter a password';
-                        } else { _pwdErrorOne = null; }
-                        if (_pwdControllerTwo.text.isEmpty) {
-                          _pwdErrorTwo = 'Please enter a password';
-                        } else { _pwdErrorTwo = null; }
-                      });
-                      if (_pwdErrorOne == null && _pwdErrorTwo == null) {
-                        if (_pwdControllerOne.text == _pwdControllerTwo.text) {
-                          widget.viewModel.setOldPwd(_pwdControllerOld.text);
-                          widget.viewModel.setNewPwd(_pwdControllerOne.text);
-                          final changeStatus = await widget.viewModel.changePassword();
-                          if (changeStatus != null && changeStatus.contains('Success')) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          widget.viewModel.pwdErrors(_pwdControllerOld.text, _pwdControllerOne.text, _pwdControllerTwo.text);
+                        });
+                        if (widget.viewModel.pwdCheck(_pwdControllerOld.text, _pwdControllerOne.text, _pwdControllerTwo.text)) {
+                          if (widget.viewModel.pwdSame(_pwdControllerOne.text, _pwdControllerTwo.text)) {
+                            final changeStatus = await widget.viewModel.changePassword();
+                            if (widget.viewModel.pwdSuccess(changeStatus)) {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text('Successfully changed password', style: TextStyle(fontSize: 16, color:Colors.green, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
                                 duration: const Duration(seconds: 3),
                                 )
                               );
                               context.go('/profile');
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text('$changeStatus', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
                                 duration: const Duration(seconds: 3),
                                 )
                               );
-                          }
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text('The typed passwords do not match', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                            duration: const Duration(seconds: 3),
+                            }
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('The typed passwords do not match', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                              duration: const Duration(seconds: 3),
                             )
                           );
                         };
