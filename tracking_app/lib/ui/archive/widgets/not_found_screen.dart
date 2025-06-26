@@ -29,7 +29,11 @@ class _NotFoundPageState extends State<NotFoundPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const SizedBox(height:100),
-                  Text(widget.viewModel.errorMessage, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,) ),
+                  Text(
+                    'No data found for the chosen date', 
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,),
+                    textAlign: TextAlign.center,
+                  ),
                   const SizedBox(height:100),
                 ]
               )

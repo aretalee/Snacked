@@ -11,8 +11,11 @@ class ArchiveViewModel extends ChangeNotifier{
   int _eating = 0;
   int _snacking = 0;
   String _comparison = '';
+  bool _compIcon = true;
   String _onTrack = '';
+  bool _progressIcon = true;
   String _comments = '';
+
 
   DateTime get date => _date;
   Map<String, dynamic> get summaryInfo => _summaryInfo;
@@ -22,31 +25,12 @@ class ArchiveViewModel extends ChangeNotifier{
   String get comparison => _comparison;
   String get onTrack => _onTrack;
   String get comments => _comments;
+  bool get compIcon => _compIcon;
+  bool get progressIcon => _progressIcon;
 
   void setDate(DateTime date) {
    _date = date;
   }
-
-  // bool getFromStorage() {
-  //   String docName = '${_date.year}${DateFormat('MMMM').format(_date)}${_date.day}';
-  //   bool valid = storeRepo.getDocument(docName);
-  //   if (valid) {
-  //     _summaryInfo = storeRepo.contents;
-  //     _eating = _summaryInfo['eating'];
-  //     _snacking = _summaryInfo['snacking'];
-  //     int comp = _summaryInfo['comparison'];
-  //     if (comp < 0) {
-  //       _comparison = 'Down by ${comp.abs()} min';
-  //     } else { _comparison = 'Increased by ${comp} min'; }
-  //     _comments = _summaryInfo['comments'];
-  //     bool status = _summaryInfo['onTrack'];
-  //     if (status) {
-  //       _onTrack = 'You\'re on track, keep it up!';
-  //     } else { _onTrack = 'No worries, try again tomorrow!'; }
-  //     return true;
-  //   } else { _errorMessage = storeRepo.error; }
-  //   return false;
-  // }
 
     Future<bool> getFromStorage() async {
     String docName = '${_date.year}${DateFormat('MMMM').format(_date)}${_date.day}';
@@ -58,18 +42,23 @@ class ArchiveViewModel extends ChangeNotifier{
       int comp = _summaryInfo['comparison'];
       if (comp < 0) {
         _comparison = 'Down by ${comp.abs()} min';
-      } else { _comparison = 'Increased by ${comp} min'; }
+      } else { 
+        _comparison = 'Increased by ${comp} min'; 
+        _compIcon = false;
+      }
       _comments = _summaryInfo['comments'];
       bool status = _summaryInfo['onTrack'];
       if (status) {
         _onTrack = 'You\'re on track, keep it up!';
-      } else { _onTrack = 'No worries, try again tomorrow!'; }
+      } else { 
+        _onTrack = 'Let\'s try again!'; 
+        _progressIcon = false;
+      }
       return true;
     } else { _errorMessage = storeRepo.error; }
     return false;
   }
 
-  
 }
 
 
