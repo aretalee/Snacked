@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../data/repositories/auth_repository.dart';
-
 import '../ui/archive/widgets/archive_screen.dart';
+import '../ui/archive/view_model/archive_vm.dart';
 import '../ui/change_password/widgets/change_password_screen.dart';
 import '../ui/change_password/view_model/change_password_vm.dart';
 import '../ui/change_username/widgets/change_username_screen.dart';
@@ -14,7 +14,7 @@ import '../ui/login/widgets/login_screen.dart';
 import '../ui/login/view_model/login_vm.dart';
 import '../ui/navigation_bar/widgets/navigation_bar.dart';
 import '../ui/navigation_bar/view_model/navigation_bar_vm.dart';
-import '../ui/past_summary/widgets/past_summary_screen.dart';
+import '../ui/archive/widgets/past_summary_screen.dart';
 import '../ui/profile/widgets/profile_screen.dart';
 import '../ui/profile/view_model/profile_vm.dart';
 import '../ui/set_goals/widgets/set_goals_screen.dart';
@@ -25,11 +25,11 @@ import '../ui/summary/widgets/summary_screen.dart';
 import '../ui/summary/widgets/no_data_screen.dart';
 import '../ui/summary/widgets/prompt_screen.dart';
 import '../ui/auth/view_model/auth_vm.dart';
-import 'package:snacktrac/global.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
 final authVM = AuthViewModel();
+final archiveVM = ArchiveViewModel();
 
 GoRouter router(AuthRepository auth) => GoRouter(
   initialLocation: '/summary',
@@ -66,11 +66,11 @@ GoRouter router(AuthRepository auth) => GoRouter(
         ),
         GoRoute(
           path: '/archive',
-          builder: (context, state) => ArchivePage(),
+          builder: (context, state) => ArchivePage(viewModel: archiveVM),
           routes: [
             GoRoute(
               path: 'pastReport',
-              builder: (context, state) => PastSummaryPage(date: DateTime.now()),
+              builder: (context, state) => PastSummaryPage(viewModel: archiveVM),
             ),
           ]
         ),

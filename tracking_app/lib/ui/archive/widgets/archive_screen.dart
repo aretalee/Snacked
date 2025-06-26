@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import 'package:snacktrac/ui/archive/view_model/archive_vm.dart';
+
 
 class ArchivePage extends StatefulWidget {
-  const ArchivePage({super.key});
+  const ArchivePage({super.key, required this.viewModel});
+  final ArchiveViewModel viewModel;
 
   @override
   State<ArchivePage> createState() => _ArchivePageState();
@@ -15,7 +18,6 @@ class _ArchivePageState extends State<ArchivePage> {
   CalendarFormat format = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _chosenDate;
-  DateTime forSummary = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class _ArchivePageState extends State<ArchivePage> {
                 setState(() {
                   _chosenDate = chosenDate;
                   _focusedDay = focusedDay;
-                  forSummary =  chosenDate;
+                  widget.viewModel.setDate(chosenDate);
                 });
               }, 
               onPageChanged: (focusedDay) {

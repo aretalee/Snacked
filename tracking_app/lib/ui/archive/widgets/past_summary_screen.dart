@@ -2,16 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import 'package:snacktrac/ui/archive/view_model/archive_vm.dart';
 
-class PastSummaryPage extends StatelessWidget {
-  const PastSummaryPage({super.key, required this.date});
-  final DateTime date;
+
+class PastSummaryPage extends StatefulWidget {
+  const PastSummaryPage({super.key, required this.viewModel});
+  final ArchiveViewModel viewModel;
+
+  @override
+  State<PastSummaryPage> createState() => _PastSummaryPageState();
+}
+
+
+class _PastSummaryPageState extends State<PastSummaryPage> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold (
       appBar: AppBar(
-        title: Text('Summary for ${DateFormat('MMMM d, y').format(date)} ', 
+        title: Text('Summary for ${DateFormat('MMMM d, y').format(widget.viewModel.date)} ', 
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)), backgroundColor: Colors.black, 
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new),
