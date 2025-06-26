@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../data/repositories/auth_repository.dart';
 import '../ui/archive/widgets/archive_screen.dart';
+import '../ui/archive/widgets/not_found_screen.dart';
 import '../ui/archive/view_model/archive_vm.dart';
 import '../ui/change_password/widgets/change_password_screen.dart';
 import '../ui/change_password/view_model/change_password_vm.dart';
@@ -71,6 +72,10 @@ GoRouter router(AuthRepository auth) => GoRouter(
             GoRoute(
               path: 'pastReport',
               builder: (context, state) => PastSummaryPage(viewModel: archiveVM),
+            ),
+            GoRoute(
+              path: 'notFound',
+              builder: (context, state) => NotFoundPage(viewModel: archiveVM),
             ),
           ]
         ),

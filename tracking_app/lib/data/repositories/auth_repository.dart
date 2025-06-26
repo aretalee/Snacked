@@ -61,7 +61,6 @@ class AuthRepository {
       await _auth.sendPasswordResetEmail(email: email);
       return 'Success';
     } on FirebaseAuthException catch (e) {
-      print(e.code);
       if (e.code == 'invalid-email') {
         return 'Not a valid email format';
       } else if (e.code == 'missing-email') {

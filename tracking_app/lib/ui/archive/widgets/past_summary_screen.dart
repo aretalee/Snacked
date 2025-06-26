@@ -38,15 +38,15 @@ class _PastSummaryPageState extends State<PastSummaryPage> {
                   children: [
                     Text('You spent:', style: TextStyle(fontSize: 16)),
                     const SizedBox(height:15),
-                    Text('Approximately 180 min eating', style: TextStyle(fontSize: 20)),
-                    Text('60 min were likely to be snacking', style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
+                    Text('Approximately ${widget.viewModel.eating} min eating', style: TextStyle(fontSize: 20)),
+                    Text('${widget.viewModel.snacking} min were likely to be snacking', style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
                     const SizedBox(height:30),
                     Text('Compared to yesterday:', style: TextStyle(fontSize: 16)),
                     const SizedBox(height:15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Down by 30 min', style: TextStyle(fontSize: 20)),
+                        Text(widget.viewModel.comparison, style: TextStyle(fontSize: 20)), // figure out logic for this
                         const SizedBox(width:5),
                         Icon(Icons.arrow_downward, color: Colors.green, size: 20,)
                       ]
@@ -66,9 +66,9 @@ class _PastSummaryPageState extends State<PastSummaryPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('You\'re on track, keep it up!', style: TextStyle(fontSize: 20)),
-                        const SizedBox(width:10),
-                        Icon(Icons.thumb_up, color: Colors.green, size: 20,)
+                        Text(widget.viewModel.onTrack, style: TextStyle(fontSize: 20)), // also need to figure out logic for this
+                        // const SizedBox(width:10),
+                        // Icon(Icons.thumb_up, color: Colors.green, size: 20,)
                       ]
                     ),
                   ]
@@ -86,7 +86,7 @@ class _PastSummaryPageState extends State<PastSummaryPage> {
                     TextField(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: 'Type here: ',
+                        hintText: widget.viewModel.comments,
                       ),
                     ),
                   ]
