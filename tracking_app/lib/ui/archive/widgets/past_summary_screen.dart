@@ -36,12 +36,12 @@ class _PastSummaryPageState extends State<PastSummaryPage> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    Text('You spent:', style: TextStyle(fontSize: 16)),
+                    Text('You spent:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     const SizedBox(height:15),
                     Text('Approximately ${widget.viewModel.eating} min eating', style: TextStyle(fontSize: 20)),
                     Text('${widget.viewModel.snacking} min were likely to be snacking', style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
                     const SizedBox(height:30),
-                    Text('Compared to yesterday:', style: TextStyle(fontSize: 16)),
+                    Text('Compared to yesterday:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     const SizedBox(height:15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +63,7 @@ class _PastSummaryPageState extends State<PastSummaryPage> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    Text('Based on your goals:', style: TextStyle(fontSize: 16)),
+                    Text('Based on your goals:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     const SizedBox(height:15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -84,14 +84,9 @@ class _PastSummaryPageState extends State<PastSummaryPage> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    Text('Anything that contributed to snacking?', style: TextStyle(fontSize: 16)),
+                    Text('Anything that contributed to snacking?', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     const SizedBox(height:15),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: widget.viewModel.comments,
-                      ),
-                    ),
+                    Text(widget.viewModel.comments, style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
                   ]
                 ),
               ),

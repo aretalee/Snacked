@@ -44,6 +44,7 @@ class _ChangePwdPageState extends State<ChangePwdPage> {
                   Text('Change Password', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,)),
                   const SizedBox(height:30),
                     TextField(
+                      obscureText: true,
                       controller: _pwdControllerOld,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -53,6 +54,7 @@ class _ChangePwdPageState extends State<ChangePwdPage> {
                     ),
                     const SizedBox(height:15),
                     TextField(
+                      obscureText: true,
                       controller: _pwdControllerOne,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -62,6 +64,7 @@ class _ChangePwdPageState extends State<ChangePwdPage> {
                     ),
                     const SizedBox(height:15),
                     TextField(
+                      obscureText: true,
                       controller: _pwdControllerTwo,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
