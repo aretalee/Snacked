@@ -12,6 +12,7 @@ class ArchiveViewModel extends ChangeNotifier{
   int _snacking = 0;
   String _comparison = '';
   bool _compIcon = true;
+  bool _noDiff = false;
   String _onTrack = '';
   bool _progressIcon = true;
   String _comments = '';
@@ -26,6 +27,7 @@ class ArchiveViewModel extends ChangeNotifier{
   String get onTrack => _onTrack;
   String get comments => _comments;
   bool get compIcon => _compIcon;
+  bool get noDiff => _noDiff;
   bool get progressIcon => _progressIcon;
 
   void setDate(DateTime date) {
@@ -42,14 +44,22 @@ class ArchiveViewModel extends ChangeNotifier{
       int comp = _summaryInfo['comparison'];
       if (comp < 0) {
         _comparison = 'Down by ${comp.abs()} min';
+        _compIcon = true;
+        _noDiff = false;
+      } else if (comp == 0) {
+        _comparison = 'No change from yesterday'; // what icon to display for this and how
+        _compIcon = true;
+        _noDiff = true;
       } else { 
         _comparison = 'Increased by ${comp} min'; 
         _compIcon = false;
+        _noDiff = false;
       }
       _comments = _summaryInfo['comments'];
       bool status = _summaryInfo['onTrack'];
       if (status) {
         _onTrack = 'You\'re on track, keep it up!';
+        _progressIcon = true;
       } else { 
         _onTrack = 'Let\'s try again!'; 
         _progressIcon = false;

@@ -46,10 +46,11 @@ class _PastSummaryPageState extends State<PastSummaryPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(widget.viewModel.comparison, style: TextStyle(fontSize: 20)), // need to figure out logic icon
+                        Text(widget.viewModel.comparison, style: TextStyle(fontSize: 20)), // need to figure out icon logic
                         const SizedBox(width:5),
-                        widget.viewModel.compIcon ? Icon(Icons.arrow_downward, color: Colors.green, size: 20,) 
-                        : Icon(Icons.arrow_upward, color: Colors.red, size: 20,) 
+                        (widget.viewModel.compIcon && !widget.viewModel.noDiff) ? Icon(Icons.arrow_downward, color: Colors.green, size: 20,) 
+                        : (widget.viewModel.noDiff ? Icon(Icons.swap_vert, color: Colors.white, size: 20,) 
+                        : Icon(Icons.arrow_upward, color: Colors.red, size: 20,) )
                       ]
                     ),
                   ],
@@ -67,9 +68,9 @@ class _PastSummaryPageState extends State<PastSummaryPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(widget.viewModel.onTrack, style: TextStyle(fontSize: 20)), // need to figure out logic icon
+                        Text(widget.viewModel.onTrack, style: TextStyle(fontSize: 20)), 
                         const SizedBox(width:10),
-                        widget.viewModel.compIcon ? Icon(Icons.thumb_up, color: Colors.green, size: 20,) 
+                        (widget.viewModel.progressIcon) ? Icon(Icons.thumb_up, color: Colors.green, size: 20,) 
                         : Icon(Icons.warning, color: Colors.blue, size: 20,)
                       ]
                     ),
