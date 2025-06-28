@@ -21,12 +21,14 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
   }
 
+  @override
   void dispose() {
     _emailController.dispose();
     _pwdController.dispose();
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold (
       appBar: AppBar(backgroundColor: Colors.black),
@@ -98,8 +100,8 @@ class _LoginPageState extends State<LoginPage> {
                             duration: const Duration(seconds: 3),
                             )
                           );
-                        };
-                      };
+                        }
+                      }
                     },
                     child: const Text('Go'),
                   ),

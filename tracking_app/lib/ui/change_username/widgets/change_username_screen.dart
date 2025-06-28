@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:snacktrac/ui/change_username/view_model/change_username_vm.dart';
-import 'package:snacktrac/ui/profile/widgets/profile_screen.dart';
-import 'package:snacktrac/ui/profile/view_model/profile_vm.dart';
 
 
 class ChangeNamePage extends StatefulWidget {
@@ -22,11 +20,13 @@ class _ChangeNamePageState extends State<ChangeNamePage> {
     super.initState();
   }
 
+  @override
   void dispose() {
     _nameController.dispose();
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold (
       appBar: AppBar(backgroundColor: Colors.black),
@@ -71,8 +71,8 @@ class _ChangeNamePageState extends State<ChangeNamePage> {
                             duration: const Duration(seconds: 3),
                             )
                           );
-                        };
-                      };
+                        }
+                      }
                     }, 
                     child: const Text('Confirm'),
                   ),

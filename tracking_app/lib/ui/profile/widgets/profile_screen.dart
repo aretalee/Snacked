@@ -63,7 +63,7 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () async {
                 if (await widget.viewModel.status()) {
                   context.go('/signin');
-                };
+                }
               }, 
               child: const Text('Sign Out'),
             ),

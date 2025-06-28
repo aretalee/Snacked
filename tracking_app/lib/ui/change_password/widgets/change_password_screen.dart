@@ -22,12 +22,14 @@ class _ChangePwdPageState extends State<ChangePwdPage> {
     super.initState();
   }
 
+  @override
   void dispose() {
     _pwdControllerOne.dispose();
     _pwdControllerTwo.dispose();
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold (
       appBar: AppBar(backgroundColor: Colors.black),
@@ -101,8 +103,8 @@ class _ChangePwdPageState extends State<ChangePwdPage> {
                               duration: const Duration(seconds: 3),
                             )
                           );
-                        };
-                      };
+                        }
+                      }
                     }, 
                     child: const Text('Confirm'),
                   ),

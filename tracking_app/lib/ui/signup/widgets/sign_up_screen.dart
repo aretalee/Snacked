@@ -22,12 +22,14 @@ class _SignUpPageState extends State<SignUpPage> {
     super.initState();
   }
 
+  @override
   void dispose() {
     _emailController.dispose();
     _pwdController.dispose();
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold (
       appBar: AppBar(backgroundColor: Colors.black),
@@ -77,8 +79,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             duration: const Duration(seconds: 3),
                             )
                           );
-                        };
-                      };
+                        }
+                      }
                     },
                     child: const Text('Register'),
                   ),

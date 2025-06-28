@@ -7,7 +7,6 @@ import 'package:snacktrac/global.dart';
 class ArchiveViewModel extends ChangeNotifier{
   DateTime _date = DateTime.now();
   Map<String, dynamic> _summaryInfo = {};
-  String _errorMessage = '';
   int _eating = 0;
   int _snacking = 0;
   String _comparison = '';
@@ -20,7 +19,6 @@ class ArchiveViewModel extends ChangeNotifier{
 
   DateTime get date => _date;
   Map<String, dynamic> get summaryInfo => _summaryInfo;
-  String get errorMessage => _errorMessage;
   int get eating => _eating;
   int get snacking => _snacking;
   String get comparison => _comparison;
@@ -47,11 +45,11 @@ class ArchiveViewModel extends ChangeNotifier{
         _compIcon = true;
         _noDiff = false;
       } else if (comp == 0) {
-        _comparison = 'No change from yesterday'; // what icon to display for this and how
+        _comparison = 'No change from yesterday'; 
         _compIcon = true;
         _noDiff = true;
       } else { 
-        _comparison = 'Increased by ${comp} min'; 
+        _comparison = 'Increased by $comp min'; 
         _compIcon = false;
         _noDiff = false;
       }
@@ -65,7 +63,7 @@ class ArchiveViewModel extends ChangeNotifier{
         _progressIcon = false;
       }
       return true;
-    } else { _errorMessage = storeRepo.error; }
+    }
     return false;
   }
 
