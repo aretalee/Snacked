@@ -1,4 +1,4 @@
-# snacktrac
+# Snacked?
 
 A new Flutter project.
 
