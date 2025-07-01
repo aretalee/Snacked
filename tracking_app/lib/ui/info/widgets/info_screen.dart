@@ -10,7 +10,7 @@ class InfoPage extends StatelessWidget {
 
     return Scaffold (
       appBar: AppBar(
-        title:Text('About SnackTrac', style: TextStyle(fontWeight: FontWeight.bold)), 
+        title:Text('About Snacked', style: TextStyle(fontWeight: FontWeight.bold)), 
         backgroundColor: Colors.black
       ),
       body: Padding(

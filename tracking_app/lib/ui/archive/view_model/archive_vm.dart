@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'package:snacktrac/global.dart';
+import 'package:Snacked/global.dart';
 
 
 class ArchiveViewModel extends ChangeNotifier{

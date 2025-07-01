@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:snacktrac/ui/login/view_model/login_vm.dart';
+import 'package:Snacked/ui/login/view_model/login_vm.dart';
 
 
 class LoginPage extends StatefulWidget {

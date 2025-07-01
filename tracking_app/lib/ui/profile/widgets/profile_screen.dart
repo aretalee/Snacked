@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:snacktrac/ui/profile/view_model/profile_vm.dart';
+import 'package:Snacked/ui/profile/view_model/profile_vm.dart';
 
 
 class ProfilePage extends StatefulWidget {
@@ -56,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(height:15),
             FilledButton(
               onPressed: () => context.go('/profile/info'),
-              child: const Text('About SnackTrac'),
+              child: const Text('About Snacked'),
             ),
             const SizedBox(height:15),
             FilledButton(

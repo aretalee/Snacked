@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:snacktrac/global.dart';
+import 'package:Snacked/global.dart';
 
 
 

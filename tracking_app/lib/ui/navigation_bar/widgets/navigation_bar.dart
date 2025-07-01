@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:snacktrac/ui/navigation_bar/view_model/navigation_bar_vm.dart';
+import 'package:Snacked/ui/navigation_bar/view_model/navigation_bar_vm.dart';
 
 
 class NavBar extends StatefulWidget {

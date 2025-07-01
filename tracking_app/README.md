@@ -1,4 +1,4 @@
-# Snacked?
+# Snacked
 
 A new Flutter project.
 

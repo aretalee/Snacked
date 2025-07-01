@@ -54,11 +54,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAWV5-4ucHFmHTVU4lkzyck8Yq53k7z19A',
-    appId: '1:109499910826:ios:98937c22edb875292d5ed3',
+    appId: '1:109499910826:ios:ed5d242b3ccf281d2d5ed3',
     messagingSenderId: '109499910826',
     projectId: 'snacktrac',
     storageBucket: 'snacktrac.firebasestorage.app',
-    iosBundleId: 'com.example.snacktrac',
+    iosBundleId: 'com.example.Snacked',
   );
 
 }

@@ -5,7 +5,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-import 'package:snacktrac/routing/nav_router.dart';
+import 'package:Snacked/routing/nav_router.dart';
 import 'global.dart';
 
 final thisRouter = router(authRepo);
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'SnackTrac',
+      title: 'Snacked',
       theme: FlexThemeData.dark(scheme: FlexScheme.blue, fontFamily: GoogleFonts.inter().fontFamily),
       routerConfig: thisRouter,
       // routerConfig: router(authRepo),

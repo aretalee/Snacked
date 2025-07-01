@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:snacktrac/ui/change_password/view_model/change_password_vm.dart';
+import 'package:Snacked/ui/change_password/view_model/change_password_vm.dart';
 
 
 class ChangePwdPage extends StatefulWidget {

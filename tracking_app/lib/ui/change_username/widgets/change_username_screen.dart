@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:snacktrac/ui/change_username/view_model/change_username_vm.dart';
+import 'package:Snacked/ui/change_username/view_model/change_username_vm.dart';
 
 
 class ChangeNamePage extends StatefulWidget {

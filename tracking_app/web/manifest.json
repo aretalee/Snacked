@@ -1,6 +1,6 @@
 {
-    "name": "snacktrac",
-    "short_name": "snacktrac",
+    "name": "Snacked",
+    "short_name": "Snacked",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

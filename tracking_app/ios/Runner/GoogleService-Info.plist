@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.snacktrac</string>
+	<string>com.example.Snacked</string>
 	<key>PROJECT_ID</key>
 	<string>snacktrac</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:109499910826:ios:98937c22edb875292d5ed3</string>
+	<string>1:109499910826:ios:ed5d242b3ccf281d2d5ed3</string>
 </dict>
 </plist>

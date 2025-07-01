@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-import 'package:snacktrac/ui/archive/view_model/archive_vm.dart';
+import 'package:Snacked/ui/archive/view_model/archive_vm.dart';
 
 
 class PastSummaryPage extends StatefulWidget {
