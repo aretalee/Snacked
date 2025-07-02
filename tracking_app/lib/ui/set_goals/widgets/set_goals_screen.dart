@@ -1,8 +1,29 @@
 import 'package:flutter/material.dart';
 
+import 'package:Snacked/ui/set_goals/view_model/set_goals_vm.dart';
 
-class SetGoalsPage extends StatelessWidget {
-  const SetGoalsPage({super.key});
+
+class SetGoalsPage extends StatefulWidget {
+  const SetGoalsPage({super.key, required this.viewModel});
+  final SetGoalsViewModel viewModel;
+
+  @override
+  State<SetGoalsPage> createState() => _SetGoalsPageState();
+}
+
+class _SetGoalsPageState extends State<SetGoalsPage> {
+  final TextEditingController _goalController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _goalController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +43,49 @@ class SetGoalsPage extends StatelessWidget {
                   Text('Set a Goal', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,)),
                   const SizedBox(height:30),
                   TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Snacking time (in min): ',
-                      ),
+                    controller: _goalController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Snacking time (in min): ',
+                      errorText: widget.viewModel.goalError,
                     ),
-                    const SizedBox(height:30),
-                    FilledButton(
-                      onPressed: () {}, 
-                      child: const Text('Save'),
-                    ),
+                  ),
+                  const SizedBox(height:15),
+                  FilledButton(
+                    onPressed: () async {
+                      setState(() {
+                        widget.viewModel.goalErrors(_goalController.text);
+                      });
+                      if (widget.viewModel.checkGoalInput(_goalController.text)) {
+                        final updateStatus = await widget.viewModel.updateNewGoal();
+                        if (updateStatus) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('Goal updated successfully.', style: TextStyle(fontSize: 16, color:Colors.green, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                              duration: const Duration(seconds: 5),
+                            )
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('Unable to set goal, please try again.', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                              duration: const Duration(seconds: 3),
+                            )
+                          );
+                        }
+                      }
+                    }, 
+                    child: const Text('Save'),
+                  ),
+                  const SizedBox(height:5),
+                  FilledButton(
+                    onPressed: () async {
+                      final checkGoal = await widget.viewModel.currentGoal;
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Your current goal is $checkGoal min of snacking daily', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                        duration: const Duration(seconds: 5),
+                      ));
+                    }, 
+                    child: const Text('Check current goal'),
+                  ),
                 ]
               )
             )

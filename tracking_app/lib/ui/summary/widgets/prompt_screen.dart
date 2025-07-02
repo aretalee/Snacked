@@ -1,55 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import 'package:Snacked/ui/summary/view_model/summary_vm.dart';
 
 
-class PromptPage extends StatelessWidget {
-  const PromptPage({super.key});
+ class PromptPage extends StatefulWidget {
+  const PromptPage({super.key, required this.viewModel});
+  final SummaryViewModel viewModel;
+
+  @override
+  State<PromptPage> createState() => _PromptPageState();
+ }
+
+class _PromptPageState extends State<PromptPage> {
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold (
-      appBar: AppBar(backgroundColor: Colors.black),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Center(
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const SizedBox(height:30),
-                  Text(
-                    'Were you happy with yesterday’s eating habits?', 
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,), 
-                    textAlign: TextAlign.center),
-                  const SizedBox(height:30),
-                  FilledButton(
-                      onPressed: () {}, 
-                      child: const Text('I feel great!'),
-                    ),
-                    const SizedBox(height:15),
-                    FilledButton(
-                      onPressed: () {}, 
-                      child: const Text('Not really...'),
-                    ),
-                    const SizedBox(height:15),
-                    FilledButton(
-                      onPressed: () {}, 
-                      child: const Text('Maybe?'),
-                    ),
-                    const SizedBox(height:30),
-                ]
-              )
-            )
-          )
-        )
+    return AlertDialog(
+      title: Text('Were you happy with yesterday\'s eating habits?', style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+      content: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height:30),
+          FilledButton(
+            onPressed: () {
+              widget.viewModel.setPromptFalse();
+              context.go('/summary');
+            },
+            child: const Text('I feel great!'),
+          ),
+          const SizedBox(height:15),
+          FilledButton(
+            onPressed: () {
+              widget.viewModel.setPromptFalse();
+              context.go('/summary');
+            },
+            child: const Text('Not really...'),
+          ),
+          const SizedBox(height:15),
+          FilledButton(
+            onPressed: () {
+              widget.viewModel.setPromptFalse();
+              context.go('/summary');
+            },
+            child: const Text('Maybe?'),
+          ),
+          const SizedBox(height:30),
+        ]
       )
     );
   }
-  
 }
 
 

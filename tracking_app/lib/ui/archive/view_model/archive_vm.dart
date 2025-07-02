@@ -18,7 +18,6 @@ class ArchiveViewModel extends ChangeNotifier{
 
 
   DateTime get date => _date;
-  Map<String, dynamic> get summaryInfo => _summaryInfo;
   int get eating => _eating;
   int get snacking => _snacking;
   String get comparison => _comparison;
@@ -32,11 +31,11 @@ class ArchiveViewModel extends ChangeNotifier{
    _date = date;
   }
 
-    Future<bool> getFromStorage() async {
+  Future<bool> getFromStorage() async {
     String docName = '${_date.year}${DateFormat('MMMM').format(_date)}${_date.day}';
-    bool valid = await storeRepo.getDocument(docName);
+    bool valid = await storeRepo.getSummaries(docName);
     if (valid) {
-      _summaryInfo = storeRepo.contents;
+      _summaryInfo = storeRepo.summary;
       _eating = _summaryInfo['eating'];
       _snacking = _summaryInfo['snacking'];
       int comp = _summaryInfo['comparison'];

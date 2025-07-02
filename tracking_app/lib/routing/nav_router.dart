@@ -19,17 +19,20 @@ import '../ui/archive/widgets/past_summary_screen.dart';
 import '../ui/profile/widgets/profile_screen.dart';
 import '../ui/profile/view_model/profile_vm.dart';
 import '../ui/set_goals/widgets/set_goals_screen.dart';
+import '../ui/set_goals/view_model/set_goals_vm.dart';
 import '../ui/sign_in_prompt/widgets/sign_in_prompt_screen.dart';
 import '../ui/signup/widgets/sign_up_screen.dart';
 import '../ui/signup/view_model/sign_up_vm.dart';
 import '../ui/summary/widgets/summary_screen.dart';
 import '../ui/summary/widgets/no_data_screen.dart';
 import '../ui/summary/widgets/prompt_screen.dart';
+import '../ui/summary/view_model/summary_vm.dart';
 import '../ui/auth/view_model/auth_vm.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
 final authVM = AuthViewModel();
+final summaryVM = SummaryViewModel();
 final archiveVM = ArchiveViewModel();
 
 GoRouter router(AuthRepository auth) => GoRouter(
@@ -52,7 +55,12 @@ GoRouter router(AuthRepository auth) => GoRouter(
       routes: [
         GoRoute(
           path: '/summary',
-          builder: (context, state) => SummaryPage(),
+          builder: (context, state) => SummaryPage(viewModel: summaryVM),
+          redirect: (context, state) {
+            if (summaryVM.noData) { return '/summary/noData'; }
+            else if (summaryVM.prompt) { return '/summary/prompt'; }
+            else { return'/summary'; }
+          },
           routes: [
             // need to write in logic here
             GoRoute(
@@ -61,7 +69,7 @@ GoRouter router(AuthRepository auth) => GoRouter(
             ),
             GoRoute(
               path: 'prompt',
-              builder: (context, state) => PromptPage(),
+              builder: (context, state) => PromptPage(viewModel: summaryVM),
             ),
           ]
         ),
@@ -85,7 +93,7 @@ GoRouter router(AuthRepository auth) => GoRouter(
           routes: [
             GoRoute(
               path: 'setGoals',
-              builder: (context, state) => SetGoalsPage(),
+              builder: (context, state) => SetGoalsPage(viewModel: SetGoalsViewModel()),
             ),
             GoRoute(
               path: 'export',

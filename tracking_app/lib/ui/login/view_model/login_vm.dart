@@ -32,10 +32,10 @@ class LoginViewModel extends ChangeNotifier{
   void loginErrors(String emailInput, String pwdInput) {
     if (emailInput.isEmpty) {
       _emailError = 'Please enter an email address';
-    } 
+    } else { _emailError = null; };
     if (pwdInput.isEmpty) {
       _pwdError = 'Please enter a password';
-    } 
+    } else { _pwdError = null; };
   }
 
   bool loginCheck(String emailInput, String pwdInput) {

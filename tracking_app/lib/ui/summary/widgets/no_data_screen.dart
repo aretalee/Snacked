@@ -8,7 +8,7 @@ class NoDataSummary extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold (
-      appBar: AppBar(backgroundColor: Colors.black),
+      appBar: AppBar(backgroundColor: Colors.black, automaticallyImplyLeading:false),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Center(
@@ -33,7 +33,6 @@ class NoDataSummary extends StatelessWidget {
       )
     );
   }
-  
 }
 
 

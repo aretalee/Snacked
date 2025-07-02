@@ -33,10 +33,10 @@ class SignUpViewModel extends ChangeNotifier{
   void registerErrors(String emailInput, String pwdInput) {
     if (emailInput.isEmpty) {
       _emailError = 'Please enter an email address';
-    } 
+    } else { _emailError = null; };
     if (pwdInput.isEmpty) {
       _pwdError = 'Please enter a password';
-    } 
+    } else { _pwdError = null; };
   }
 
   bool registerCheck(String emailInput, String pwdInput) {
