@@ -20,7 +20,7 @@ class _PastSummaryPageState extends State<PastSummaryPage> {
   Widget build(BuildContext context) {
     return Scaffold (
       appBar: AppBar(
-        title: Text('Summary for ${DateFormat('MMMM d, y').format(widget.viewModel.date)} ', 
+        title: Text('Summary for ${DateFormat('MMMM d, y').format(widget.viewModel.date)}', 
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)), backgroundColor: Colors.black, 
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new),

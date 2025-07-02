@@ -9,8 +9,8 @@ class StorageRepository {
   Map<String, dynamic> get summary => _summary;
   Map<String, dynamic> get goal => _goal;
 
-  Future<bool> getSummaries(String docName) async {
-    final dateSummary = _db.collection("summaries").doc(docName);
+  Future<bool> getSummaries(String userID, String docName) async {
+    final dateSummary = _db.collection("users").doc(userID).collection("summaries").doc(docName);
     final DocumentSnapshot doc = await dateSummary.get().catchError((error) { 
       throw error;
     });
@@ -21,8 +21,18 @@ class StorageRepository {
     return false;
   }
 
-  Future<bool> getGoal() async {
-    final goalInfo = _db.collection("currentGoal").doc("goal");
+    Future<bool> addComment(String comment, String userID, String docName) async {
+    final goalInfo = _db.collection("users").doc(userID).collection("summaries").doc(docName);
+    try {
+      await goalInfo.update({"comments": comment});
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> getGoal(String userID) async {
+    final goalInfo = _db.collection("users").doc(userID).collection("currentGoal").doc("goal");
     final DocumentSnapshot doc = await goalInfo.get().catchError((error) { 
       throw error;
     });
@@ -33,8 +43,8 @@ class StorageRepository {
     return false;
   }
 
-  Future<bool> setGoal(int goal) async {
-    final goalInfo = _db.collection("currentGoal").doc("goal");
+  Future<bool> setGoal(int goal, String userID) async {
+    final goalInfo = _db.collection("users").doc(userID).collection("currentGoal").doc("goal");
     try {
       await goalInfo.update({"targetTime": goal});
       return true;

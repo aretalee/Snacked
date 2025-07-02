@@ -22,7 +22,7 @@ class InfoPage extends StatelessWidget {
                 padding: const EdgeInsets.all(45.0),
                 child: Column(
                   children: [
-                    Text('Your bespoke snacking report for the previous day is released at 7am daily', style: TextStyle(fontSize: 18), textAlign: TextAlign.center),
+                    Text('Your bespoke snacking report for the previous day is released at 12am daily', style: TextStyle(fontSize: 18), textAlign: TextAlign.center),
                     const SizedBox(height:24),
                     Text('We aim to give an overview of how much time you spend  eating every day', style: TextStyle(fontSize: 18), textAlign: TextAlign.center),
                     const SizedBox(height:24),

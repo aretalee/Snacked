@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:intl/intl.dart';
 
 import 'package:Snacked/ui/summary/view_model/summary_vm.dart';
 
@@ -13,12 +14,24 @@ import 'package:Snacked/ui/summary/view_model/summary_vm.dart';
  }
 
 class _SummaryPageState extends State<SummaryPage> {
+  final TextEditingController _commentsController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _commentsController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
       return Scaffold (
         appBar: AppBar(
-          title: const Text('June 17 Summary', style: TextStyle(fontWeight: FontWeight.bold)), 
+          title: Text('Summary for ${DateFormat('MMMM d, y').format(widget.viewModel.summaryDate)}', style: TextStyle(fontWeight: FontWeight.bold)), 
           backgroundColor: Colors.black, automaticallyImplyLeading:false),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -100,10 +113,20 @@ class _SummaryPageState extends State<SummaryPage> {
                       Text('Anything that contributed to snacking?', style: TextStyle(fontSize: 16)),
                       const SizedBox(height:15),
                       TextField(
+                        controller: _commentsController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'Type here: ',
                         ),
+                        onChanged: (value) async {
+                          if (!await widget.viewModel.updateComments(value)) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('Unable to save comment.', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                              duration: const Duration(seconds: 3),
+                            )
+                          );
+                        }
+                        }
                       ),
                     ]
                   ),

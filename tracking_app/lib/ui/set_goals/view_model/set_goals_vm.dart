@@ -19,8 +19,8 @@ class SetGoalsViewModel extends ChangeNotifier{
     return 'Unable to retrieve current goal';
   }
 
-    Future<bool> getGoal() async {
-    bool valid = await storeRepo.getGoal();
+  Future<bool> getGoal() async {
+    bool valid = await storeRepo.getGoal(authRepo.userID);
     if (valid) {
       _goalInfo = storeRepo.goal;
       _currentGoal = _goalInfo['targetTime'];
@@ -49,7 +49,7 @@ class SetGoalsViewModel extends ChangeNotifier{
   }
 
   Future<bool> updateNewGoal() async {
-    bool valid = await storeRepo.setGoal(_desiredGoal);
+    bool valid = await storeRepo.setGoal(_desiredGoal, authRepo.userID);
     if (valid) { return true; }
     return false;
   }

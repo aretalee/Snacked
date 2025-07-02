@@ -33,7 +33,7 @@ class ArchiveViewModel extends ChangeNotifier{
 
   Future<bool> getFromStorage() async {
     String docName = '${_date.year}${DateFormat('MMMM').format(_date)}${_date.day}';
-    bool valid = await storeRepo.getSummaries(docName);
+    bool valid = await storeRepo.getSummaries(authRepo.userID, docName);
     if (valid) {
       _summaryInfo = storeRepo.summary;
       _eating = _summaryInfo['eating'];

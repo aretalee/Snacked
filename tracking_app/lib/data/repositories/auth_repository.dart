@@ -6,6 +6,7 @@ class AuthRepository {
 
   User? get currentUser => _auth.currentUser;
   Stream<User?> get changes => _auth.authStateChanges();
+  String get userID => currentUser!.uid;
 
   Future<String?> register(String email, String password) async {
     try {
