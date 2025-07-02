@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 
+import 'package:Snacked/ui/export_data/view_model/export_vm.dart';
 
-class ExportPage extends StatelessWidget {
-  const ExportPage({super.key});
+
+class ExportPage extends StatefulWidget {
+  const ExportPage({super.key, required this.viewModel});
+  final ExportViewModel viewModel;
+
+  @override
+  State<ExportPage> createState() => _ExportPageState();
+}
+
+class _ExportPageState extends State<ExportPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -26,19 +35,28 @@ class ExportPage extends StatelessWidget {
                     textAlign: TextAlign.center),
                   const SizedBox(height:30),
                   FilledButton(
-                      onPressed: () {}, 
-                      child: const Text('CSV'),
+                      onPressed: () async {
+                        if (await widget.viewModel.getJSON()) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('Data exported.', style: TextStyle(fontSize: 16, color:Colors.green, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                              duration: const Duration(seconds: 5),
+                            )
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('Unable to export data, please try again.', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                            duration: const Duration(seconds: 5),
+                            )
+                          );
+                        }
+                      }, 
+                      child: const Text('JSON'),
                     ),
-                    const SizedBox(height:15),
-                    FilledButton(
-                      onPressed: () {}, 
-                      child: const Text('PDF'),
-                    ),
-                    const SizedBox(height:15),
-                    FilledButton(
-                      onPressed: () {}, 
-                      child: const Text('Excel'),
-                    ),
+                    // const SizedBox(height:15),
+                    // FilledButton(
+                    //   onPressed: () {}, 
+                    //   child: const Text('Excel'),
+                    // ),
                 ]
               )
             )

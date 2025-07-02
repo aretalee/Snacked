@@ -10,6 +10,7 @@ import '../ui/change_password/view_model/change_password_vm.dart';
 import '../ui/change_username/widgets/change_username_screen.dart';
 import '../ui/change_username/view_model/change_username_vm.dart';
 import '../ui/export_data/widgets/export_screen.dart';
+import '../ui/export_data/view_model/export_vm.dart';
 import '../ui/info/widgets/info_screen.dart';
 import '../ui/login/widgets/login_screen.dart';
 import '../ui/login/view_model/login_vm.dart';
@@ -97,7 +98,7 @@ GoRouter router(AuthRepository auth) => GoRouter(
             ),
             GoRoute(
               path: 'export',
-              builder: (context, state) => ExportPage(),
+              builder: (context, state) => ExportPage(viewModel: ExportViewModel()),
             ),
             GoRoute(
               path: 'changeUsername',
