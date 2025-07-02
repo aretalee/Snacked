@@ -5,11 +5,11 @@ class StorageRepository {
   final _db = FirebaseFirestore.instance;
   Map<String, dynamic> _summary = {};
   Map<String, dynamic> _goal = {};
-  Map<String, dynamic> _data = {};
+  List<Map<String, dynamic>> _data = [];
 
   Map<String, dynamic> get summary => _summary;
   Map<String, dynamic> get goal => _goal;
-  Map<String, dynamic> get data => _data;
+  List<Map<String, dynamic>> get data => _data;
 
   Future<bool> getSummaries(String userID, String docName) async {
     final dateSummary = _db.collection("users").doc(userID).collection("summaries").doc(docName);
@@ -56,12 +56,12 @@ class StorageRepository {
   }
 
   Future<bool> fetchUserData(String userID) async {
-    final userData = _db.collection("users").doc(userID);
-    final DocumentSnapshot doc = await userData.get().catchError((error) { 
+    final userData = _db.collection("users").doc(userID).collection("summaries");
+    final QuerySnapshot<Map<String, dynamic>> items = await userData.get().catchError((error) { 
       throw error;
     });
-    if (doc.exists) {
-      _data = doc.data() as Map<String, dynamic>;
+    if (items.size > 0) {
+      _data = items.docs.map((item) => item.data()).toList();
       return true;
     } 
     return false;

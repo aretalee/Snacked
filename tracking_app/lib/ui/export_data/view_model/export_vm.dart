@@ -25,10 +25,8 @@ class ExportViewModel extends ChangeNotifier{
     final path = '${saveLocation.path}/your_snacked_data.json';
     final saveFile = File(path);
     await saveFile.writeAsString(_jsonString);
-    await Share.shareFile([saveFile.path]);
+    await SharePlus.instance.share(ShareParams(files: [XFile(saveFile.path, mimeType: 'application/json')]));
   }
-
-  
 
 }
 
