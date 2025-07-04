@@ -17,19 +17,21 @@ class _PromptPageState extends State<PromptPage> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Were you happy with yesterday\'s eating habits?', style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+      title: Text('Do you think you snacked more or less than yesterday?', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
       content: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          const SizedBox(height:5),
+          Text('Choose an option below to see!', style: TextStyle(fontSize: 16), textAlign: TextAlign.center),
           const SizedBox(height:30),
           FilledButton(
             onPressed: () {
               widget.viewModel.setPromptFalse();
               context.go('/summary');
             },
-            child: const Text('I feel great!'),
+            child: const Text('Less :)'),
           ),
           const SizedBox(height:15),
           FilledButton(
@@ -37,7 +39,7 @@ class _PromptPageState extends State<PromptPage> {
               widget.viewModel.setPromptFalse();
               context.go('/summary');
             },
-            child: const Text('Not really...'),
+            child: const Text('More :('),
           ),
           const SizedBox(height:15),
           FilledButton(
@@ -45,7 +47,7 @@ class _PromptPageState extends State<PromptPage> {
               widget.viewModel.setPromptFalse();
               context.go('/summary');
             },
-            child: const Text('Maybe?'),
+            child: const Text('Not sure'),
           ),
           const SizedBox(height:30),
         ]

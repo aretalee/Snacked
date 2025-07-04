@@ -30,7 +30,7 @@ class _ExportPageState extends State<ExportPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'Choose Export Format', 
+                    'Get JSON File', 
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,), 
                     textAlign: TextAlign.center),
                   const SizedBox(height:30),
@@ -51,7 +51,7 @@ class _ExportPageState extends State<ExportPage> {
                           );
                         }
                       }, 
-                      child: const Text('JSON'),
+                      child: const Text('Export'),
                     ),
                     // const SizedBox(height:15),
                     // FilledButton(

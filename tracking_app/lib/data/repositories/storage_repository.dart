@@ -11,6 +11,24 @@ class StorageRepository {
   Map<String, dynamic> get goal => _goal;
   List<Map<String, dynamic>> get data => _data;
 
+  Future<bool> saveToDatabase(String userID, String docName) async {
+    final dailyData = {
+      // hard-coded right now, but need to changed the values to data from server
+      "comments": "",
+      "comparison": 0,
+      "date": "20250705",
+      "eating": 20,
+      "onTrack": true,
+      "snacking": 5,
+    };
+    try {
+      await _db.collection("users").doc(userID).collection("summaries").doc(docName).set(dailyData);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<bool> getSummaries(String userID, String docName) async {
     final dateSummary = _db.collection("users").doc(userID).collection("summaries").doc(docName);
     final DocumentSnapshot doc = await dateSummary.get().catchError((error) { 
