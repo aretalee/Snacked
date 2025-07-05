@@ -59,7 +59,6 @@ GoRouter router(AuthRepository auth) => GoRouter(
           builder: (context, state) => SummaryPage(viewModel: summaryVM),
           redirect: (context, state) {
             if (summaryVM.noData) { return '/summary/noData'; }
-            else if (summaryVM.prompt) { return '/summary/prompt'; }
             else { return'/summary'; }
           },
           routes: [
@@ -70,7 +69,7 @@ GoRouter router(AuthRepository auth) => GoRouter(
             ),
             GoRoute(
               path: 'prompt',
-              builder: (context, state) => PromptPage(viewModel: summaryVM),
+              builder: (context, state) => PromptPage(),
             ),
           ]
         ),

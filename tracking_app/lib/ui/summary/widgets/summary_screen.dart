@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 
@@ -15,15 +16,20 @@ import 'package:Snacked/ui/summary/view_model/summary_vm.dart';
 
 class _SummaryPageState extends State<SummaryPage> {
   final TextEditingController _commentsController = TextEditingController();
+  Timer? _timer;
 
   @override
   void initState() {
     super.initState();
+    _timer = Timer(widget.viewModel.timerDuration(), () {
+      widget.viewModel.showPrompt(context);
+    });
   }
 
   @override
   void dispose() {
     _commentsController.dispose();
+    _timer?.cancel();
     super.dispose();
   }
 
