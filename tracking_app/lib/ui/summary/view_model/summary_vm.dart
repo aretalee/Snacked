@@ -7,6 +7,8 @@ import 'package:Snacked/ui/summary/widgets/prompt_screen.dart';
 
 class SummaryViewModel extends ChangeNotifier{
   bool _noData = false;
+  Map<String, dynamic> _summaryInfo = {};
+  String _comment = '';
   DateTime _summaryDate = DateTime.now().subtract(Duration(days:1));
   DateTime _updateTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 00, 00, 00).add(Duration(days:1));
 
@@ -23,6 +25,24 @@ class SummaryViewModel extends ChangeNotifier{
     _noData = false;
   }
 
+  Future<String> get comment async {
+    if (await getComment()) { 
+      if (_comment == '') { return 'You have not saved any comments'; }
+      else { return _comment; }
+    }
+    return 'Unable to retrieve comments';
+  }
+
+  Future<bool> getComment() async {
+    String docName = '${_summaryDate.year}${DateFormat('MMMM').format(_summaryDate)}${_summaryDate.day}';
+    bool valid = await storeRepo.getSummaries(authRepo.userID, docName);
+    if (valid) {
+      _summaryInfo = storeRepo.summary;
+      _comment = _summaryInfo['comments'];
+      return true;
+    }
+    return false;
+  }
 
   Future<bool> updateComments(String comment) async {
     String docName = '${_summaryDate.year}${DateFormat('MMMM').format(_summaryDate)}${_summaryDate.day}';

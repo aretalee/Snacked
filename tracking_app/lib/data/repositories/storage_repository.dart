@@ -42,9 +42,9 @@ class StorageRepository {
   }
 
     Future<bool> addComment(String comment, String userID, String docName) async {
-    final goalInfo = _db.collection("users").doc(userID).collection("summaries").doc(docName);
+    final info = _db.collection("users").doc(userID).collection("summaries").doc(docName);
     try {
-      await goalInfo.update({"comments": comment});
+      await info.update({"comments": comment});
       return true;
     } catch (e) {
       return false;

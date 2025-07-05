@@ -48,44 +48,46 @@ class _SummaryPageState extends State<SummaryPage> {
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
-                      Text('You spent:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      Text('You spent:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       const SizedBox(height:10),
-                      Text('Approximately 180 min eating,', style: TextStyle(fontSize: 16)),
+                      Text('Approximately 180 min eating,', style: TextStyle(fontSize: 16), textAlign: TextAlign.center),
                       const SizedBox(height:5),
-                      Text('60 min were likely to be snacking', style: TextStyle(fontSize: 16)),
-                      const SizedBox(height:15),
+                      Text('60 min were likely to be snacking', style: TextStyle(fontSize: 16), textAlign: TextAlign.center),
+                      const SizedBox(height:20),
+                      Text('Compared to yesterday:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      const SizedBox(height:5),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('That\'s 30 min less than yesterday', style: TextStyle(fontSize: 16)),
+                          Text('That\'s 30 min less than yesterday', style: TextStyle(fontSize: 16), textAlign: TextAlign.center),
                           const SizedBox(width:5),
-                          Icon(Icons.arrow_downward, color: Colors.green, size: 20,)
+                          Icon(Icons.arrow_downward, color: Colors.green, size: 16,)
                         ]
                       ),
-                      const SizedBox(height:20),
-                      SizedBox(
-                        height: 100,
-                        child: PieChart(
-                          PieChartData(
-                            sections: [
-                              PieChartSectionData(
-                                value: 90,
-                                radius: 50,
-                                color: Colors.white,
-                                title: '',
-                              ),
-                              PieChartSectionData(
-                                value: 10,
-                                radius: 50,
-                                color: const Color.fromARGB(255, 90, 174, 239),
-                                title: '',
-                              ),
-                            ]
-                          )
-                        )
-                      ),
-                      const SizedBox(height:15),
-                      Text('10% of total time spent eating', style: TextStyle(fontSize: 16)),
+                      // const SizedBox(height:20),
+                      // SizedBox(
+                      //   height: 100,
+                      //   child: PieChart(
+                      //     PieChartData(
+                      //       sections: [
+                      //         PieChartSectionData(
+                      //           value: 90,
+                      //           radius: 50,
+                      //           color: Colors.white,
+                      //           title: '',
+                      //         ),
+                      //         PieChartSectionData(
+                      //           value: 10,
+                      //           radius: 50,
+                      //           color: const Color.fromARGB(255, 90, 174, 239),
+                      //           title: '',
+                      //         ),
+                      //       ]
+                      //     )
+                      //   )
+                      // ),
+                      // const SizedBox(height:15),
+                      // Text('10% of total time spent eating', style: TextStyle(fontSize: 16)),
                     ],
                   ),
                 ),
@@ -96,8 +98,8 @@ class _SummaryPageState extends State<SummaryPage> {
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
-                      Text('Based on your goals:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                      const SizedBox(height:10),
+                      Text('Based on your goals:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      const SizedBox(height:5),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -116,23 +118,44 @@ class _SummaryPageState extends State<SummaryPage> {
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
-                      Text('Anything that contributed to snacking?', style: TextStyle(fontSize: 16)),
-                      const SizedBox(height:15),
+                      Text('Anything that contributed to snacking?', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                      const SizedBox(height:10),
                       TextField(
                         controller: _commentsController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'Type here: ',
                         ),
-                        onChanged: (value) async {
-                          if (!await widget.viewModel.updateComments(value)) {
+                      ),
+                      const SizedBox(height:10),
+                      FilledButton(
+                        onPressed: () async {
+                          if (await widget.viewModel.updateComments(_commentsController.text)) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text('Commment saved.', style: TextStyle(fontSize: 16, color:Colors.green, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                                duration: const Duration(seconds: 3),
+                              )
+                            );
+                          } else  {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text('Unable to save comment.', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                                duration: const Duration(seconds: 3),
+                              )
+                            );
+                          }
+                        }, 
+                        child: const Text('Save'),
+                      ),
+                      const SizedBox(height:5),
+                      FilledButton(
+                        onPressed: () async {
+                          final savedComment = await widget.viewModel.comment;
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text('Unable to save comment.', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                              duration: const Duration(seconds: 3),
-                            )
-                          );
-                        }
-                        }
+                            content: Text('$savedComment', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                            duration: const Duration(seconds: 5),
+                          ));
+                        }, 
+                        child: const Text('See comment'),
                       ),
                     ]
                   ),
