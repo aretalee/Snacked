@@ -6,8 +6,6 @@ import 'package:go_router/go_router.dart';
 
  class PromptPage extends StatefulWidget {
   const PromptPage({super.key});
-  // const PromptPage({super.key, required this.viewModel});
-  // final SummaryViewModel viewModel;
 
   @override
   State<PromptPage> createState() => _PromptPageState();
@@ -31,7 +29,6 @@ class _PromptPageState extends State<PromptPage> {
             const SizedBox(height:30),
             FilledButton(
               onPressed: () {
-
                 context.pop();
               },
               child: const Text('Less than before'),

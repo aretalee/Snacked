@@ -8,7 +8,7 @@ import 'package:Snacked/ui/summary/widgets/prompt_screen.dart';
 class SummaryViewModel extends ChangeNotifier{
   bool _noData = false;
   DateTime _summaryDate = DateTime.now().subtract(Duration(days:1));
-  DateTime _updateTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 00, 00, 00);
+  DateTime _updateTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 00, 00, 00).add(Duration(days:1));
 
   bool get noData => _noData;
   DateTime get summaryDate => _summaryDate;

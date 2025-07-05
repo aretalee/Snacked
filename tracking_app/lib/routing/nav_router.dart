@@ -62,15 +62,14 @@ GoRouter router(AuthRepository auth) => GoRouter(
             else { return'/summary'; }
           },
           routes: [
-            // need to write in logic here
             GoRoute(
               path: 'noData',
               builder: (context, state) => NoDataSummary(),
             ),
-            GoRoute(
-              path: 'prompt',
-              builder: (context, state) => PromptPage(),
-            ),
+            // GoRoute(
+            //   path: 'prompt',
+            //   builder: (context, state) => PromptPage(),
+            // ),
           ]
         ),
         GoRoute(
