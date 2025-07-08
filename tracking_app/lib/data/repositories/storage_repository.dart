@@ -14,6 +14,7 @@ class StorageRepository {
   Future<bool> saveToDatabase(String userID, String docName) async {
     final dailyData = {
       // hard-coded right now, but need to changed the values to data from server
+      // get data from WatchData object that's created after fetching data
       "comments": "",
       "comparison": 0,
       "date": "20250705",
