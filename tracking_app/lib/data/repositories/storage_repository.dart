@@ -21,6 +21,9 @@ class StorageRepository {
       "eating": 20,
       "onTrack": true,
       "snacking": 5,
+      // need logic here to populate comparison and onTrack
+      // comparison: compare with data from previous day (if any)
+      // onTrack: compare with goal that's saved in DB (if any)
     };
     try {
       await _db.collection("users").doc(userID).collection("summaries").doc(docName).set(dailyData);
@@ -53,7 +56,7 @@ class StorageRepository {
   }
 
   Future<bool> getGoal(String userID) async {
-    final goalInfo = _db.collection("users").doc(userID).collection("currentGoal").doc("goal");
+    final goalInfo = _db.collection("users").doc(userID);
     final DocumentSnapshot doc = await goalInfo.get().catchError((error) { 
       throw error;
     });
@@ -65,9 +68,9 @@ class StorageRepository {
   }
 
   Future<bool> setGoal(int goal, String userID) async {
-    final goalInfo = _db.collection("users").doc(userID).collection("currentGoal").doc("goal");
+    final goalInfo = _db.collection("users").doc(userID);
     try {
-      await goalInfo.update({"targetTime": goal});
+      await goalInfo.update({"currentGoal": goal});
       return true;
     } catch (e) {
       return false;
@@ -85,6 +88,12 @@ class StorageRepository {
     } 
     return false;
   }
+
+  void initUser(String userID) async {
+    await _db.collection("users").doc(userID).set({"currentGoal": -1});
+    await _db.collection("users").doc(userID).collection("summaries").doc("init").set({"status": "User created."});
+  }
+
 
 }
 

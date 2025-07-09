@@ -23,7 +23,7 @@ class SetGoalsViewModel extends ChangeNotifier{
     bool valid = await storeRepo.getGoal(authRepo.userID);
     if (valid) {
       _goalInfo = storeRepo.goal;
-      _currentGoal = _goalInfo['targetTime'];
+      _currentGoal = _goalInfo['currentGoal'];
       return true;
     }
     return false;

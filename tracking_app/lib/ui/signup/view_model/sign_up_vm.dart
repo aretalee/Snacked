@@ -50,6 +50,7 @@ class SignUpViewModel extends ChangeNotifier{
 
   bool registerSuccess(String? status) {
     if (status != null && status.contains('Success')) {
+      storeRepo.initUser(authRepo.userID);
       return true;
     }
     return false;
