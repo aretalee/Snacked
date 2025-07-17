@@ -70,13 +70,13 @@ class _LoginPageState extends State<LoginPage> {
                         if (widget.viewModel.resetSuccess(resetStatus)) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text('If an account is linked to this email, you will receive a reset link shortly.', style: TextStyle(fontSize: 16, color:Colors.green, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                              duration: const Duration(seconds: 5),
+                              duration: const Duration(seconds: 2),
                             )
                           );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text('$resetStatus', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                              duration: const Duration(seconds: 3),
+                              duration: const Duration(seconds: 1),
                             )
                           );
                         }
@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                         } else{
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text('$loginStatus', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                            duration: const Duration(seconds: 3),
+                            duration: const Duration(seconds: 1),
                             )
                           );
                         }

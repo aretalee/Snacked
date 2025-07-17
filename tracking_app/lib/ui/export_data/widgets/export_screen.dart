@@ -40,13 +40,13 @@ class _ExportPageState extends State<ExportPage> {
                           await widget.viewModel.exportData();
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text('Data exported.', style: TextStyle(fontSize: 16, color:Colors.green, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                              duration: const Duration(seconds: 5),
+                              duration: const Duration(seconds: 1),
                             )
                           );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text('Unable to export data, please try again.', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                            duration: const Duration(seconds: 5),
+                            duration: const Duration(seconds: 1),
                             )
                           );
                         }

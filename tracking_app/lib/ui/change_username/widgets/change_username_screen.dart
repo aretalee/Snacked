@@ -61,14 +61,14 @@ class _ChangeNamePageState extends State<ChangeNamePage> {
                         if (widget.viewModel.nameSuccess(nameChangeStatus)) {
                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text('Successfully changed username', style: TextStyle(fontSize: 16, color:Colors.green, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                            duration: const Duration(seconds: 3),
+                            duration: const Duration(seconds: 1),
                             )
                           );
                           context.go('/profile');
                         } else{
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text('$nameChangeStatus', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                            duration: const Duration(seconds: 3),
+                            duration: const Duration(seconds: 1),
                             )
                           );
                         }

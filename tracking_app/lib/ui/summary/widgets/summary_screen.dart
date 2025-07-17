@@ -133,13 +133,13 @@ class _SummaryPageState extends State<SummaryPage> {
                           if (await widget.viewModel.updateComments(_commentsController.text)) {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text('Commment saved.', style: TextStyle(fontSize: 16, color:Colors.green, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                                duration: const Duration(seconds: 3),
+                                duration: const Duration(seconds: 1),
                               )
                             );
                           } else  {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text('Unable to save comment.', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                                duration: const Duration(seconds: 3),
+                                duration: const Duration(seconds: 1),
                               )
                             );
                           }
@@ -152,7 +152,7 @@ class _SummaryPageState extends State<SummaryPage> {
                           final savedComment = await widget.viewModel.comment;
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text('$savedComment', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                            duration: const Duration(seconds: 5),
+                            duration: const Duration(seconds: 2),
                           ));
                         }, 
                         child: const Text('See comment'),

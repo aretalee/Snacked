@@ -61,13 +61,13 @@ class _SetGoalsPageState extends State<SetGoalsPage> {
                         if (updateStatus) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text('Goal updated successfully.', style: TextStyle(fontSize: 16, color:Colors.green, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                              duration: const Duration(seconds: 5),
+                              duration: const Duration(seconds: 1),
                             )
                           );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text('Unable to set goal, please try again.', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                              duration: const Duration(seconds: 3),
+                              duration: const Duration(seconds: 1),
                             )
                           );
                         }
@@ -81,7 +81,7 @@ class _SetGoalsPageState extends State<SetGoalsPage> {
                       final checkGoal = await widget.viewModel.currentGoal;
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text('Your current goal is $checkGoal min of snacking daily', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                        duration: const Duration(seconds: 5),
+                        duration: const Duration(seconds: 2),
                       ));
                     }, 
                     child: const Text('Check current goal'),

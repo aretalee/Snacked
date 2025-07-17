@@ -86,21 +86,21 @@ class _ChangePwdPageState extends State<ChangePwdPage> {
                             if (widget.viewModel.pwdSuccess(changeStatus)) {
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text('Successfully changed password', style: TextStyle(fontSize: 16, color:Colors.green, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                                duration: const Duration(seconds: 3),
+                                duration: const Duration(seconds: 1),
                                 )
                               );
                               context.go('/profile');
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text('$changeStatus', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                                duration: const Duration(seconds: 3),
+                                duration: const Duration(seconds: 1),
                                 )
                               );
                             }
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text('The typed passwords do not match', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                              duration: const Duration(seconds: 3),
+                              duration: const Duration(seconds: 1),
                             )
                           );
                         }
