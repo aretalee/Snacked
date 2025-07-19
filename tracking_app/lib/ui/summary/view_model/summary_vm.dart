@@ -10,10 +10,12 @@ class SummaryViewModel extends ChangeNotifier{
   Map<String, dynamic> _summaryInfo = {};
   String _comment = '';
   DateTime _summaryDate = DateTime.now().subtract(Duration(days:1));
-  DateTime _updateTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 00, 00, 00).add(Duration(days:1));
+  DateTime _updateTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 00, 00, 00);
+  bool _promptShown = false;
 
   bool get noData => _noData;
   DateTime get summaryDate => _summaryDate;
+  bool get promptShown => _promptShown;
 
   // logic that detects if data has been imported successfully --> sets _noData to false
 
@@ -23,6 +25,10 @@ class SummaryViewModel extends ChangeNotifier{
 
   void setNoDataFalse() {
     _noData = false;
+  }
+
+  void setPromptTrue() {
+    _promptShown = true;
   }
 
   Future<String> get comment async {
@@ -56,10 +62,13 @@ class SummaryViewModel extends ChangeNotifier{
     if (DateTime.now().isAfter(_updateTime)) {
       finalTime = finalTime.add(Duration(days:1));
     }
+    if (DateTime.now().isAtSameMomentAs(_updateTime)) {
+      _promptShown = false;
+    }
     return finalTime.difference(DateTime.now());
   }
 
-  Future<void> showPrompt(BuildContext context) async {
+  Future<void> showPrompt(BuildContext context, SummaryViewModel vm) async {
     return showDialog<void> (
       context: context,
       barrierDismissible: false,

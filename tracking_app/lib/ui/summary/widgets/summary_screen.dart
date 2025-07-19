@@ -22,7 +22,10 @@ class _SummaryPageState extends State<SummaryPage> {
   void initState() {
     super.initState();
     _timer = Timer(widget.viewModel.timerDuration(), () {
-      widget.viewModel.showPrompt(context);
+      if (!widget.viewModel.promptShown) {
+        widget.viewModel.setPromptTrue();
+        widget.viewModel.showPrompt(context, widget.viewModel);
+      }
     });
   }
 
