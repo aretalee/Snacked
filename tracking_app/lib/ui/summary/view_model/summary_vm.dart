@@ -31,6 +31,15 @@ class SummaryViewModel extends ChangeNotifier{
     _promptShown = true;
   }
 
+  Future<bool> dataCheck() async {
+    String user = authRepo.userID;
+    String doc = '${_summaryDate.year}${DateFormat('MMMM').format(_summaryDate)}${_summaryDate.day}';
+    if (await storeRepo.getSummaries(user, doc)) {
+      return true;
+    }
+    return false;
+  }
+
   Future<String> get comment async {
     if (await getComment()) { 
       if (_comment == '') { return 'You have not saved any comments'; }

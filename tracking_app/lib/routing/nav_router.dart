@@ -26,7 +26,6 @@ import '../ui/signup/widgets/sign_up_screen.dart';
 import '../ui/signup/view_model/sign_up_vm.dart';
 import '../ui/summary/widgets/summary_screen.dart';
 import '../ui/summary/widgets/no_data_screen.dart';
-import '../ui/summary/widgets/prompt_screen.dart';
 import '../ui/summary/view_model/summary_vm.dart';
 import '../ui/auth/view_model/auth_vm.dart';
 
@@ -41,7 +40,7 @@ GoRouter router(AuthRepository auth) => GoRouter(
   navigatorKey: _rootNavigatorKey,
   refreshListenable: authVM,
   redirect: (context, state) {
-    if ( !authVM.initialized ) { return null; }
+    if (!authVM.initialized) { return null; }
     if (!authVM.loggedIn && (state.matchedLocation != '/signin' && state.matchedLocation != '/signin/signup' && state.matchedLocation != '/signin/login')) {
       return '/signin';
     }
@@ -57,8 +56,8 @@ GoRouter router(AuthRepository auth) => GoRouter(
         GoRoute(
           path: '/summary',
           builder: (context, state) => SummaryPage(viewModel: summaryVM),
-          redirect: (context, state) {
-            if (summaryVM.noData) { return '/summary/noData'; }
+          redirect: (context, state) async {
+            if (!await summaryVM.dataCheck()) { return '/summary/noData'; }
             else { return'/summary'; }
           },
           routes: [
@@ -66,10 +65,6 @@ GoRouter router(AuthRepository auth) => GoRouter(
               path: 'noData',
               builder: (context, state) => NoDataSummary(),
             ),
-            // GoRoute(
-            //   path: 'prompt',
-            //   builder: (context, state) => PromptPage(),
-            // ),
           ]
         ),
         GoRoute(
