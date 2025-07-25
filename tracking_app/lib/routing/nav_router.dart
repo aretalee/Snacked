@@ -24,7 +24,7 @@ import '../ui/set_goals/view_model/set_goals_vm.dart';
 import '../ui/sign_in_prompt/widgets/sign_in_prompt_screen.dart';
 import '../ui/signup/widgets/sign_up_screen.dart';
 import '../ui/signup/view_model/sign_up_vm.dart';
-import '../ui/summary/widgets/summary_screen.dart';
+import '../ui/summary/widgets/home_screen.dart';
 import '../ui/summary/widgets/no_data_screen.dart';
 import '../ui/summary/view_model/summary_vm.dart';
 import '../ui/auth/view_model/auth_vm.dart';
@@ -39,11 +39,14 @@ GoRouter router(AuthRepository auth) => GoRouter(
   initialLocation: '/summary',
   navigatorKey: _rootNavigatorKey,
   refreshListenable: authVM,
-  redirect: (context, state) {
+  redirect: (context, state) async {
     if (!authVM.initialized) { return null; }
     if (!authVM.loggedIn && (state.matchedLocation != '/signin' && state.matchedLocation != '/signin/signup' && state.matchedLocation != '/signin/login')) {
       return '/signin';
     }
+    archiveVM.setDate(DateTime.now().subtract(Duration(days:1)));
+    bool done = await archiveVM.getFromStorage();
+    if (done) { return '/summary'; }
     return null;
   },
   routes: [
@@ -55,7 +58,7 @@ GoRouter router(AuthRepository auth) => GoRouter(
       routes: [
         GoRoute(
           path: '/summary',
-          builder: (context, state) => SummaryPage(viewModel: summaryVM),
+          builder: (context, state) => HomePage(viewModel: summaryVM, viewModelA: archiveVM),
           redirect: (context, state) async {
             if (!await summaryVM.dataCheck()) { return '/summary/noData'; }
             else { return'/summary'; }

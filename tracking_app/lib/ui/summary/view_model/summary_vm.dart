@@ -3,32 +3,31 @@ import 'package:intl/intl.dart';
 
 import 'package:Snacked/global.dart';
 import 'package:Snacked/ui/summary/widgets/prompt_screen.dart';
+import 'package:Snacked/data/models/watch_data.dart';
 
 
 class SummaryViewModel extends ChangeNotifier{
-  bool _noData = false;
   Map<String, dynamic> _summaryInfo = {};
   String _comment = '';
   DateTime _summaryDate = DateTime.now().subtract(Duration(days:1));
   DateTime _updateTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 00, 00, 00);
-  bool _promptShown = false;
+  DateTime? _lastShown;
 
-  bool get noData => _noData;
   DateTime get summaryDate => _summaryDate;
-  bool get promptShown => _promptShown;
 
-  // logic that detects if data has been imported successfully --> sets _noData to false
-
-  void setNoDataTrue() {
-    _noData = true;
+  void updateLastShown() {
+    _lastShown = DateTime.now();
   }
 
-  void setNoDataFalse() {
-    _noData = false;
-  }
-
-  void setPromptTrue() {
-    _promptShown = true;
+  Future<bool> addData() async {
+    String user = authRepo.userID;
+    String doc = '${_summaryDate.year}${DateFormat('MMMM').format(_summaryDate)}${_summaryDate.day}';
+    if (await fetchService.fetchData()) {
+      if (await storeRepo.saveToDatabase(user, doc, fetchService.fetched)) {
+      return true;
+      }
+    }
+    return false;
   }
 
   Future<bool> dataCheck() async {
@@ -71,10 +70,13 @@ class SummaryViewModel extends ChangeNotifier{
     if (DateTime.now().isAfter(_updateTime)) {
       finalTime = finalTime.add(Duration(days:1));
     }
-    if (DateTime.now().isAtSameMomentAs(_updateTime)) {
-      _promptShown = false;
-    }
     return finalTime.difference(DateTime.now());
+  }
+
+  bool promptShown() {
+    if (_lastShown == null) return false;
+    return _lastShown!.year == DateTime.now().year && _lastShown!.month == DateTime.now().month
+    && _lastShown!.day == DateTime.now().day;
   }
 
   Future<void> showPrompt(BuildContext context, SummaryViewModel vm) async {

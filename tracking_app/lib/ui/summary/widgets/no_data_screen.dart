@@ -22,7 +22,10 @@ class NoDataSummary extends StatelessWidget {
                   const SizedBox(height:100),
                   Text('No data available yet', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,) ),
                   const SizedBox(height:30),
-                  Text('Please check back in tomorrow at 8am', 
+                  Text('Refresh once to double check', 
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                  const SizedBox(height:30),
+                  Text('Otherwise, Please wait until data has been collected', 
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
                   const SizedBox(height:100),
                 ]

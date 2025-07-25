@@ -4,11 +4,13 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 
 import 'package:Snacked/ui/summary/view_model/summary_vm.dart';
+import 'package:Snacked/ui/archive/view_model/archive_vm.dart';
 
  
  class SummaryPage extends StatefulWidget {
-  const SummaryPage({super.key, required this.viewModel});
+  const SummaryPage({super.key, required this.viewModel, required this.viewModelA});
   final SummaryViewModel viewModel;
+  final ArchiveViewModel viewModelA;
 
   @override
   State<SummaryPage> createState() => _SummaryPageState();
@@ -16,25 +18,6 @@ import 'package:Snacked/ui/summary/view_model/summary_vm.dart';
 
 class _SummaryPageState extends State<SummaryPage> {
   final TextEditingController _commentsController = TextEditingController();
-  Timer? _timer;
-
-  @override
-  void initState() {
-    super.initState();
-    _timer = Timer(widget.viewModel.timerDuration(), () {
-      if (!widget.viewModel.promptShown) {
-        widget.viewModel.setPromptTrue();
-        widget.viewModel.showPrompt(context, widget.viewModel);
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _commentsController.dispose();
-    _timer?.cancel();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,44 +36,22 @@ class _SummaryPageState extends State<SummaryPage> {
                     children: [
                       Text('You spent:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       const SizedBox(height:10),
-                      Text('Approximately 180 min eating,', style: TextStyle(fontSize: 16), textAlign: TextAlign.center),
+                      Text('Approximately ${widget.viewModelA.eating} min eating,', style: TextStyle(fontSize: 16), textAlign: TextAlign.center),
                       const SizedBox(height:5),
-                      Text('60 min were likely to be snacking', style: TextStyle(fontSize: 16), textAlign: TextAlign.center),
+                      Text('${widget.viewModelA.snacking} min were likely to be snacking', style: TextStyle(fontSize: 16), textAlign: TextAlign.center),
                       const SizedBox(height:20),
                       Text('Compared to yesterday:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       const SizedBox(height:5),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('That\'s 30 min less than yesterday', style: TextStyle(fontSize: 16), textAlign: TextAlign.center),
+                          Text(widget.viewModelA.comparison, style: TextStyle(fontSize: 20)), // need to figure out icon logic
                           const SizedBox(width:5),
-                          Icon(Icons.arrow_downward, color: Colors.green, size: 16,)
+                          (widget.viewModelA.compIcon && !widget.viewModelA.noDiff) ? Icon(Icons.arrow_downward, color: Colors.green, size: 20,) 
+                          : (widget.viewModelA.noDiff ? Icon(Icons.swap_vert, color: Colors.white, size: 20,) 
+                          : Icon(Icons.arrow_upward, color: Colors.red, size: 20,) )
                         ]
                       ),
-                      // const SizedBox(height:20),
-                      // SizedBox(
-                      //   height: 100,
-                      //   child: PieChart(
-                      //     PieChartData(
-                      //       sections: [
-                      //         PieChartSectionData(
-                      //           value: 90,
-                      //           radius: 50,
-                      //           color: Colors.white,
-                      //           title: '',
-                      //         ),
-                      //         PieChartSectionData(
-                      //           value: 10,
-                      //           radius: 50,
-                      //           color: const Color.fromARGB(255, 90, 174, 239),
-                      //           title: '',
-                      //         ),
-                      //       ]
-                      //     )
-                      //   )
-                      // ),
-                      // const SizedBox(height:15),
-                      // Text('10% of total time spent eating', style: TextStyle(fontSize: 16)),
                     ],
                   ),
                 ),
@@ -106,9 +67,10 @@ class _SummaryPageState extends State<SummaryPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('You\'re on track, keep it up!', style: TextStyle(fontSize: 16)),
+                          Text(widget.viewModelA.onTrack, style: TextStyle(fontSize: 20)), 
                           const SizedBox(width:10),
-                          Icon(Icons.thumb_up, color: Colors.green, size: 20,)
+                          (widget.viewModelA.progressIcon) ? Icon(Icons.thumb_up, color: Colors.green, size: 20,) 
+                          : Icon(Icons.warning, color: Colors.blue, size: 20,)
                         ]
                       ),
                     ]

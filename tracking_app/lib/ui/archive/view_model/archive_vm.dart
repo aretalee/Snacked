@@ -27,9 +27,7 @@ class ArchiveViewModel extends ChangeNotifier{
   bool get noDiff => _noDiff;
   bool get progressIcon => _progressIcon;
 
-  void setDate(DateTime date) {
-   _date = date;
-  }
+  void setDate(DateTime date) { _date = date; }
 
   Future<bool> getFromStorage() async {
     String docName = '${_date.year}${DateFormat('MMMM').format(_date)}${_date.day}';
@@ -38,8 +36,12 @@ class ArchiveViewModel extends ChangeNotifier{
       _summaryInfo = storeRepo.summary;
       _eating = _summaryInfo['eating'];
       _snacking = _summaryInfo['snacking'];
-      int comp = _summaryInfo['comparison'];
-      if (comp < 0) {
+      int? comp = _summaryInfo['comparison'];
+      if (comp == null) {
+        _comparison = 'No data from yesterday'; 
+        _compIcon = true;
+        _noDiff = true;
+      } else if (comp < 0) {
         _comparison = 'Down by ${comp.abs()} min';
         _compIcon = true;
         _noDiff = false;
@@ -53,14 +55,18 @@ class ArchiveViewModel extends ChangeNotifier{
         _noDiff = false;
       }
       _comments = _summaryInfo['comments'];
-      bool status = _summaryInfo['onTrack'];
-      if (status) {
+      bool? status = _summaryInfo['onTrack'];
+      if (status == null) {
+        _onTrack = 'No goals set';
+        _progressIcon = false;
+      } else if (status) {
         _onTrack = 'You\'re on track, keep it up!';
         _progressIcon = true;
       } else { 
         _onTrack = 'Let\'s try again!'; 
         _progressIcon = false;
       }
+      print(_onTrack);
       return true;
     }
     return false;

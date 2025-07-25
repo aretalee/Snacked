@@ -1,4 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
+
+import 'package:Snacked/data/models/watch_data.dart';
 
 
 class StorageRepository {
@@ -11,19 +14,29 @@ class StorageRepository {
   Map<String, dynamic> get goal => _goal;
   List<Map<String, dynamic>> get data => _data;
 
-  Future<bool> saveToDatabase(String userID, String docName) async {
+  Future<bool> saveToDatabase(String userID, String docName, WatchData data) async {
+    int? comp;
+    bool? track;
+
+    DateTime dayBefore = DateTime.now().subtract(Duration(days:2));
+    String previous = '${dayBefore.year}${DateFormat('MMMM').format(dayBefore)}${dayBefore.day}';
+    if (await getSummaries(userID, previous)) { 
+      print(_summary['snacking']);
+      comp = _summary['snacking'] - data.snackingTime; }
+
+    await getGoal(userID);
+    if (_goal['currentGoal'] != -1) {
+      if (_goal['currentGoal'] >= data.snackingTime) { track = true; }
+      else if (_goal['currentGoal'] < data.snackingTime) { track = false; }
+    }
+
     final dailyData = {
-      // hard-coded right now, but need to changed the values to data from server
-      // get data from WatchData object that's created after fetching data
       "comments": "",
-      "comparison": 0,
-      "date": "20250705",
-      "eating": 20,
-      "onTrack": true,
-      "snacking": 5,
-      // need logic here to populate comparison and onTrack
-      // comparison: compare with data from previous day (if any)
-      // onTrack: compare with goal that's saved in DB (if any)
+      "comparison": comp,
+      "date": data.date,
+      "eating": data.eatingTime,
+      "onTrack": track, 
+      "snacking": data.snackingTime,
     };
     try {
       await _db.collection("users").doc(userID).collection("summaries").doc(docName).set(dailyData);
