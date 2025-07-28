@@ -20,7 +20,7 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     int selectedIndex;
-    if (widget.where.startsWith('/summary')) {
+    if (widget.where.startsWith('/home')) {
       selectedIndex = 0;
     } else if (widget.where.startsWith('/archive')) {
       selectedIndex = 1;

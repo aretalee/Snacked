@@ -66,7 +66,6 @@ class ArchiveViewModel extends ChangeNotifier{
         _onTrack = 'Let\'s try again!'; 
         _progressIcon = false;
       }
-      print(_onTrack);
       return true;
     }
     return false;

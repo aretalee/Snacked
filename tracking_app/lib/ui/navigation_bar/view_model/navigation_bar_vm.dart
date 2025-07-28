@@ -7,13 +7,13 @@ class NavBarViewModel extends ChangeNotifier{
   String get currentPage{
     switch (pageIndex) {
       case 0:
-        return '/summary';
+        return '/home';
       case 1:
        return '/archive';
       case 2:
         return '/profile';
       default:
-        return '/summary';
+        return '/home';
     }
   }
 

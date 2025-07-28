@@ -25,6 +25,8 @@ import '../ui/sign_in_prompt/widgets/sign_in_prompt_screen.dart';
 import '../ui/signup/widgets/sign_up_screen.dart';
 import '../ui/signup/view_model/sign_up_vm.dart';
 import '../ui/summary/widgets/home_screen.dart';
+import '../ui/summary/widgets/home_screen.dart';
+import '../ui/summary/widgets/summary_screen.dart';
 import '../ui/summary/widgets/no_data_screen.dart';
 import '../ui/summary/view_model/summary_vm.dart';
 import '../ui/auth/view_model/auth_vm.dart';
@@ -36,17 +38,18 @@ final summaryVM = SummaryViewModel();
 final archiveVM = ArchiveViewModel();
 
 GoRouter router(AuthRepository auth) => GoRouter(
-  initialLocation: '/summary',
+  initialLocation: '/home',
   navigatorKey: _rootNavigatorKey,
   refreshListenable: authVM,
   redirect: (context, state) async {
     if (!authVM.initialized) { return null; }
     if (!authVM.loggedIn && (state.matchedLocation != '/signin' && state.matchedLocation != '/signin/signup' && state.matchedLocation != '/signin/login')) {
       return '/signin';
-    }
-    archiveVM.setDate(DateTime.now().subtract(Duration(days:1)));
-    bool done = await archiveVM.getFromStorage();
-    if (done) { return '/summary'; }
+    } 
+    // if(authVM.loggedIn && state.matchedLocation != '/archive' && state.matchedLocation != '/archive/pastReport') {
+    //   archiveVM.setDate(DateTime.now().subtract(Duration(days:1)));
+    //   await archiveVM.getFromStorage();
+    // }
     return null;
   },
   routes: [
@@ -57,13 +60,17 @@ GoRouter router(AuthRepository auth) => GoRouter(
       },
       routes: [
         GoRoute(
-          path: '/summary',
+          path: '/home',
           builder: (context, state) => HomePage(viewModel: summaryVM, viewModelA: archiveVM),
-          redirect: (context, state) async {
-            if (!await summaryVM.dataCheck()) { return '/summary/noData'; }
-            else { return'/summary'; }
-          },
+          // redirect: (context, state) async {
+          //   if (!await summaryVM.dataCheck()) { return '/home/noData'; }
+          //   else { return'/home/summary'; }
+          // },
           routes: [
+            GoRoute(
+              path: 'summary',
+              builder: (context, state) => SummaryPage(viewModel: summaryVM, viewModelA: archiveVM),
+            ),
             GoRoute(
               path: 'noData',
               builder: (context, state) => NoDataSummary(),

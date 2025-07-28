@@ -29,6 +29,17 @@ class _ArchivePageState extends State<ArchivePage> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
+            // FilledButton(
+            //      onPressed: () async {
+            //        if (await widget.viewModel.getFromStorage()) {
+            //         context.go('/home/summary');
+            //        } else { context.go('/home/noData'); }
+            //     }, 
+            //     child: Padding(
+            //      padding: const EdgeInsets.all(15.0),
+            //       child: const Text('See daily summary'),
+            //     ),
+            //   ),
             const SizedBox(height:30),
             TableCalendar(
               headerStyle: HeaderStyle(

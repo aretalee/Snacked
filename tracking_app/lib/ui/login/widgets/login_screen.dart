@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                       if (widget.viewModel.loginCheck(_emailController.text, _pwdController.text)) {
                         final loginStatus = await widget.viewModel.login();
                         if (widget.viewModel.loginSuccess(loginStatus)) {
-                          context.go('/summary'); // is this still needed if there's also logic
+                          context.go('/home'); // is this still needed if there's also logic
                         } else{
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text('$loginStatus', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),

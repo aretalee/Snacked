@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 
 import 'package:Snacked/ui/summary/view_model/summary_vm.dart';
@@ -45,7 +43,7 @@ class _SummaryPageState extends State<SummaryPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(widget.viewModelA.comparison, style: TextStyle(fontSize: 20)), // need to figure out icon logic
+                          Text(widget.viewModelA.comparison, style: TextStyle(fontSize: 16)), // need to figure out icon logic
                           const SizedBox(width:5),
                           (widget.viewModelA.compIcon && !widget.viewModelA.noDiff) ? Icon(Icons.arrow_downward, color: Colors.green, size: 20,) 
                           : (widget.viewModelA.noDiff ? Icon(Icons.swap_vert, color: Colors.white, size: 20,) 
@@ -67,7 +65,7 @@ class _SummaryPageState extends State<SummaryPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(widget.viewModelA.onTrack, style: TextStyle(fontSize: 20)), 
+                          Text(widget.viewModelA.onTrack, style: TextStyle(fontSize: 16)), 
                           const SizedBox(width:10),
                           (widget.viewModelA.progressIcon) ? Icon(Icons.thumb_up, color: Colors.green, size: 20,) 
                           : Icon(Icons.warning, color: Colors.blue, size: 20,)

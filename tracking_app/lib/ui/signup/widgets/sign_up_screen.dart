@@ -72,7 +72,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       if (widget.viewModel.registerCheck(_emailController.text, _pwdController.text)) {
                         final signUpStatus = await widget.viewModel.register();
                         if (widget.viewModel.registerSuccess(signUpStatus)) {
-                          context.go('/summary');
+                          context.go('/home');
                         } else{
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text('$signUpStatus', style: TextStyle(fontSize: 16, color:Colors.red, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
