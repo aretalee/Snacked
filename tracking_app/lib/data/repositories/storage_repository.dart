@@ -18,7 +18,7 @@ class StorageRepository {
     int? comp;
     bool? track;
 
-    DateTime dayBefore = DateTime.now().subtract(Duration(days:2));
+    DateTime dayBefore = DateTime.now().subtract(Duration(days:1));
     String previous = '${dayBefore.year}${DateFormat('MMMM').format(dayBefore)}${dayBefore.day}';
     if (await getSummaries(userID, previous)) { 
       print(_summary['snacking']);

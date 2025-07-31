@@ -21,7 +21,7 @@ class _SummaryPageState extends State<SummaryPage> {
   Widget build(BuildContext context) {
       return Scaffold (
         appBar: AppBar(
-          title: Text('Summary for ${DateFormat('MMMM d, y').format(widget.viewModel.summaryDate)}', style: TextStyle(fontWeight: FontWeight.bold)), 
+          title: Text('Summary for ${DateFormat('MMMM d, y').format(DateTime.now().subtract(Duration(days:1)))}', style: TextStyle(fontWeight: FontWeight.bold)), 
           backgroundColor: Colors.black, automaticallyImplyLeading:false),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
