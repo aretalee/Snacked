@@ -10,7 +10,7 @@ class SummaryViewModel extends ChangeNotifier{
   Map<String, dynamic> _summaryInfo = {};
   String _comment = '';
   DateTime _summaryDate = DateTime.now().subtract(Duration(days:1));
-  DateTime _updateTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 00, 00, 01);
+  DateTime _updateTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 00, 09, 00);
   DateTime? _lastShown;
   bool _addedData = false;
 

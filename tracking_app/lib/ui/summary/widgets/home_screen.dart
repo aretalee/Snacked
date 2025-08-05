@@ -38,7 +38,7 @@ class _SummaryPageState extends State<HomePage> {
         widget.viewModel.updateLastShown();
         widget.viewModel.showPrompt(context, widget.viewModel);
       }
-      
+
     });
   }
 
@@ -80,7 +80,11 @@ class _SummaryPageState extends State<HomePage> {
           // );
           return SummaryPage(viewModel: widget.viewModel, viewModelA: widget.viewModelA);
         } else if (snapshot.hasError) { return NoDataSummary(); }
-        else { return const Text('Loading'); }
+        else { return const 
+          Center(
+            child: Text('Loading')
+          );
+        }
         
       }
     );
