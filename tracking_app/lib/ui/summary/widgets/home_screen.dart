@@ -38,6 +38,7 @@ class _SummaryPageState extends State<HomePage> {
         widget.viewModel.updateLastShown();
         widget.viewModel.showPrompt(context, widget.viewModel);
       }
+      
     });
   }
 

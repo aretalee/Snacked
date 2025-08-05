@@ -31,7 +31,8 @@ class SummaryViewModel extends ChangeNotifier{
 
   Future<bool> addData() async {
     String user = authRepo.userID;
-    String doc = '${_summaryDate.year}${DateFormat('MMMM').format(_summaryDate)}${_summaryDate.day}';
+    DateTime date = DateTime.now().subtract(Duration(days:1));
+    String doc = '${date.year}${DateFormat('MMMM').format(date)}${date.day}';
     if (await fetchService.fetchData()) {
       if (await storeRepo.saveToDatabase(user, doc, fetchService.fetched)) {
       return true;

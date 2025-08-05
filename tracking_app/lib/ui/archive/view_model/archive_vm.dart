@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 import 'package:Snacked/global.dart';
 
@@ -16,6 +17,8 @@ class ArchiveViewModel extends ChangeNotifier{
   bool _progressIcon = true;
   String _comments = '';
 
+  Set<DateTime> _daysToHighlight = {};
+
 
   DateTime get date => _date;
   int get eating => _eating;
@@ -26,6 +29,8 @@ class ArchiveViewModel extends ChangeNotifier{
   bool get compIcon => _compIcon;
   bool get noDiff => _noDiff;
   bool get progressIcon => _progressIcon;
+
+  Set<DateTime> get getDays => _daysToHighlight;
 
   void setDate(DateTime date) { _date = date; }
 
@@ -69,6 +74,21 @@ class ArchiveViewModel extends ChangeNotifier{
       return true;
     }
     return false;
+  }
+
+  Future<void> highlightedDays() async {
+    await storeRepo.fetchUserData(authRepo.userID);
+    print(storeRepo.summary);
+    //storedDates = storeRepo.summary;
+
+    DateTime startDay = DateTime.utc(2025, 6, 22);
+    while(!isSameDay(startDay, DateTime.now())) {
+      setDate(startDay);
+      if(await getFromStorage()) {
+        _daysToHighlight.add(startDay);
+      }
+      startDay.add(Duration(days:1));
+    }
   }
 
 }

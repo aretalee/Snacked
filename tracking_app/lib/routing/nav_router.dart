@@ -46,10 +46,6 @@ GoRouter router(AuthRepository auth) => GoRouter(
     if (!authVM.loggedIn && (state.matchedLocation != '/signin' && state.matchedLocation != '/signin/signup' && state.matchedLocation != '/signin/login')) {
       return '/signin';
     } 
-    // if(authVM.loggedIn && state.matchedLocation != '/archive' && state.matchedLocation != '/archive/pastReport') {
-    //   archiveVM.setDate(DateTime.now().subtract(Duration(days:1)));
-    //   await archiveVM.getFromStorage();
-    // }
     return null;
   },
   routes: [
