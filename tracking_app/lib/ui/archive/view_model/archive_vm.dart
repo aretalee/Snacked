@@ -68,11 +68,18 @@ class ArchiveViewModel extends ChangeNotifier{
         _onTrack = 'You\'re on track, keep it up!';
         _progressIcon = true;
       } else { 
-        _onTrack = 'Let\'s try again!'; 
+        _onTrack = 'No worries, let\'s try again!'; 
         _progressIcon = false;
       }
       return true;
     }
+    _eating = 0;
+    _snacking = 0;
+    _comparison = 'No data';
+    _compIcon = true;
+    _noDiff = true;
+    _onTrack = 'No data';
+    _progressIcon = false;
     return false;
   }
 

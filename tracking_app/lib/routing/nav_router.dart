@@ -25,9 +25,9 @@ import '../ui/sign_in_prompt/widgets/sign_in_prompt_screen.dart';
 import '../ui/signup/widgets/sign_up_screen.dart';
 import '../ui/signup/view_model/sign_up_vm.dart';
 import '../ui/summary/widgets/home_screen.dart';
-import '../ui/summary/widgets/home_screen.dart';
 import '../ui/summary/widgets/summary_screen.dart';
 import '../ui/summary/widgets/no_data_screen.dart';
+import '../ui/summary/widgets/comment_screen.dart';
 import '../ui/summary/view_model/summary_vm.dart';
 import '../ui/auth/view_model/auth_vm.dart';
 
@@ -70,6 +70,10 @@ GoRouter router(AuthRepository auth) => GoRouter(
             GoRoute(
               path: 'noData',
               builder: (context, state) => NoDataSummary(),
+            ),
+            GoRoute(
+              path: 'comments',
+              builder: (context, state) => CommentPage(viewModel: summaryVM),
             ),
           ]
         ),

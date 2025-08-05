@@ -101,8 +101,8 @@ class _ArchivePageState extends State<ArchivePage> {
             FilledButton(
               onPressed: () async {
                 if (await widget.viewModel.getFromStorage()) {
-                  context.go('/archive/pastReport');
-                } else { context.go('/archive/notFound'); }
+                  context.push('/archive/pastReport');
+                } else { context.push('/archive/notFound'); }
               }, 
               child: Padding(
                 padding: const EdgeInsets.all(15.0),

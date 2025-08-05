@@ -35,12 +35,12 @@ class _ProfilePageState extends State<ProfilePage> {
             Text('${widget.viewModel.getName()}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
             const SizedBox(height:45),
             FilledButton(
-              onPressed: () => context.go('/profile/setGoals'),
+              onPressed: () => context.push('/profile/setGoals'),
               child: const Text('Set Daily Goal'), 
             ),
             const SizedBox(height:15),
             FilledButton(
-              onPressed: () => context.go('/profile/export'), 
+              onPressed: () => context.push('/profile/export'), 
               child: const Text('Export Data'),
             ),
             const SizedBox(height:15),
@@ -55,7 +55,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height:15),
             FilledButton(
-              onPressed: () => context.go('/profile/info'),
+              onPressed: () => context.push('/profile/info'),
               child: const Text('About Snacked'),
             ),
             const SizedBox(height:15),

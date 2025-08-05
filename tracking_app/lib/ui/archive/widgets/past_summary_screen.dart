@@ -21,12 +21,7 @@ class _PastSummaryPageState extends State<PastSummaryPage> {
     return Scaffold (
       appBar: AppBar(
         title: Text('Summary for ${DateFormat('MMMM d, y').format(widget.viewModel.date)}', 
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)), backgroundColor: Colors.black, 
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new),
-          onPressed: () => context.go('/archive'),
-        )
-      ),
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)), backgroundColor: Colors.black),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -36,21 +31,39 @@ class _PastSummaryPageState extends State<PastSummaryPage> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    Text('You spent:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                    const SizedBox(height:15),
-                    Text('Approximately ${widget.viewModel.eating} min eating', style: TextStyle(fontSize: 20)),
-                    Text('${widget.viewModel.snacking} min were likely to be snacking', style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
-                    const SizedBox(height:30),
-                    Text('Compared to yesterday:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Column(
+                          children: [
+                            Text('Eating:', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                            const SizedBox(height:15),
+                            Text('${widget.viewModel.eating} min', style: TextStyle(fontSize: 20, color: const Color.fromARGB(255, 39, 183, 255)), textAlign: TextAlign.center),
+                          ]
+                        ),
+                        const SizedBox(width:50),
+                        Column(
+                          children: [
+                            Text('Snacking:', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                            const SizedBox(height:15),
+                            Text('${widget.viewModel.snacking} min', style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 39, 183, 255)), textAlign: TextAlign.center),
+                          ]
+                        )
+                      ]
+                    ),
+                    const SizedBox(height:45),
+                    Text('Compared to yesterday:', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                     const SizedBox(height:15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(widget.viewModel.comparison, style: TextStyle(fontSize: 20)), // need to figure out icon logic
+                        (widget.viewModel.compIcon && !widget.viewModel.noDiff) ? Text(widget.viewModel.comparison, style: TextStyle(fontSize: 20, color: const Color.fromARGB(255, 66, 255, 72))) 
+                        : (widget.viewModel.noDiff ? Text(widget.viewModel.comparison, style: TextStyle(fontSize: 20, fontStyle: FontStyle.italic)) 
+                        : Text(widget.viewModel.comparison, style: TextStyle(fontSize: 20, color: const Color.fromARGB(255, 255, 86, 73)))),
                         const SizedBox(width:5),
-                        (widget.viewModel.compIcon && !widget.viewModel.noDiff) ? Icon(Icons.arrow_downward, color: Colors.green, size: 20,) 
+                        (widget.viewModel.compIcon && !widget.viewModel.noDiff) ? Icon(Icons.arrow_downward, color: Color.fromARGB(255, 66, 255, 72), size: 20,) 
                         : (widget.viewModel.noDiff ? Icon(Icons.swap_vert, color: Colors.white, size: 20,) 
-                        : Icon(Icons.arrow_upward, color: Colors.red, size: 20,) )
+                        : Icon(Icons.arrow_upward, color: Color.fromARGB(255, 255, 86, 73), size: 20,))
                       ]
                     ),
                   ],
@@ -63,15 +76,16 @@ class _PastSummaryPageState extends State<PastSummaryPage> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    Text('Based on your goals:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    Text('Based on your goals:', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                     const SizedBox(height:15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(widget.viewModel.onTrack, style: TextStyle(fontSize: 20)), 
+                        (widget.viewModel.progressIcon) ? Text(widget.viewModel.onTrack, style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 66, 255, 72))) 
+                        : Text(widget.viewModel.onTrack, style: TextStyle(fontSize: 20, color: Colors.yellow)), 
                         const SizedBox(width:10),
-                        (widget.viewModel.progressIcon) ? Icon(Icons.thumb_up, color: Colors.green, size: 20,) 
-                        : Icon(Icons.warning, color: Colors.blue, size: 20,)
+                        (widget.viewModel.progressIcon) ? Icon(Icons.thumb_up, color: Color.fromARGB(255, 66, 255, 72), size: 20,) 
+                        : Icon(Icons.warning, color: Colors.yellow, size: 20,)
                       ]
                     ),
                   ]
@@ -84,9 +98,9 @@ class _PastSummaryPageState extends State<PastSummaryPage> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    Text('Anything that contributed to snacking?', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    Text('Anything that contributed to snacking?', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
                     const SizedBox(height:15),
-                    Text(widget.viewModel.comments, style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
+                    Text(widget.viewModel.comments, style: TextStyle(fontSize: 20, fontStyle: FontStyle.italic), textAlign: TextAlign.center),
                   ]
                 ),
               ),

@@ -17,7 +17,7 @@ class _PromptPageState extends State<PromptPage> {
   Widget build(BuildContext context) {
     return Dialog.fullscreen(
       child: Padding(
-        padding: const EdgeInsets.all(30.0),
+        padding: const EdgeInsets.all(35.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
