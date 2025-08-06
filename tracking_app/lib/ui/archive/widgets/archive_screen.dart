@@ -56,10 +56,11 @@ class _ArchivePageState extends State<ArchivePage> {
               onPressed: _manualSelect,
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: const Text('Pick a date'),
+                child: const Text('Input a date'),
               ),
             ),
             const SizedBox(height:30),
+            Text('Or choose from calendar:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             TableCalendar(
               headerStyle: HeaderStyle(
                 formatButtonVisible: false,
@@ -98,7 +99,7 @@ class _ArchivePageState extends State<ArchivePage> {
                 _focusedDay = focusedDay;
               },
             ),
-            const SizedBox(height:60),
+            const SizedBox(height:30),
             FilledButton(
               onPressed: () async {
                 if (await widget.viewModel.getFromStorage()) {
