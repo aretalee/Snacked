@@ -47,6 +47,8 @@ class InfoPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text('Stress? Boredom? Exercise?', style: TextStyle(fontSize: 18, color: const Color.fromARGB(255, 157, 105, 253))),
+                          const SizedBox(height:10),
+                          Text('Out of habit? Fatigue? Peers?', style: TextStyle(fontSize: 18, color: const Color.fromARGB(255, 157, 105, 253))),
                         ]
                       ),
                     ]
@@ -67,9 +69,13 @@ class InfoPage extends StatelessWidget {
                         children: [
                           Text('Nutrient-poor snacking may be linked to obesity', style: TextStyle(fontSize: 17), textAlign: TextAlign.center),
                           const SizedBox(height:20),
+                          Text('In fact, obesity is mostly caused by modifiable behaviours', style: TextStyle(fontSize: 17), textAlign: TextAlign.center),
+                          const SizedBox(height:20),
                           Text('Habit strength is one of the biggest predictors and drivers of snacking', style: TextStyle(fontSize: 17), textAlign: TextAlign.center),
                           const SizedBox(height:20),
-                          Text('With reflection, snacking behaviour can be changed!', style: TextStyle(fontSize: 17), textAlign: TextAlign.center),
+                          Text('Tracking personal data is a good way to encourage self-reflection', style: TextStyle(fontSize: 17), textAlign: TextAlign.center),
+                          const SizedBox(height:20),
+                          Text('With determination, snacking behaviour can be changed!', style: TextStyle(fontSize: 17), textAlign: TextAlign.center),
                         ]
                       ),
                     ]

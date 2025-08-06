@@ -52,6 +52,13 @@ class _ArchivePageState extends State<ArchivePage> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
+            OutlinedButton(
+              onPressed: _manualSelect,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: const Text('Pick a date'),
+              ),
+            ),
             const SizedBox(height:30),
             TableCalendar(
               headerStyle: HeaderStyle(
@@ -60,7 +67,7 @@ class _ArchivePageState extends State<ArchivePage> {
               calendarFormat: format,
               focusedDay: _focusedDay,
               firstDay: DateTime.utc(2025, 6, 22),
-              lastDay: DateTime.utc(2050, 6, 22),
+              lastDay: DateTime.utc(2026, 6, 22),
               calendarBuilders: CalendarBuilders(
                 defaultBuilder: (context, day, focusedDay) {
                   final highlight = daysToHighlight.any((x) => isSameDay(x, day));
@@ -74,12 +81,6 @@ class _ArchivePageState extends State<ArchivePage> {
                         ),
                       ),
                     );
-                    // return Container(
-                    //   decoration: BoxDecoration(
-                    //     color: Colors.orange,
-                    //     shape: BoxShape.circle,
-                    //   )
-                    // );
                   }
                 }
               ), 
@@ -114,6 +115,22 @@ class _ArchivePageState extends State<ArchivePage> {
       )
     );
 
+  }
+
+  Future<void> _manualSelect() async {
+    final DateTime? pick = await showDatePicker(
+      context: context,
+      initialDate: _focusedDay,
+      firstDate: DateTime(2025, 6, 22),
+      lastDate: DateTime(2026, 6, 22),
+      initialEntryMode: DatePickerEntryMode.input,
+    );
+
+    setState(() {
+        DateTime chosenDate = pick!;
+        widget.viewModel.setDate(chosenDate);
+      }
+    );
   }
 
 }
