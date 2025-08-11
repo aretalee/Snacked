@@ -55,18 +55,18 @@ class _SummaryPageState extends State<SummaryPage> {
                         ]
                       ),
                       const SizedBox(height:45),
-                      Text('Compared to yesterday:', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                      const SizedBox(height:30),
+                      Text('Compared to ${DateFormat('MMM d').format(DateTime.now().subtract(Duration(days:2)))}:', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                      const SizedBox(height:15),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           (widget.viewModelA.compIcon && !widget.viewModelA.noDiff) ? Text(widget.viewModelA.comparison, style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 66, 255, 72))) 
                           : (widget.viewModelA.noDiff ? Text(widget.viewModelA.comparison, style: TextStyle(fontSize: 20, fontStyle: FontStyle.italic)) 
-                          : Text(widget.viewModelA.comparison, style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 255, 86, 73)))),
+                          : Text(widget.viewModelA.comparison, style: TextStyle(fontSize: 20, color: Colors.yellow))),
                           const SizedBox(width:5),
                           (widget.viewModelA.compIcon && !widget.viewModelA.noDiff) ? Icon(Icons.arrow_downward, color: Color.fromARGB(255, 66, 255, 72), size: 20,) 
                           : (widget.viewModelA.noDiff ? Icon(Icons.swap_vert, color: Colors.white, size: 20,) 
-                          : Icon(Icons.arrow_upward, color: Color.fromARGB(255, 255, 86, 73), size: 20,))
+                          : Icon(Icons.arrow_upward, color: Colors.yellow, size: 20,))
                         ]
                       ),
                     ],
@@ -85,10 +85,10 @@ class _SummaryPageState extends State<SummaryPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           (widget.viewModelA.progressIcon) ? Text(widget.viewModelA.onTrack, style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 66, 255, 72))) 
-                          : Text(widget.viewModelA.onTrack, style: TextStyle(fontSize: 20, color: Colors.yellow)),
+                          : Text(widget.viewModelA.onTrack, style: TextStyle(fontSize: 20, color: const Color.fromARGB(255, 255, 91, 244))),
                           const SizedBox(width:10),
                           (widget.viewModelA.progressIcon) ? Icon(Icons.thumb_up, color: Color.fromARGB(255, 66, 255, 72), size: 20,) 
-                          : Icon(Icons.warning, color: Colors.yellow, size: 20,)
+                          : Icon(Icons.warning, color: const Color.fromARGB(255, 255, 91, 244), size: 20,)
                         ]
                       ),
                     ]

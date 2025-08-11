@@ -1,6 +1,7 @@
-// import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import 'package:Snacked/data/models/watch_data.dart';
 
@@ -29,11 +30,20 @@ class FetchService{
     final eating = eatDuration[0]['duration'] as int;
     final snack = snackDuration[0]['duration'] as int;
     
-    // final fetchedInfo = data.map((e) => WatchData.fromJson(e)).toList(); 
     fetchedInfo = WatchData(snackingTime: snack, eatingTime: eating, date: date, watchID: watchID);
     return true;
 
   }
+
+  Future<void> callFlow() async {
+    final url = Uri.parse('https://prod-55.westeurope.logic.azure.com:443/workflows/7ba510c391d04806867c531edce688aa/triggers/manual/paths/invoke?api-version=2016-06-01');
+
+    var response = await http.post(url);
+    if (response.statusCode == 200) { print('Called successfully'); }
+    else { print('Call failed'); }
+
+  }
+
 }
 
 

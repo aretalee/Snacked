@@ -58,10 +58,6 @@ GoRouter router(AuthRepository auth) => GoRouter(
         GoRoute(
           path: '/home',
           builder: (context, state) => HomePage(viewModel: summaryVM, viewModelA: archiveVM),
-          // redirect: (context, state) async {
-          //   if (!await summaryVM.dataCheck()) { return '/home/noData'; }
-          //   else { return'/home/summary'; }
-          // },
           routes: [
             GoRoute(
               path: 'summary',

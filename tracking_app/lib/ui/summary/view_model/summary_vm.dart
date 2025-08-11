@@ -3,14 +3,13 @@ import 'package:intl/intl.dart';
 
 import 'package:Snacked/global.dart';
 import 'package:Snacked/ui/summary/widgets/prompt_screen.dart';
-import 'package:Snacked/data/models/watch_data.dart';
 
 
 class SummaryViewModel extends ChangeNotifier{
   Map<String, dynamic> _summaryInfo = {};
   String _comment = '';
   DateTime _summaryDate = DateTime.now().subtract(Duration(days:1));
-  DateTime _updateTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 00, 09, 00);
+  DateTime _updateTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 09, 00, 00);
   DateTime? _lastShown;
   bool _addedData = false;
 

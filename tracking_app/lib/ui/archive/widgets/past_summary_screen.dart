@@ -52,18 +52,18 @@ class _PastSummaryPageState extends State<PastSummaryPage> {
                       ]
                     ),
                     const SizedBox(height:45),
-                    Text('Compared to yesterday:', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                    Text('Compared to ${DateFormat('MMM d').format(widget.viewModel.date.subtract(Duration(days:1)))}:', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                     const SizedBox(height:15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         (widget.viewModel.compIcon && !widget.viewModel.noDiff) ? Text(widget.viewModel.comparison, style: TextStyle(fontSize: 20, color: const Color.fromARGB(255, 66, 255, 72))) 
                         : (widget.viewModel.noDiff ? Text(widget.viewModel.comparison, style: TextStyle(fontSize: 20, fontStyle: FontStyle.italic)) 
-                        : Text(widget.viewModel.comparison, style: TextStyle(fontSize: 20, color: const Color.fromARGB(255, 255, 86, 73)))),
+                        : Text(widget.viewModel.comparison, style: TextStyle(fontSize: 20, color: Colors.yellow))),
                         const SizedBox(width:5),
                         (widget.viewModel.compIcon && !widget.viewModel.noDiff) ? Icon(Icons.arrow_downward, color: Color.fromARGB(255, 66, 255, 72), size: 20,) 
                         : (widget.viewModel.noDiff ? Icon(Icons.swap_vert, color: Colors.white, size: 20,) 
-                        : Icon(Icons.arrow_upward, color: Color.fromARGB(255, 255, 86, 73), size: 20,))
+                        : Icon(Icons.arrow_upward, color: Colors.yellow, size: 20,))
                       ]
                     ),
                   ],
@@ -82,10 +82,10 @@ class _PastSummaryPageState extends State<PastSummaryPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         (widget.viewModel.progressIcon) ? Text(widget.viewModel.onTrack, style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 66, 255, 72))) 
-                        : Text(widget.viewModel.onTrack, style: TextStyle(fontSize: 20, color: Colors.yellow)), 
+                        : Text(widget.viewModel.onTrack, style: TextStyle(fontSize: 20, color: const Color.fromARGB(255, 255, 91, 244))), 
                         const SizedBox(width:10),
                         (widget.viewModel.progressIcon) ? Icon(Icons.thumb_up, color: Color.fromARGB(255, 66, 255, 72), size: 20,) 
-                        : Icon(Icons.warning, color: Colors.yellow, size: 20,)
+                        : Icon(Icons.warning, color: const Color.fromARGB(255, 255, 91, 244), size: 20,)
                       ]
                     ),
                   ]
