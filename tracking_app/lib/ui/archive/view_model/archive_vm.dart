@@ -85,8 +85,6 @@ class ArchiveViewModel extends ChangeNotifier{
 
   Future<void> highlightedDays() async {
     await storeRepo.fetchUserData(authRepo.userID);
-    print(storeRepo.summary);
-    //storedDates = storeRepo.summary;
 
     DateTime startDay = DateTime.utc(2025, 6, 22);
     while(!isSameDay(startDay, DateTime.now())) {
