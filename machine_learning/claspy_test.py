@@ -26,7 +26,7 @@ z = testOne['z-axis'].values
 data = np.column_stack((x, y, z))
 
 claspOne = BinaryClaSPSegmentation()
-dataOne = claspOne.fit_predict(np.array(data))
+dataOne = claspOne.fit_predict(data)
 
 claspOne.plot(heading=f"Segmentation of activity routine:", ts_name="ACC", font_size=18, file_path="wisdm_example.png")
 plt.show()
