@@ -37,7 +37,11 @@ user_one = har_df[har_df['user'] == 33]
 training, testing = [], []
 
 for label, group in user_one.groupby('activity'): 
-  train, test = train_test_split(group, test_size=int(len(group)*0.2), random_state=42)
+  group = group.sort_values(by='timestamp')
+  split = int(len(group) * 0.8)
+  train = group.iloc[:split]
+  test = group.iloc[split:]
+
   training.append(train)
   testing.append(test)
 
@@ -546,16 +550,20 @@ user_two = har_df[har_df['user'] == 8]
 training_two, testing_two = [], []
 
 for label, group in user_two.groupby('activity'): 
-  train_two, test_two = train_test_split(group, test_size=int(len(group)*0.2), random_state=42)
+  group = group.sort_values(by='timestamp')
+  split_two = int(len(group) * 0.8)
+  train_two = group.iloc[:split_two]
+  test_two = group.iloc[split_two:]
+
   training_two.append(train_two)
   testing_two.append(test_two)
 
-train_df= pd.concat(training_two) 
-test_df= pd.concat(testing_two) 
+train_df_two= pd.concat(training_two) 
+test_df_two= pd.concat(testing_two) 
 
 
-train_df = train_df.sort_values(by = ['timestamp'], ignore_index=True)
-test_df = test_df.sort_values(by = ['timestamp'], ignore_index=True)
+train_df_two = train_df_two.sort_values(by = ['timestamp'], ignore_index=True)
+test_df_two = test_df_two.sort_values(by = ['timestamp'], ignore_index=True)
 
 x_list_two = []
 y_list_two = []
@@ -566,11 +574,11 @@ window = 100
 step = 50
 
 
-for i in range(0, train_df.shape[0] - window, step):
-  xs = train_df['x-axis'].values[i: i + 100]
-  ys = train_df['y-axis'].values[i: i + 100]
-  zs = train_df['z-axis'].values[i: i + 100]
-  label = train_df['activity'][i: i + 100].mode()[0]
+for i in range(0, train_df_two.shape[0] - window, step):
+  xs = train_df_two['x-axis'].values[i: i + 100]
+  ys = train_df_two['y-axis'].values[i: i + 100]
+  zs = train_df_two['z-axis'].values[i: i + 100]
+  label = train_df_two['activity'][i: i + 100].mode()[0]
   # scipy mode no longer supports non-numbers, use .mode()[0] instead --> pandas.Series.mode()
   
   x_list_two.append(xs)
@@ -792,23 +800,23 @@ X_train_two['z_arg_diff_fft'] = abs(X_train_two['z_argmax_fft'] - X_train_two['z
 x_list_two_test = []
 y_list_two_test = []
 z_list_two_test = []
-test_labels = []
+test_labels_two = []
 
 window = 100
 step = 50
 
 
-for i in range(0, test_df.shape[0] - window, step):
-  xs_test = test_df['x-axis'].values[i: i + 100]
-  ys_test = test_df['y-axis'].values[i: i + 100]
-  zs_test = test_df['z-axis'].values[i: i + 100]
-  test_label = test_df['activity'][i: i + 100].mode()[0]
+for i in range(0, test_df_two.shape[0] - window, step):
+  xs_test = test_df_two['x-axis'].values[i: i + 100]
+  ys_test = test_df_two['y-axis'].values[i: i + 100]
+  zs_test = test_df_two['z-axis'].values[i: i + 100]
+  test_label = test_df_two['activity'][i: i + 100].mode()[0]
   # scipy mode no longer supports non-numbers, use .mode()[0] instead --> pandas.Series.mode()
   
   x_list_two_test.append(xs_test)
   y_list_two_test.append(ys_test)
   z_list_two_test.append(zs_test)
-  test_labels.append(test_label)
+  test_labels_two.append(test_label)
 
 X_test_two = pd.DataFrame()
   
@@ -1021,7 +1029,7 @@ X_test_two['z_arg_diff_fft'] = abs(X_test_two['z_argmax_fft'] - X_test_two['z_ar
 
 # # linear model for activity prediction
 y_train_two = np.array(train_labels_two)
-y_test_two = np.array(test_labels)
+y_test_two = np.array(test_labels_two)
 
 
 

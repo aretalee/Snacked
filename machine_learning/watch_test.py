@@ -40,7 +40,11 @@ balanced = pd.concat([brush, drink, chips, choco, walk, soup])
 training, testing = [], []
 
 for label, group in balanced.groupby('activity'): 
-  train, test = train_test_split(group, test_size=int(len(group)*0.2), random_state=42)
+  group = group.sort_values(by='timestamp')
+  split = int(len(group) * 0.8)
+  train = group.iloc[:split]
+  test = group.iloc[split:]
+
   training.append(train)
   testing.append(test)
 

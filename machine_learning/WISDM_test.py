@@ -19,10 +19,17 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
 
+# teeth = G
+# soup = H
+# chips = I
+# pasta = J
+# drinking = K
+# sandwich = L
 
 
-col = ['user', 'activity', 'timestamp', 'x-axis', 'y-axis', 'z-axis']
-har_df = pd.read_csv('WISDM_ar_v1.1_raw.txt', sep=',', on_bad_lines='skip', header = None, names = col)
+
+col = ['har_df', 'activity', 'timestamp', 'x-axis', 'y-axis', 'z-axis']
+har_df = pd.read_csv('data_1608_accel_phone.txt', sep=',', on_bad_lines='skip', header = None, names = col)
 
 
 har_df = har_df.dropna()
@@ -32,22 +39,25 @@ har_df['z-axis'] = har_df['z-axis'].str.replace(';', '')
 har_df['z-axis'] = har_df['z-axis'].apply(lambda x:float(x))
 
 
-user = har_df[har_df['user'] == 8]
-w = user[user['activity'] == 'Walking'].head(2699)
-j = user[user['activity'] == 'Jogging'].head(2699)
-u = user[user['activity'] == 'Upstairs'].head(2699)
-d = user[user['activity'] == 'Downstairs'].head(2699)
-sit = user[user['activity'] == 'Sitting'].head(2699)
-st = user[user['activity'] == 'Standing'].head(2699)
+teeth = har_df[har_df['activity'] == 'G'].head(3605)
+soup = har_df[har_df['activity'] == 'H'].head(3605)
+chips = har_df[har_df['activity'] == 'I'].head(3605)
+pasta = har_df[har_df['activity'] == 'J'].head(3605)
+drinking = har_df[har_df['activity'] == 'K'].head(3605)
+sandwich = har_df[har_df['activity'] == 'L'].head(3605)
 
 balanced = pd.DataFrame()
-balanced = pd.concat([w, j, u, d, sit, st])
+balanced = pd.concat([teeth, soup, chips, pasta, drinking, sandwich])
 
 
 training, testing = [], []
 
 for label, group in balanced.groupby('activity'): 
-  train, test = train_test_split(group, test_size=int(len(group)*0.2), random_state=42)
+  group = group.sort_values(by='timestamp')
+  split = int(len(group) * 0.8)
+  train = group.iloc[:split]
+  test = group.iloc[split:]
+
   training.append(train)
   testing.append(test)
 
@@ -542,7 +552,7 @@ print("Cross validation mean:", np.mean(scores))
 print(classification_report(y_test, y_pred))
 
 
-labels = ['Downstairs', 'Jogging', 'Sitting', 'Standing', 'Upstairs', 'Walking']
+labels = ['Brushing teeth', 'Drinking soup', 'Eating chips', 'Eating pasta', 'Drinking water', 'Eating sandwich']
 confusion_matrix = confusion_matrix(y_test, y_pred)
 sns.heatmap(confusion_matrix, xticklabels=labels, yticklabels=labels, annot=True,linewidths = 0.1, fmt="d", cmap = 'YlGnBu')
 plt.title("Confusion matrix", fontsize = 15)
