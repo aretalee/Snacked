@@ -15,10 +15,7 @@ from sklearn.model_selection import train_test_split
 from scipy.stats import randint
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import cross_val_score
-from matplotlib.colors import ListedColormap
-from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
-from sklearn import metrics
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
 
