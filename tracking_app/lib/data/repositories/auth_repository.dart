@@ -98,7 +98,7 @@ class AuthRepository {
     return '';
   }
 
-  Future<String?> changeUserame(String name) async {
+  Future<String?> changeUsername(String name) async {
     try {
       await _auth.currentUser?.updateDisplayName(name);
       return 'Success';

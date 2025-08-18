@@ -17,7 +17,7 @@ class ChangeNameViewModel extends ChangeNotifier{
 
   Future<String?> changeUsername() async {
     try {
-      final status = await authRepo.changeUserame(_name);
+      final status = await authRepo.changeUsername(_name);
       return status;
     } catch (e) {
       return e.toString();
