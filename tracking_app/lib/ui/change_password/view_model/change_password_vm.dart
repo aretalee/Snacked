@@ -63,6 +63,5 @@ class ChangePwdViewModel extends ChangeNotifier{
     }
     return false;
   }
-  
 }
 

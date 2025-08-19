@@ -57,7 +57,6 @@ class _NavBarState extends State<NavBar> {
       body: widget.child,
     );
   }
-
 }
 
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:go_router/go_router.dart';
 
 import 'package:Snacked/global.dart';
 import 'package:Snacked/ui/summary/view_model/summary_vm.dart';
@@ -63,7 +62,6 @@ class _SummaryPageState extends State<HomePage> {
       }
     );
   }
-
 }
 
 

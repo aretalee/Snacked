@@ -43,6 +43,5 @@ class _NotFoundPageState extends State<NotFoundPage> {
       )
     );
   }
-  
 }
 

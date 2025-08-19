@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:Snacked/global.dart';
 
 
-
 class SignUpViewModel extends ChangeNotifier{
   String _email = '';
   String _pwd = '';
@@ -55,7 +54,6 @@ class SignUpViewModel extends ChangeNotifier{
     }
     return false;
   }
-  
 }
 
 

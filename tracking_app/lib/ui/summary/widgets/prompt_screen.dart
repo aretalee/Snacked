@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-// import 'package:Snacked/ui/summary/view_model/summary_vm.dart';
-
 
  class PromptPage extends StatefulWidget {
   const PromptPage({super.key});

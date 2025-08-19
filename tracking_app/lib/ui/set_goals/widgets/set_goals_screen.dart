@@ -94,7 +94,6 @@ class _SetGoalsPageState extends State<SetGoalsPage> {
       )
     );
   }
-  
 }
 
 

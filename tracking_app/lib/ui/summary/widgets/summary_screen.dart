@@ -104,9 +104,7 @@ class _SummaryPageState extends State<SummaryPage> {
           )
         )
       );
-
   }
-
 }
 
 

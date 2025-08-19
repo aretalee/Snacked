@@ -29,7 +29,8 @@ from sklearn.metrics import classification_report
 
 
 col = ['har_df', 'activity', 'timestamp', 'x-axis', 'y-axis', 'z-axis']
-har_df = pd.read_csv('data_1608_accel_phone.txt', sep=',', on_bad_lines='skip', header = None, names = col)
+har_df = pd.read_csv('data_1608_accel_watch.txt', sep=',', on_bad_lines='skip', header = None, names = col)
+# har_df = pd.read_csv('data_1608_accel_phone.txt', sep=',', on_bad_lines='skip', header = None, names = col)
 
 
 har_df = har_df.dropna()
@@ -39,12 +40,21 @@ har_df['z-axis'] = har_df['z-axis'].str.replace(';', '')
 har_df['z-axis'] = har_df['z-axis'].apply(lambda x:float(x))
 
 
+# balancing for watch data
 teeth = har_df[har_df['activity'] == 'G'].head(3605)
 soup = har_df[har_df['activity'] == 'H'].head(3605)
 chips = har_df[har_df['activity'] == 'I'].head(3605)
 pasta = har_df[har_df['activity'] == 'J'].head(3605)
 drinking = har_df[har_df['activity'] == 'K'].head(3605)
 sandwich = har_df[har_df['activity'] == 'L'].head(3605)
+
+# balancing for phone data
+# teeth = har_df[har_df['activity'] == 'G'].head(3572)
+# soup = har_df[har_df['activity'] == 'H'].head(3572)
+# chips = har_df[har_df['activity'] == 'I'].head(3572)
+# pasta = har_df[har_df['activity'] == 'J'].head(3572)
+# drinking = har_df[har_df['activity'] == 'K'].head(3572)
+# sandwich = har_df[har_df['activity'] == 'L'].head(3572)
 
 balanced = pd.DataFrame()
 balanced = pd.concat([teeth, soup, chips, pasta, drinking, sandwich])

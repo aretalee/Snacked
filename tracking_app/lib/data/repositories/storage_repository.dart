@@ -105,8 +105,6 @@ class StorageRepository {
     await _db.collection("users").doc(userID).set({"currentGoal": -1});
     await _db.collection("users").doc(userID).collection("summaries").doc("init").set({"status": "User created."});
   }
-
-
 }
 
 

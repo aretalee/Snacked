@@ -27,7 +27,6 @@ class ExportViewModel extends ChangeNotifier{
     await saveFile.writeAsString(_jsonString);
     await SharePlus.instance.share(ShareParams(files: [XFile(saveFile.path, mimeType: 'application/json')]));
   }
-
 }
 
 

@@ -24,6 +24,5 @@ class ProfileViewModel extends ChangeNotifier{
         return true;
      } else { return false; }
   }
-  
 }
 

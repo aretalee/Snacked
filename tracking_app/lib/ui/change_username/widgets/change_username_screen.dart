@@ -84,7 +84,6 @@ class _ChangeNamePageState extends State<ChangeNamePage> {
       )
     );
   }
-  
 }
 
 

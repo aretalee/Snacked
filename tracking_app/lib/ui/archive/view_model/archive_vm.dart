@@ -95,7 +95,6 @@ class ArchiveViewModel extends ChangeNotifier{
       startDay.add(Duration(days:1));
     }
   }
-
 }
 
 

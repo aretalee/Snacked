@@ -106,6 +106,5 @@ class AuthRepository {
       return e.toString();
     } 
   }
-
 }
 

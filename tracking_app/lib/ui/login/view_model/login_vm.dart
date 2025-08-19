@@ -77,7 +77,6 @@ class LoginViewModel extends ChangeNotifier{
     }
     return false;
   }
-  
 }
 
 

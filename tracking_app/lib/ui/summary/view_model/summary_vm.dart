@@ -98,8 +98,6 @@ class SummaryViewModel extends ChangeNotifier{
       }
     );
   }
-  
-
 }
 
 

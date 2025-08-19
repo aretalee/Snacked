@@ -44,6 +44,5 @@ class ChangeNameViewModel extends ChangeNotifier{
     }
     return false;
   }
-  
 }
 

@@ -53,9 +53,6 @@ class SetGoalsViewModel extends ChangeNotifier{
     if (valid) { return true; }
     return false;
   }
-
-  
-
 }
 
 
