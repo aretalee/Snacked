@@ -11,13 +11,8 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from scipy.stats import randint
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import cross_val_score
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import classification_report
 
 
 
@@ -66,7 +61,6 @@ for i in range(0, train_df.shape[0] - window, step):
   ys = train_df['y-axis'].values[i: i + 100]
   zs = train_df['z-axis'].values[i: i + 100]
   label = train_df['activity'][i: i + 100].mode()[0]
-  # scipy mode no longer supports non-numbers, use .mode()[0] instead --> pandas.Series.mode()
   
   x_list.append(xs)
   y_list.append(ys)
@@ -298,7 +292,6 @@ for i in range(0, test_df.shape[0] - window, step):
   ys_test = test_df['y-axis'].values[i: i + 100]
   zs_test = test_df['z-axis'].values[i: i + 100]
   test_label = test_df['activity'][i: i + 100].mode()[0]
-  # scipy mode no longer supports non-numbers, use .mode()[0] instead --> pandas.Series.mode()
   
   x_list_test.append(xs_test)
   y_list_test.append(ys_test)
@@ -579,7 +572,6 @@ for i in range(0, train_df_two.shape[0] - window, step):
   ys = train_df_two['y-axis'].values[i: i + 100]
   zs = train_df_two['z-axis'].values[i: i + 100]
   label = train_df_two['activity'][i: i + 100].mode()[0]
-  # scipy mode no longer supports non-numbers, use .mode()[0] instead --> pandas.Series.mode()
   
   x_list_two.append(xs)
   y_list_two.append(ys)
@@ -811,7 +803,6 @@ for i in range(0, test_df_two.shape[0] - window, step):
   ys_test = test_df_two['y-axis'].values[i: i + 100]
   zs_test = test_df_two['z-axis'].values[i: i + 100]
   test_label = test_df_two['activity'][i: i + 100].mode()[0]
-  # scipy mode no longer supports non-numbers, use .mode()[0] instead --> pandas.Series.mode()
   
   x_list_two_test.append(xs_test)
   y_list_two_test.append(ys_test)
