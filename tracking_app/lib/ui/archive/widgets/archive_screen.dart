@@ -83,6 +83,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     );
                   }
+                  return null;
                 }
               ), 
               selectedDayPredicate: (date) {
