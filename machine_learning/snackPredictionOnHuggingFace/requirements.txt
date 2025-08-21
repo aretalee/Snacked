@@ -1,0 +1,10 @@
+gradio
+numpy
+pandas
+matplotlib
+seaborn
+scipy
+joblib
+scikit-learn
+claspy @ git+https://github.com/ermshaua/claspy.git
+supabase

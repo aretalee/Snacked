@@ -18,7 +18,7 @@ har_df['z-axis'] = har_df['z-axis'].apply(lambda x:float(x))
 df = har_df[har_df['timestamp'] != 0].sort_values(by = ['user', 'timestamp'], ignore_index=True)
 
 testOne = df[df['user'] == 33].iloc[:8000]
-testOne.to_csv('test1.txt', sep='\t', index=False)
+testOne.to_csv('claspy_test1.txt', sep='\t', index=False)
 
 x = testOne['x-axis'].values
 y = testOne['y-axis'].values
@@ -33,7 +33,7 @@ plt.show()
 
 
 testTwo = df[df['user'] == 8]
-testTwo.to_csv('test2.txt', sep='\t', index=False)
+testTwo.to_csv('claspy_test2.txt', sep='\t', index=False)
 
 xs = testTwo['x-axis'].values
 ys = testTwo['y-axis'].values

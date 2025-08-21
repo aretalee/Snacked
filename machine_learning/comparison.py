@@ -507,14 +507,11 @@ X_test['y_arg_diff_fft'] = abs(X_test['y_argmax_fft'] - X_test['y_argmin_fft'])
 X_test['z_arg_diff_fft'] = abs(X_test['z_argmax_fft'] - X_test['z_argmin_fft'])
 
 
-# # linear model for activity prediction
 y_train = np.array(train_labels)
 y_test = np.array(test_labels)
 
 
-
-# random forest model
-
+# model for User 33
 rf = RandomForestClassifier(random_state = 21)
 k=5
 folds = StratifiedKFold(n_splits=k, shuffle=True, random_state=42)
@@ -1018,14 +1015,10 @@ X_test_two['y_arg_diff_fft'] = abs(X_test_two['y_argmax_fft'] - X_test_two['y_ar
 X_test_two['z_arg_diff_fft'] = abs(X_test_two['z_argmax_fft'] - X_test_two['z_argmin_fft'])
 
 
-# # linear model for activity prediction
 y_train_two = np.array(train_labels_two)
 y_test_two = np.array(test_labels_two)
 
-
-
-# random forest model
-
+# model for User 8
 rf_two = RandomForestClassifier(random_state = 21)
 k=5
 folds_two = StratifiedKFold(n_splits=k, shuffle=True, random_state=42)
@@ -1049,6 +1042,7 @@ plt.xlabel('Predicted label')
 plt.show()
 
 
+# using model of User 33 on User 8
 y_pred_three = rf.predict(X_test_two)
 accuracy_three = accuracy_score(y_test_two, y_pred_three)
 print("Accuracy of predicting User 8 data with model for User 33:", accuracy_three)
@@ -1064,6 +1058,7 @@ plt.xlabel('Predicted label')
 plt.show()
 
 
+# using model of User 8 on User 33
 y_pred_four = rf_two.predict(X_test)
 accuracy_four = accuracy_score(y_test, y_pred_four)
 print("Accuracy of predicting User 33 data with model for User 8:", accuracy_four)

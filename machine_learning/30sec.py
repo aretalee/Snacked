@@ -503,7 +503,6 @@ X_test['y_arg_diff_fft'] = abs(X_test['y_argmax_fft'] - X_test['y_argmin_fft'])
 X_test['z_arg_diff_fft'] = abs(X_test['z_argmax_fft'] - X_test['z_argmin_fft'])
 
 
-# # linear model for activity prediction
 y_train = np.array(train_labels)
 y_test = np.array(test_labels)
 
@@ -511,9 +510,12 @@ y_test = np.array(test_labels)
 rf = RandomForestClassifier(random_state = 21)
 rf.fit(X_train, y_train)
 
-har_df = pd.read_csv("test1.csv", sep=',', on_bad_lines='skip')
-# har_df = pd.read_csv("test2.csv", sep=',', on_bad_lines='skip')
-# har_df = pd.read_csv("test3.csv", sep=',', on_bad_lines='skip')
+
+# predicting 30 second data streams
+
+har_df = pd.read_csv("30sec_test1.csv", sep=',', on_bad_lines='skip')
+# har_df = pd.read_csv("30sec_test2.csv", sep=',', on_bad_lines='skip')
+# har_df = pd.read_csv("30sec_test3.csv", sep=',', on_bad_lines='skip')
 har_df = har_df.dropna()
 har_df.shape
 har_df['Z'] = har_df['Z'].apply(lambda x:float(x))
