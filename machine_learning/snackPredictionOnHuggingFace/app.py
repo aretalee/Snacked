@@ -15,16 +15,16 @@ from supabase import create_client
 
 def predict(csv):
     try:  
-        har_df = pd.read_csv(StringIO(csv), sep=',', on_bad_lines='skip')
-        har_df = har_df.dropna()
-        har_df.shape
-        har_df['Z'] = har_df['Z'].apply(lambda x:float(x))
+        watchData = pd.read_csv(StringIO(csv), sep=',', on_bad_lines='skip')
+        watchData = watchData.dropna()
+        watchData.shape
+        watchData['Z'] = watchData['Z'].apply(lambda x:float(x))
 
-        pred_df = har_df[har_df['TimeStamp'] != 0].sort_values(by = ['TimeStamp'], ignore_index=True)
+        pred_df = watchData[watchData['TimeStamp'] != 0].sort_values(by = ['TimeStamp'], ignore_index=True)
 
-        x_list = []
-        y_list = []
-        z_list = []
+        x_items = []
+        y_items = []
+        z_items = []
 
         xs = pred_df['X'].values
         ys = pred_df['Y'].values
@@ -43,38 +43,38 @@ def predict(csv):
             seg_length.append(i - init)
             init = i
             
-            x_list.append(x_seg)
-            y_list.append(y_seg)
-            z_list.append(z_seg)
+            x_items.append(x_seg)
+            y_items.append(y_seg)
+            z_items.append(z_seg)
 
 
 
         X_pred = pd.DataFrame()
         
         # mean
-        X_pred['x_mean'] = pd.Series(x_list).apply(lambda x: x.mean())
-        X_pred['y_mean'] = pd.Series(y_list).apply(lambda x: x.mean())
-        X_pred['z_mean'] = pd.Series(z_list).apply(lambda x: x.mean())
+        X_pred['x_mean'] = pd.Series(x_items).apply(lambda x: x.mean())
+        X_pred['y_mean'] = pd.Series(y_items).apply(lambda x: x.mean())
+        X_pred['z_mean'] = pd.Series(z_items).apply(lambda x: x.mean())
 
         # std dev
-        X_pred['x_std'] = pd.Series(x_list).apply(lambda x: x.std())
-        X_pred['y_std'] = pd.Series(y_list).apply(lambda x: x.std())
-        X_pred['z_std'] = pd.Series(z_list).apply(lambda x: x.std())
+        X_pred['x_std'] = pd.Series(x_items).apply(lambda x: x.std())
+        X_pred['y_std'] = pd.Series(y_items).apply(lambda x: x.std())
+        X_pred['z_std'] = pd.Series(z_items).apply(lambda x: x.std())
 
         # avg absolute diff
-        X_pred['x_aad'] = pd.Series(x_list).apply(lambda x: np.mean(np.absolute(x - np.mean(x))))
-        X_pred['y_aad'] = pd.Series(y_list).apply(lambda x: np.mean(np.absolute(x - np.mean(x))))
-        X_pred['z_aad'] = pd.Series(z_list).apply(lambda x: np.mean(np.absolute(x - np.mean(x))))
+        X_pred['x_aad'] = pd.Series(x_items).apply(lambda x: np.mean(np.absolute(x - np.mean(x))))
+        X_pred['y_aad'] = pd.Series(y_items).apply(lambda x: np.mean(np.absolute(x - np.mean(x))))
+        X_pred['z_aad'] = pd.Series(z_items).apply(lambda x: np.mean(np.absolute(x - np.mean(x))))
 
         # min
-        X_pred['x_min'] = pd.Series(x_list).apply(lambda x: x.min())
-        X_pred['y_min'] = pd.Series(y_list).apply(lambda x: x.min())
-        X_pred['z_min'] = pd.Series(z_list).apply(lambda x: x.min())
+        X_pred['x_min'] = pd.Series(x_items).apply(lambda x: x.min())
+        X_pred['y_min'] = pd.Series(y_items).apply(lambda x: x.min())
+        X_pred['z_min'] = pd.Series(z_items).apply(lambda x: x.min())
 
         # max
-        X_pred['x_max'] = pd.Series(x_list).apply(lambda x: x.max())
-        X_pred['y_max'] = pd.Series(y_list).apply(lambda x: x.max())
-        X_pred['z_max'] = pd.Series(z_list).apply(lambda x: x.max())
+        X_pred['x_max'] = pd.Series(x_items).apply(lambda x: x.max())
+        X_pred['y_max'] = pd.Series(y_items).apply(lambda x: x.max())
+        X_pred['z_max'] = pd.Series(z_items).apply(lambda x: x.max())
 
         # max-min diff
         X_pred['x_maxmin_diff'] = X_pred['x_max'] - X_pred['x_min']
@@ -82,68 +82,68 @@ def predict(csv):
         X_pred['z_maxmin_diff'] = X_pred['z_max'] - X_pred['z_min']
 
         # median
-        X_pred['x_median'] = pd.Series(x_list).apply(lambda x: np.median(x))
-        X_pred['y_median'] = pd.Series(y_list).apply(lambda x: np.median(x))
-        X_pred['z_median'] = pd.Series(z_list).apply(lambda x: np.median(x))
+        X_pred['x_median'] = pd.Series(x_items).apply(lambda x: np.median(x))
+        X_pred['y_median'] = pd.Series(y_items).apply(lambda x: np.median(x))
+        X_pred['z_median'] = pd.Series(z_items).apply(lambda x: np.median(x))
 
         # median abs dev 
-        X_pred['x_mad'] = pd.Series(x_list).apply(lambda x: np.median(np.absolute(x - np.median(x))))
-        X_pred['y_mad'] = pd.Series(y_list).apply(lambda x: np.median(np.absolute(x - np.median(x))))
-        X_pred['z_mad'] = pd.Series(z_list).apply(lambda x: np.median(np.absolute(x - np.median(x))))
+        X_pred['x_mad'] = pd.Series(x_items).apply(lambda x: np.median(np.absolute(x - np.median(x))))
+        X_pred['y_mad'] = pd.Series(y_items).apply(lambda x: np.median(np.absolute(x - np.median(x))))
+        X_pred['z_mad'] = pd.Series(z_items).apply(lambda x: np.median(np.absolute(x - np.median(x))))
 
         # interquartile range
-        X_pred['x_IQR'] = pd.Series(x_list).apply(lambda x: np.percentile(x, 75) - np.percentile(x, 25))
-        X_pred['y_IQR'] = pd.Series(y_list).apply(lambda x: np.percentile(x, 75) - np.percentile(x, 25))
-        X_pred['z_IQR'] = pd.Series(z_list).apply(lambda x: np.percentile(x, 75) - np.percentile(x, 25))
+        X_pred['x_IQR'] = pd.Series(x_items).apply(lambda x: np.percentile(x, 75) - np.percentile(x, 25))
+        X_pred['y_IQR'] = pd.Series(y_items).apply(lambda x: np.percentile(x, 75) - np.percentile(x, 25))
+        X_pred['z_IQR'] = pd.Series(z_items).apply(lambda x: np.percentile(x, 75) - np.percentile(x, 25))
 
         # negtive count
-        X_pred['x_neg_count'] = pd.Series(x_list).apply(lambda x: np.sum(x < 0))
-        X_pred['y_neg_count'] = pd.Series(y_list).apply(lambda x: np.sum(x < 0))
-        X_pred['z_neg_count'] = pd.Series(z_list).apply(lambda x: np.sum(x < 0))
+        X_pred['x_neg_count'] = pd.Series(x_items).apply(lambda x: np.sum(x < 0))
+        X_pred['y_neg_count'] = pd.Series(y_items).apply(lambda x: np.sum(x < 0))
+        X_pred['z_neg_count'] = pd.Series(z_items).apply(lambda x: np.sum(x < 0))
 
         # positive count
-        X_pred['x_pos_count'] = pd.Series(x_list).apply(lambda x: np.sum(x > 0))
-        X_pred['y_pos_count'] = pd.Series(y_list).apply(lambda x: np.sum(x > 0))
-        X_pred['z_pos_count'] = pd.Series(z_list).apply(lambda x: np.sum(x > 0))
+        X_pred['x_pos_count'] = pd.Series(x_items).apply(lambda x: np.sum(x > 0))
+        X_pred['y_pos_count'] = pd.Series(y_items).apply(lambda x: np.sum(x > 0))
+        X_pred['z_pos_count'] = pd.Series(z_items).apply(lambda x: np.sum(x > 0))
 
         # values above mean
-        X_pred['x_above_mean'] = pd.Series(x_list).apply(lambda x: np.sum(x > x.mean()))
-        X_pred['y_above_mean'] = pd.Series(y_list).apply(lambda x: np.sum(x > x.mean()))
-        X_pred['z_above_mean'] = pd.Series(z_list).apply(lambda x: np.sum(x > x.mean()))
+        X_pred['x_above_mean'] = pd.Series(x_items).apply(lambda x: np.sum(x > x.mean()))
+        X_pred['y_above_mean'] = pd.Series(y_items).apply(lambda x: np.sum(x > x.mean()))
+        X_pred['z_above_mean'] = pd.Series(z_items).apply(lambda x: np.sum(x > x.mean()))
 
         # number of peaks
-        X_pred['x_peak_count'] = pd.Series(x_list).apply(lambda x: len(find_peaks(x)[0]))
-        X_pred['y_peak_count'] = pd.Series(y_list).apply(lambda x: len(find_peaks(x)[0]))
-        X_pred['z_peak_count'] = pd.Series(z_list).apply(lambda x: len(find_peaks(x)[0]))
+        X_pred['x_peak_count'] = pd.Series(x_items).apply(lambda x: len(find_peaks(x)[0]))
+        X_pred['y_peak_count'] = pd.Series(y_items).apply(lambda x: len(find_peaks(x)[0]))
+        X_pred['z_peak_count'] = pd.Series(z_items).apply(lambda x: len(find_peaks(x)[0]))
 
         # skewness
-        X_pred['x_skewness'] = pd.Series(x_list).apply(lambda x: stats.skew(x))
-        X_pred['y_skewness'] = pd.Series(y_list).apply(lambda x: stats.skew(x))
-        X_pred['z_skewness'] = pd.Series(z_list).apply(lambda x: stats.skew(x))
+        X_pred['x_skewness'] = pd.Series(x_items).apply(lambda x: stats.skew(x))
+        X_pred['y_skewness'] = pd.Series(y_items).apply(lambda x: stats.skew(x))
+        X_pred['z_skewness'] = pd.Series(z_items).apply(lambda x: stats.skew(x))
 
         # kurtosis
-        X_pred['x_kurtosis'] = pd.Series(x_list).apply(lambda x: stats.kurtosis(x))
-        X_pred['y_kurtosis'] = pd.Series(y_list).apply(lambda x: stats.kurtosis(x))
-        X_pred['z_kurtosis'] = pd.Series(z_list).apply(lambda x: stats.kurtosis(x))
+        X_pred['x_kurtosis'] = pd.Series(x_items).apply(lambda x: stats.kurtosis(x))
+        X_pred['y_kurtosis'] = pd.Series(y_items).apply(lambda x: stats.kurtosis(x))
+        X_pred['z_kurtosis'] = pd.Series(z_items).apply(lambda x: stats.kurtosis(x))
 
         # energy
-        X_pred['x_energy'] = pd.Series(x_list).apply(lambda x: np.sum(x**2)/100)
-        X_pred['y_energy'] = pd.Series(y_list).apply(lambda x: np.sum(x**2)/100)
-        X_pred['z_energy'] = pd.Series(z_list).apply(lambda x: np.sum(x**2/100))
+        X_pred['x_energy'] = pd.Series(x_items).apply(lambda x: np.sum(x**2)/100)
+        X_pred['y_energy'] = pd.Series(y_items).apply(lambda x: np.sum(x**2)/100)
+        X_pred['z_energy'] = pd.Series(z_items).apply(lambda x: np.sum(x**2/100))
 
         # avg resultant
-        X_pred['avg_result_accl'] = [i.mean() for i in ((pd.Series(x_list)**2 + pd.Series(y_list)**2 + pd.Series(z_list)**2)**0.5)]
+        X_pred['avg_result_accl'] = [i.mean() for i in ((pd.Series(x_items)**2 + pd.Series(y_items)**2 + pd.Series(z_items)**2)**0.5)]
 
         # signal magnitude area
-        X_pred['sma'] =    pd.Series(x_list).apply(lambda x: np.sum(abs(x)/100)) + pd.Series(y_list).apply(lambda x: np.sum(abs(x)/100)) \
-                        + pd.Series(z_list).apply(lambda x: np.sum(abs(x)/100))
+        X_pred['sma'] =    pd.Series(x_items).apply(lambda x: np.sum(abs(x)/100)) + pd.Series(y_items).apply(lambda x: np.sum(abs(x)/100)) \
+                        + pd.Series(z_items).apply(lambda x: np.sum(abs(x)/100))
 
 
 
         # fft: chaning time domain signals to frequency domain
-        x_fft = pd.Series(x_list).apply(lambda x: np.abs(np.fft.fft(x)[1:51]))
-        y_fft = pd.Series(y_list).apply(lambda x: np.abs(np.fft.fft(x)[1:51]))
-        z_fft = pd.Series(z_list).apply(lambda x: np.abs(np.fft.fft(x)[1:51]))
+        x_fft = pd.Series(x_items).apply(lambda x: np.abs(np.fft.fft(x)[1:51]))
+        y_fft = pd.Series(y_items).apply(lambda x: np.abs(np.fft.fft(x)[1:51]))
+        z_fft = pd.Series(z_items).apply(lambda x: np.abs(np.fft.fft(x)[1:51]))
 
 
         # Statistical Features on raw x, y and z in frequency domain
@@ -228,14 +228,14 @@ def predict(csv):
         # calculating max & min indices
 
         # index of max value in time domain
-        X_pred['x_argmax'] = pd.Series(x_list).apply(lambda x: np.argmax(x))
-        X_pred['y_argmax'] = pd.Series(y_list).apply(lambda x: np.argmax(x))
-        X_pred['z_argmax'] = pd.Series(z_list).apply(lambda x: np.argmax(x))
+        X_pred['x_argmax'] = pd.Series(x_items).apply(lambda x: np.argmax(x))
+        X_pred['y_argmax'] = pd.Series(y_items).apply(lambda x: np.argmax(x))
+        X_pred['z_argmax'] = pd.Series(z_items).apply(lambda x: np.argmax(x))
 
         # index of min value in time domain
-        X_pred['x_argmin'] = pd.Series(x_list).apply(lambda x: np.argmin(x))
-        X_pred['y_argmin'] = pd.Series(y_list).apply(lambda x: np.argmin(x))
-        X_pred['z_argmin'] = pd.Series(z_list).apply(lambda x: np.argmin(x))
+        X_pred['x_argmin'] = pd.Series(x_items).apply(lambda x: np.argmin(x))
+        X_pred['y_argmin'] = pd.Series(y_items).apply(lambda x: np.argmin(x))
+        X_pred['z_argmin'] = pd.Series(z_items).apply(lambda x: np.argmin(x))
 
         # absolute difference between above indices
         X_pred['x_arg_diff'] = abs(X_pred['x_argmax'] - X_pred['x_argmin'])
@@ -258,7 +258,6 @@ def predict(csv):
         X_pred['z_arg_diff_fft'] = abs(X_pred['z_argmax_fft'] - X_pred['z_argmin_fft'])
 
 
-        rf = RandomForestClassifier(random_state = 21)
         model = joblib.load("model.pkl")
         pred = model.predict(X_pred)
 

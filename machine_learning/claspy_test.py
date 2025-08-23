@@ -7,15 +7,15 @@ warnings.filterwarnings('ignore')
 
 
 col = ['user', 'activity', 'timestamp', 'x-axis', 'y-axis', 'z-axis']
-har_df = pd.read_csv('WISDM_ar_v1.1_raw.txt', sep=',', on_bad_lines='skip', header = None, names = col)
+wisdm = pd.read_csv('WISDM_ar_v1.1_raw.txt', sep=',', on_bad_lines='skip', header = None, names = col)
 
-har_df = har_df.dropna()
-har_df.shape
+wisdm = wisdm.dropna()
+wisdm.shape
 
-har_df['z-axis'] = har_df['z-axis'].str.replace(';', '')
-har_df['z-axis'] = har_df['z-axis'].apply(lambda x:float(x))
+wisdm['z-axis'] = wisdm['z-axis'].str.replace(';', '')
+wisdm['z-axis'] = wisdm['z-axis'].apply(lambda x:float(x))
 
-df = har_df[har_df['timestamp'] != 0].sort_values(by = ['user', 'timestamp'], ignore_index=True)
+df = wisdm[wisdm['timestamp'] != 0].sort_values(by = ['user', 'timestamp'], ignore_index=True)
 
 testOne = df[df['user'] == 33].iloc[:8000]
 testOne.to_csv('claspy_test1.txt', sep='\t', index=False)
