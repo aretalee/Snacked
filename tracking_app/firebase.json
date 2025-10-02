@@ -1,0 +1,1 @@
+{"flutter":{"platforms":{"ios":{"default":{"projectId":"snacktrac","appId":"1:109499910826:ios:ed5d242b3ccf281d2d5ed3","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"snacktrac","configurations":{"ios":"1:109499910826:ios:ed5d242b3ccf281d2d5ed3"}}}}}}
